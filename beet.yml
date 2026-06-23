@@ -1,5 +1,6 @@
 name: spindle
-description: 
+version: 1.1.1
+description:
   - text: "🔧 SPiNDLE 🔧"
     color: "#e77c56"
   - text: "\n"
