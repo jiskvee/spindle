@@ -8,7 +8,6 @@ function ./raycast/start:
 
 
 function ./raycast/step:
-	particle minecraft:happy_villager
 	particle minecraft:smoke ~ ~ ~ 0.25 0.25 0.25 0.02 2
 	scoreboard players remove @s spindle.dummy 1
 
@@ -17,11 +16,9 @@ function ./raycast/step:
 	b = (ofs / 2) * -1
 	execute positioned ~b ~b ~b as @e[dx=0,type=!#spindle:ignore,tag=!spindle.shooting,tag=!smithed.strict] positioned ~a ~a ~a if entity @s[dx=0] run function ./raycast/as_entity with storage spindle:temp root.raycast
 	
-	#execute as @e[type=!#spindle:ignore,tag=!spindle.shooting,tag=!smithed.strict,distance=..3] run function ./raycast/as_entity with storage spindle:temp root.raycast
 	execute unless block ~ ~ ~ #spindle:pass_through run return run function ./raycast/end
 	execute unless score @s spindle.dummy matches 1.. run return run function ./raycast/end
 	execute positioned ^ ^ ^0.5 run function ./raycast/step
-	#execute positioned ^ ^ ^0.25 run function ./raycast/step
 
 
 function ./raycast/as_entity:
