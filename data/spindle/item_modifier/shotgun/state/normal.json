@@ -1,0 +1,39 @@
+[
+  {
+    "function": "minecraft:set_components",
+    "components": {
+      "minecraft:item_name": {
+        "translate": "item.spindle.copper_shotgun",
+        "color": "white",
+        "fallback": "%s",
+        "with": [
+          {
+            "translate": "resourcePack.runtime_failure",
+            "color": "red",
+            "bold": true
+          }
+        ]
+      }
+    }
+  },
+  {
+    "function": "minecraft:set_custom_model_data",
+    "strings": {
+      "values": [
+        "normal"
+      ],
+      "mode": "replace_section"
+    }
+  },
+  {
+    "function": "minecraft:set_custom_data",
+    "tag": {
+      "spindle": {
+        "gun": {
+          "state": 0,
+          "reload_step": 2
+        }
+      }
+    }
+  }
+]

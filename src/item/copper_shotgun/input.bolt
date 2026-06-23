@@ -1,0 +1,57 @@
+from camellia.utils import technical
+
+rc = ./rc
+cd = ./cd
+rc_adv = technical(rc)
+cd_adv = technical(cd)
+
+function rc:
+	execute unless score @s spindle.step matches 1.. run function ./use_alt:
+		execute if items entity @s weapon.* *[minecraft:custom_data~{spindle:{gun:{loaded:true}}}] run return run function ./shoot
+		function ./reload/start
+	advancement revoke @s only rc_adv
+	advancement revoke @s only cd_adv
+	scoreboard players set @s spindle.step 2
+
+function cd:
+	scoreboard players remove @s spindle.step 1
+	execute if score @s spindle.step matches 1.. run return run advancement revoke @s only cd_adv
+
+	# runs when right click is released
+	# 1 tick of delay sadly 
+	scoreboard players reset @s spindle.step
+	execute if entity @s[tag=spindle.reloading] run function ./reload/end
+
+advancement rc_adv {
+	"parent": f"{ctx.project_name}:technical/root",
+	"criteria": {
+		"requirement": {
+			"trigger": "minecraft:using_item",
+			"conditions": {
+				"item": {
+					"predicates": {
+						"minecraft:custom_data": {
+							"spindle": {
+								"id": "copper_shotgun"
+							}
+						}
+					}
+				}
+			}
+		}
+	},
+	"rewards": {
+		"function": rc
+	}
+}
+advancement cd_adv {
+	"parent": f"{ctx.project_name}:technical/root",
+	"criteria": {
+		"tick": {
+			"trigger": "minecraft:tick"
+		}
+	},
+	"rewards": {
+		"function": cd
+	}
+}

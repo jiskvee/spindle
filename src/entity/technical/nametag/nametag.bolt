@@ -1,0 +1,49 @@
+function ./raycast/start:
+	advancement revoke @s only spindle:technical/entity/nametag
+	execute if items entity @s weapon.mainhand minecraft:name_tag[!minecraft:custom_name] run return fail
+
+	tag @s add spindle.raycast
+	scoreboard players set @s spindle.dummy 0
+	execute store result score @s spindle.dummy run attribute @s minecraft:entity_interaction_range get 100
+	execute anchored eyes run function ./raycast/step
+
+function ./raycast/step:
+	scoreboard players remove @s spindle.dummy 1
+
+	ofs = 0.1
+	a = 1.0 - ofs
+	b = ofs / 2
+	execute positioned ~-b ~-b ~-b as @n[dx=0,type=#spindle:copper_entities,tag=spindle.entity,team=spindle.no_nametag] positioned ~-a ~-a ~-a if entity @s[dx=0] run function ./show_name
+	execute unless score @s spindle.dummy matches 1.. run return run function ./raycast/end
+	execute positioned ^ ^ ^0.01 run function ./raycast/step
+
+function ./raycast/end:
+	scoreboard players set @s spindle.dummy 0
+	tag @s remove spindle.raycast
+
+function ./show_name:
+	execute as @p[tag=spindle.raycast] run function ./raycast/end
+	data modify entity @s data.has_custom_name set value true
+	team leave @s
+
+
+advancement spindle:technical/entity/nametag {
+  "parent": "spindle:technical/root",
+  "criteria": {
+    "requirement": {
+      "trigger": "minecraft:player_interacted_with_entity",
+      "conditions": {
+        "item": {
+          "items": "minecraft:name_tag"
+        },
+        "entity": {
+          "minecraft:entity_type": "#spindle:copper_entities",
+          "team": "spindle.no_nametag"
+        }
+      }
+    }
+  },
+  "rewards": {
+    "function": "spindle:entity/technical/nametag/raycast/start"
+  }
+}

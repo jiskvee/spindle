@@ -1,0 +1,52 @@
+function ./technical/load:
+	append function_tag minecraft:load { "values": [f"{~/}"] }
+
+	team add spindle.no_nametag
+	team modify spindle.no_nametag nametagVisibility never
+
+	# general use
+	scoreboard objectives add spindle.dummy dummy
+
+	# shotgun
+	scoreboard objectives add spindle.shotgun.state dummy # oxidization state
+	scoreboard objectives add spindle.shotgun.spot dummy # reload hole
+	scoreboard objectives add spindle.shotgun.time dummy # time between each movement
+	scoreboard objectives add spindle.shotgun.step dummy # how much to advance each movement
+	scoreboard objectives add spindle.shotgun.pos dummy # bullet pos in bar
+	scoreboard objectives add spindle.shotgun.dir dummy # movement direction
+	scoreboard players set -1 spindle.shotgun.dir -1
+	scoreboard objectives add spindle.shotgun.fw_time dummy # time + 1
+	scoreboard objectives add spindle.shotgun.display_pos dummy # pos + 1
+
+	# entities
+	scoreboard objectives add spindle.entity dummy
+	scoreboard objectives add spindle.sound dummy
+	scoreboard objectives add spindle.step dummy
+	scoreboard objectives add spindle.hurt dummy
+	scoreboard objectives add spindle.explode dummy
+
+	# copper horse laser cooldown
+	scoreboard objectives add spindle.laser dummy
+
+	# copper entities placement
+	scoreboard objectives add spindle.egg minecraft.used:minecraft.bat_spawn_egg
+	
+	# fckin copper wheel lmao
+	scoreboard objectives add spindle.wheel dummy
+
+function ./technical/kill:
+	damage @s 1000 minecraft:explosion
+	kill @s
+
+function spindle:commands/revoke_technical_advancements:
+	advancement revoke @s through spindle:technical/root
+advancement spindle:technical/root {
+  "criteria": {
+    "impossible": {
+      "trigger": "minecraft:impossible"
+    }
+  },
+  "rewards": {
+    "function": "spindle:commands/revoke_technical_advancements"
+  }
+}

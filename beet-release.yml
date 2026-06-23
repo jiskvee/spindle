@@ -1,0 +1,7 @@
+extend: beet.yml
+output: "build"
+
+data_pack:
+  zipped: true
+resource_pack:
+  zipped: true

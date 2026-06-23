@@ -1,0 +1,61 @@
+name: spindle
+description: 
+  - text: "🔧 SPiNDLE 🔧"
+    color: "#e77c56"
+  - text: "\n"
+  - text: "Rust in Peace"
+    color: "#39b894"
+
+data_pack:
+  name: spindle-dp
+  load:
+    - data: data
+    - data/spindle/modules: src
+    - pack.png: pack.png
+resource_pack:
+  name: spindle-rp
+  load:
+    - assets: assets
+    - pack.png: pack.png
+
+require:
+  - bolt
+  - camellia.clocks
+
+pipeline:
+  - mecha
+  - beet.contrib.find_replace
+  - camellia.gen.updater
+  - camellia.gen.sounds_json
+  - camellia.gen.recipe_outputs
+  - camellia.gen.copy_spanish
+  - camellia.gen.mcmeta
+
+meta:
+
+  bolt:
+    entrypoint:
+      - spindle:*
+
+  camellia:
+    clocks:
+      tick: true
+      second_clock: true
+      ten_second_clock: true
+
+  find_replace:
+    data_pack:
+      match:
+        - "spindle:*"
+    substitute:
+      find: "\"@c\""
+      replace: "@a[distance=..16]"
+
+  lsp:
+    excluded_plugins:
+      - beet.contrib.find_replace
+      - camellia.gen.updater
+      - camellia.gen.sounds_json
+      - camellia.gen.recipe_outputs
+      - camellia.gen.copy_spanish
+      - camellia.gen.mcmeta

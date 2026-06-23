@@ -1,0 +1,37 @@
+function ./start:
+	schedule function ./scan 1t append
+	advancement revoke @s only spindle:technical/killed_custom_entity
+
+function ./scan:
+	execute as @e[type=item,nbt={Item:{components:{"minecraft:custom_data":{spindle:{death:{}}}}}}] at @s run function ./as_item:
+		data remove storage spindle:temp root
+		data modify storage spindle:temp root.death set from entity @s Item.components."minecraft:custom_data".spindle.death
+		function ./macro with storage spindle:temp root.death
+		data remove storage spindle:temp root
+
+		execute if data storage spindle:temp root.death.xp summon minecraft:experience_orb run data modify entity @s Value set from storage spindle:temp root.death.xp
+		kill @s
+
+function ./macro:
+	$playsound $(sound) $(sound_category) @a[distance=..16] ~ ~ ~ $(volume) $(pitch)
+	$function $(function)
+
+advancement spindle:technical/killed_custom_entity {
+  "criteria": {
+    "requirement": {
+      "trigger": "minecraft:player_killed_entity",
+      "conditions": {
+        "entity": {
+          "minecraft:entity_tags": {
+            "any_of": [
+              "spindle.entity"
+            ]
+          }
+        }
+      }
+    }
+  },
+  "rewards": {
+    "function": "spindle:entity/technical/kill/start"
+  }
+}

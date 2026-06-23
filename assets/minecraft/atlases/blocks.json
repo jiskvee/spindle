@@ -1,0 +1,21 @@
+{
+  "sources": [
+    {
+      "type": "single",
+      "resource": "spindle:entity/cat_variant/copper_cat"
+    },
+    {
+      "type": "single",
+      "resource": "spindle:entity/wolf_variant/copper_wolf"
+    },
+    {
+      "type": "single",
+      "resource": "spindle:entity/copper_frog"
+    },
+    {
+      "type": "directory",
+      "source": "gui/spindle",
+      "prefix": "gui/"
+    }
+  ]
+}

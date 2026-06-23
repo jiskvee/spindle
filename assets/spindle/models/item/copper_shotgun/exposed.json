@@ -1,0 +1,6 @@
+{
+	"parent": "spindle:item/copper_shotgun/normal",
+	"textures": {
+		"layer0": "spindle:item/copper_shotgun/exposed_sprite"
+	}
+}

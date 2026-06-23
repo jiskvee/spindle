@@ -1,0 +1,73 @@
+{
+  "type": "minecraft:entity",
+  "pools": [
+    {
+      "rolls": 1,
+      "bonus_rolls": 0,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "minecraft:copper_ingot",
+          "functions": [
+            {
+              "add": false,
+              "count": {
+                "type": "minecraft:uniform",
+                "max": 6,
+                "min": 2
+              },
+              "function": "minecraft:set_count"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "rolls": 1,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "minecraft:poisonous_potato",
+          "functions": [
+            {
+              "function": "minecraft:set_components",
+              "components": {
+                "minecraft:item_model": "spindle:empty"
+              }
+            },
+            {
+              "function": "minecraft:set_custom_data",
+              "tag": {
+                "spindle": {
+                  "death": {
+                    "id": "copper_horse",
+                    "sound": "spindle:entity.copper_horse.death",
+                    "sound_category": "neutral",
+                    "function": "empty",
+                    "volume": 1,
+                    "pitch": 1
+                  }
+                }
+              }
+            }
+          ],
+          "conditions": [
+            {
+              "condition": "minecraft:killed_by_player"
+            },
+            {
+              "condition": "minecraft:inverted",
+              "term": {
+                "condition": "minecraft:entity_properties",
+                "entity": "this",
+                "predicate": {
+                  "minecraft:entity_type": "minecraft:wolf"
+                }
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

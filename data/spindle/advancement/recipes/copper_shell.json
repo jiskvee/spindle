@@ -1,0 +1,43 @@
+{
+	"parent": "minecraft:recipes/root",
+	"criteria": {
+		"has_copper": {
+      "trigger": "minecraft:inventory_changed",
+			"conditions": {
+				"items": [
+					{
+						"items": "minecraft:copper_ingot"
+					}
+				]
+			}
+		},
+    "has_gunpowder": {
+      "trigger": "minecraft:inventory_changed",
+			"conditions": {
+				"items": [
+					{
+						"items": "minecraft:gunpowder"
+					}
+				]
+			}
+		},
+		"has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+			"conditions": {
+				"recipe": "spindle:copper_shell"
+			}
+		}
+	},
+	"requirements": [
+		[
+      "has_copper",
+      "has_gunpowder",
+			"has_the_recipe"
+		]
+	],
+	"rewards": {
+		"recipes": [
+			"spindle:copper_shell"
+		]
+	}
+}

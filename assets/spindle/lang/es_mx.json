@@ -1,0 +1,53 @@
+{
+  "ui.spindle.title": "Spindle",
+  "ui.spindle.version": "v1.1",
+  "ui.spindle.update": "\"Rust in Peace\"",
+
+  "item.spindle.copper_wheel": "Llanta de cobre",
+  "item.spindle.copper_pet.desc1": "%s para desplegar",
+  "item.spindle.copper_pet.desc2": "%s agachado con la mano vacía para recuperar",
+  "item.spindle.copper_shotgun": "Escopeta de cobre",
+  "item.spindle.exposed_copper_shotgun": "Escopeta de cobre expuesta",
+  "item.spindle.weathered_copper_shotgun": "Escopeta de cobre degradada",
+  "item.spindle.oxidized_copper_shotgun": "Escopeta de cobre oxidada",
+  "item.spindle.copper_shotgun.desc1": "Presiona %s para disparar",
+  "item.spindle.copper_shotgun.desc2": "Manten %s para disparar",
+  "item.spindle.copper_shotgun.ammo_display": "Municion: %s/1",
+  "item.spindle.copper_shotgun.message.no_ammo": "¡Sin %s en el inventario!",
+  "item.spindle.copper_shell": "Cartucho de cobre",
+  "item.spindle.copper_shell.desc1": "Usado para recargar la %s",
+
+  "item.spindle.modifiers.using": "Al usarse:",
+  "item.spindle.modifiers.shooting": "Al disparar:",
+
+  "subtitles.spindle.item.copper_shotgun.shoot": "Escopeta dispara",
+  "subtitles.spindle.item.copper_shotgun.open": "Escopeta abre",
+  "subtitles.spindle.item.copper_shotgun.close": "Escopeta cierra",
+  "subtitles.spindle.item.copper_shotgun.rack": "Escopeta acciona",
+  "subtitles.spindle.item.copper_shotgun.empty": "Escopeta hace clic",
+  "subtitles.spindle.item.copper_shotgun.insert": "Escopeta carga",
+
+  "entity.spindle.copper_horse": "Caballo de cobre",
+  "entity.spindle.copper_horse.instructions": "%s para disparar | %s para desmontar",
+  "entity.spindle.copper_frog": "Rana de cobre",
+  "entity.spindle.copper_wolf": "Lobo de cobre",
+  "entity.spindle.copper_cat": "Gato de cobre",
+
+  "subtitles.spindle.entity.copper_horse.hurt": "Caballo de cobre herido",
+  "subtitles.spindle.entity.copper_horse.ambient": "Caballo de cobre respira",
+  "subtitles.spindle.entity.copper_horse.death": "Caballo de cobre muerto",
+  "subtitles.spindle.entity.copper_horse.neigh": "Caballo de cobre relincha",
+  "subtitles.spindle.entity.copper_frog.idle": "Croar de rana de cobre",
+  "subtitles.spindle.entity.copper_frog.hurt": "Rana de cobre herida",
+  "subtitles.spindle.entity.copper_frog.death": "Rana de cobre muerta",
+  "subtitles.spindle.entity.copper_cat.ambient": "Gato de cobre maúlla",
+  "subtitles.spindle.entity.copper_cat.hurt": "Gato de cobre herido",
+  "subtitles.spindle.entity.copper_wolf.ambient": "Lobo de cobre ladra",
+  "subtitles.spindle.entity.copper_wolf.hurt": "Lobo de cobre herido",
+  "subtitles.spindle.entity.copper_wolf.death": "Lobo de cobre muerto",
+  "subtitles.spindle.entity.copper_mob.shoot": "Láser disparado",
+  "subtitles.spindle.entity.copper_mob.short_circuit": "Electricidad crepita",
+  "subtitles.spindle.entity.copper_pet_retrieve": "Mascota de cobre recuperada",
+
+  "enchantment.spindle.technical": "Encantamiento técnico | ¡Ignora esto!"
+}

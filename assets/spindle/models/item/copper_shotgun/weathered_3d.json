@@ -1,0 +1,7 @@
+{
+	"parent": "spindle:item/copper_shotgun/normal_3d",
+	"textures": {
+		"0": "spindle:item/copper_shotgun/weathered_3d",
+    "particle": "spindle:item/copper_shotgun/weathered_3d"
+	}
+}

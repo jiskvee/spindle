@@ -1,0 +1,111 @@
+from spindle:utils import modify_weapon
+
+function ./reload/start:
+	# exit reload
+	execute if entity @s[tag=spindle.reloading] run return run function ./reload/end
+
+	# no ammo in inventory
+	execute store result score #count spindle.dummy run clear @s *[minecraft:custom_data~{spindle:{id:"copper_shell"}}] 0
+	execute if score #count spindle.dummy matches 0 run return run function ./reload/no_ammo:
+		title @s actionbar [{text:"\u2718\u23f5 ",color:"red"},{translate:"item.spindle.copper_shotgun.message.no_ammo",with:[{translate:"item.spindle.copper_shell",color:"red"}],color:"#ffbbbb"}]
+		playsound spindle:item.copper_shotgun.empty player "@c" ~ ~ ~ 0.4 1
+
+	# get stats from item
+	execute run function ./reload/get_stats:
+		execute if items entity @s weapon.offhand *[minecraft:custom_data~{spindle:{id:"copper_shotgun"}}] run return run data modify storage spindle:temp root.stats set from entity @s equipment.offhand.components."minecraft:custom_data".spindle.gun
+		data modify storage spindle:temp root.stats set from entity @s SelectedItem.components."minecraft:custom_data".spindle.gun
+	
+	scoreboard players set @s spindle.shotgun.pos 1
+	scoreboard players set @s spindle.shotgun.dir 1
+	scoreboard players set @s spindle.shotgun.time 0
+	execute store result score @s spindle.shotgun.spot run random value 3..8
+	execute store result score @s spindle.shotgun.step run data get storage spindle:temp root.stats.reload_step
+	execute store result score @s spindle.shotgun.state run data get storage spindle:temp root.stats.state
+	data remove storage spindle:temp root
+
+	# awesome
+	tag @s add spindle.reloading
+	playsound spindle:item.copper_shotgun.open player "@c" ~ ~ ~ 1 1
+	modify_weapon('copper_shotgun', 'spindle:shotgun/action/reload')
+
+
+function ./reload/bar/display:
+	# base bar: 9 long, 0..8
+	data remove storage spindle:shotgun root
+	data merge storage spindle:shotgun {root:{bar:["E","E","E","E","E","E","E","E","E"]}}
+
+	execute store result storage spindle:shotgun root.spot int 1 run scoreboard players get @s spindle.shotgun.spot
+	#execute store result storage spindle:shotgun root.pos int 1 run scoreboard players get @s spindle.shotgun.pos
+
+	# ----- FUTURE VISION WITCHCRAFT -----
+    # copy current pos and time to temp scores
+    scoreboard players operation @s spindle.shotgun.display_pos = @s spindle.shotgun.pos
+    scoreboard players operation @s spindle.shotgun.next_time = @s spindle.shotgun.time
+    
+    # simulate what the time will be next tick
+    scoreboard players add @s spindle.shotgun.next_time 1
+    
+    # if the bullet will move next tick, apply the movement to the display position NOW
+    execute if score @s spindle.shotgun.next_time >= @s spindle.shotgun.step:
+		scoreboard players operation @s spindle.shotgun.display_pos += @s spindle.shotgun.dir
+    
+    # pass the future display_pos to the storage instead of the actual pos
+    execute store result storage spindle:shotgun root.pos int 1 run scoreboard players get @s spindle.shotgun.display_pos
+    # ------------------------------------
+
+	# get oxidization state for the font
+	execute run function ./reload/bar/state:
+		execute if score @s spindle.shotgun.state matches 0 run return run data modify storage spindle:shotgun root.state set value "normal"
+		execute if score @s spindle.shotgun.state matches 1 run return run data modify storage spindle:shotgun root.state set value "exposed"
+		execute if score @s spindle.shotgun.state matches 2 run return run data modify storage spindle:shotgun root.state set value "weathered"
+		data modify storage spindle:shotgun root.state set value "oxidized"
+
+	# place bullet and hole
+	execute run function ./reload/bar/place_spot with storage spindle:shotgun root:
+		$data modify storage spindle:shotgun root.bar[$(spot)] set value "O"
+
+	execute run function ./reload/bar/place_cartridge with storage spindle:shotgun root:
+		$data modify storage spindle:shotgun root.bar[$(pos)] set value "B"
+
+	# parse array
+	data modify storage spindle:shotgun root.parsed set value ""
+	execute run function ./reload/bar/parse:
+		# copy last element and remove it
+		data modify storage spindle:shotgun root.current set from storage spindle:shotgun root.bar[-1]
+		execute run function ./reload/bar/concat with storage spindle:shotgun root:
+			$data modify storage spindle:shotgun root.parsed set value "$(current) $(parsed)"
+		data remove storage spindle:shotgun root.bar[-1]
+
+		# loop if there are still elements left
+		execute if data storage spindle:shotgun root.bar[-1] run return run function ./reload/bar/parse
+
+	# finally show bar
+	execute run function ./reload/bar/show with storage spindle:shotgun root:
+		$title @s actionbar {text:"( $(parsed))",font:"spindle:reload_bar/$(state)"}
+
+
+function ./reload/end:
+	tag @s remove spindle.reloading
+	modify_weapon('copper_shotgun', 'spindle:shotgun/action/ready')
+	function ./reload/determine
+	data remove storage spindle:shotgun root
+
+
+function ./reload/determine:
+	execute if score @s spindle.shotgun.pos = @s spindle.shotgun.spot run return run function ./reload/success:
+		clear @s[gamemode=!creative] *[minecraft:custom_data~{spindle:{id:"copper_shell"}}] 1
+		modify_weapon('copper_shotgun', 'spindle:shotgun/ammo/load')
+		playsound spindle:item.copper_shotgun.rack player "@c" ~ ~ ~ 1 1
+		playsound spindle:item.copper_shotgun.reload_success player @s ~ ~ ~ 0.5 1
+
+		function ./reload/bar/display
+		execute run function ./reload/bar/show_green with storage spindle:shotgun root:
+			$title @s actionbar {text:"( $(parsed))",font:"spindle:reload_bar/$(state)",color:"green"}
+	
+	execute run function ./reload/fail:
+		playsound spindle:item.copper_shotgun.close player "@c" ~ ~ ~ 0.8 1
+		playsound spindle:item.copper_shotgun.reload_fail player @s ~ ~ ~ 0.4 1
+
+		function ./reload/bar/display
+		execute run function ./reload/bar/show_red with storage spindle:shotgun root:
+			$title @s actionbar {text:"( $(parsed))",font:"spindle:reload_bar/$(state)",color:"red"}

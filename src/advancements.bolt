@@ -1,0 +1,75 @@
+def insert_after_colon(text, insert):
+    prefix, rest = text.split(":", 1)
+    return f"{prefix}:{insert}{rest}"
+
+def base_adv(trigger, tag):
+	adv = insert_after_colon(~/, "technical/")
+	advancement adv {
+		"parent": f"{ctx.project_name}:technical/root",
+		"criteria": {
+			"requirement": {
+				"trigger": trigger,
+				"conditions": {
+					"entity": {
+						"minecraft:entity_tags": {
+							"any_of": [
+								tag
+							]
+						}
+					}
+				}
+			}
+		},
+		"rewards": {
+			"function": f"{~/}"
+		}
+	}
+	advancement revoke @s only adv
+
+def attack_adv(tag):
+	base_adv("minecraft:player_hurt_entity", tag)
+
+def interact_adv(tag):
+	base_adv("minecraft:player_interacted_with_entity", tag)
+
+def any_click_adv(tag):
+	adv = insert_after_colon(~/, "technical/")
+	advancement adv {
+		"parent": f"{ctx.project_name}:technical/root",
+		"criteria": {
+			"attack": {
+				"trigger": "minecraft:player_hurt_entity",
+				"conditions": {
+					"entity": {
+						"minecraft:entity_tags": {
+							"any_of": [
+								tag
+							]
+						}
+					}
+				}
+			},
+			"interact": {
+				"trigger": "minecraft:player_interacted_with_entity",
+				"conditions": {
+					"entity": {
+						"minecraft:entity_tags": {
+							"any_of": [
+								tag
+							]
+						}
+					}
+				}
+			}
+		},
+		"requirements": [
+			[
+				"attack",
+				"interact"
+			]
+		],
+		"rewards": {
+			"function": f"{~/}"
+		}
+	}
+	advancement revoke @s only adv

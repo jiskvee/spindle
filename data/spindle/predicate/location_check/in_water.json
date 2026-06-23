@@ -1,0 +1,46 @@
+{
+  "condition": "minecraft:any_of",
+  "terms": [
+    {
+      "condition": "minecraft:location_check",
+      "predicate": {
+        "fluid": {
+          "fluids": "#minecraft:water"
+        }
+      }
+    },
+    {
+      "condition": "minecraft:all_of",
+      "terms": [
+        {
+          "condition": "minecraft:any_of",
+          "terms": [
+            {
+              "condition": "minecraft:weather_check",
+              "raining": true
+            },
+            {
+              "condition": "minecraft:weather_check",
+              "thundering": true
+            }
+          ]
+        },
+        {
+          "condition": "minecraft:location_check",
+          "predicate": {
+            "can_see_sky": true
+          }
+        },
+        {
+          "condition": "minecraft:inverted",
+          "term": {
+            "condition": "minecraft:location_check",
+            "predicate": {
+              "biomes": "#spindle:no_rain"
+            }
+          }
+        }
+      ]
+    }
+  ]
+}

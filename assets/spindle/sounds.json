@@ -1,0 +1,21 @@
+{
+  "entity.copper_pet_retrieve": {
+    "sounds": [
+      "block/copper_statue/become_statue1",
+      "block/copper_statue/become_statue2",
+      "block/copper_statue/become_statue3",
+      "block/copper_statue/become_statue4"
+    ],
+    "subtitle": "subtitles.spindle.entity.copper_pet_retrieve"
+  },
+  "item.copper_shotgun.reload_success": {
+    "sounds": [
+      "random/successful_hit"
+    ]
+  },
+  "item.copper_shotgun.reload_fail": {
+    "sounds": [
+      "mob/zombie/metal3"
+    ]
+  }
+}

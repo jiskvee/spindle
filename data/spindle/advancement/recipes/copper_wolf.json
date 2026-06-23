@@ -1,0 +1,43 @@
+{
+	"parent": "minecraft:recipes/root",
+	"criteria": {
+		"has_copper": {
+			"conditions": {
+				"items": [
+					{
+						"items": "minecraft:copper_ingot"
+					}
+				]
+			},
+			"trigger": "minecraft:inventory_changed"
+		},
+    "has_bone": {
+			"conditions": {
+				"items": [
+					{
+						"items": "minecraft:bone"
+					}
+				]
+			},
+			"trigger": "minecraft:inventory_changed"
+		},
+		"has_the_recipe": {
+			"conditions": {
+				"recipe": "spindle:copper_wolf"
+			},
+			"trigger": "minecraft:recipe_unlocked"
+		}
+	},
+	"requirements": [
+		[
+      "has_copper",
+      "has_bone",
+			"has_the_recipe"
+		]
+	],
+	"rewards": {
+		"recipes": [
+			"spindle:copper_wolf"
+		]
+	}
+}

@@ -1,0 +1,19 @@
+{
+  "providers": [
+    {
+      "type": "bitmap",
+      "file": "spindle:gui/sprites/reload_bar/normal.png",
+      "height": 11,
+      "ascent": 10,
+      "chars": [
+        "(EOB)"
+      ]
+    },
+    {
+      "type": "space",
+      "advances": {
+        " ": -1
+      }
+    }
+  ]
+}

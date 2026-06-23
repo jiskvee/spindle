@@ -1,0 +1,53 @@
+{
+  "ui.spindle.title": "Spindle",
+  "ui.spindle.version": "v1.1",
+  "ui.spindle.update": "\"Rust in Peace\"",
+
+  "item.spindle.copper_wheel": "Copper Wheel",
+  "item.spindle.copper_pet.desc1": "%s to deploy",
+  "item.spindle.copper_pet.desc2": "Sneak + %s with empty hand to retrieve",
+  "item.spindle.copper_shotgun": "Copper Shotgun",
+  "item.spindle.exposed_copper_shotgun": "Exposed Copper Shotgun",
+  "item.spindle.weathered_copper_shotgun": "Weathered Copper Shotgun",
+  "item.spindle.oxidized_copper_shotgun": "Oxidized Copper Shotgun",
+  "item.spindle.copper_shotgun.desc1": "Press %s to shoot",
+  "item.spindle.copper_shotgun.desc2": "Hold %s to reload",
+  "item.spindle.copper_shotgun.ammo_display": "Chamber: %s/1",
+  "item.spindle.copper_shotgun.message.no_ammo": "No %s in inventory!",
+  "item.spindle.copper_shell": "Copper Shell",
+  "item.spindle.copper_shell.desc1": "Used to reload the %s",
+
+  "item.spindle.modifiers.using": "When using:",
+  "item.spindle.modifiers.shooting": "When shooting:",
+
+  "subtitles.spindle.item.copper_shotgun.shoot": "Shotgun fires",
+  "subtitles.spindle.item.copper_shotgun.open": "Shotgun opens",
+  "subtitles.spindle.item.copper_shotgun.close": "Shotgun closes",
+  "subtitles.spindle.item.copper_shotgun.rack": "Shotgun racks",
+  "subtitles.spindle.item.copper_shotgun.empty": "Shotgun clicks",
+  "subtitles.spindle.item.copper_shotgun.insert": "Shotgun loads",
+
+  "entity.spindle.copper_horse": "Copper Horse",
+  "entity.spindle.copper_horse.instructions": "%s to shoot | %s to Dismount",
+  "entity.spindle.copper_frog": "Copper Frog",
+  "entity.spindle.copper_wolf": "Copper Wolf",
+  "entity.spindle.copper_cat": "Copper Cat",
+
+  "subtitles.spindle.entity.copper_horse.hurt": "Copper Horse hurts",
+  "subtitles.spindle.entity.copper_horse.ambient": "Copper Horse respirates",
+  "subtitles.spindle.entity.copper_horse.death": "Copper Horse dies",
+  "subtitles.spindle.entity.copper_horse.neigh": "Copper Horse neighs",
+  "subtitles.spindle.entity.copper_frog.idle": "Copper Frog croaks",
+  "subtitles.spindle.entity.copper_frog.hurt": "Copper Frog hurts",
+  "subtitles.spindle.entity.copper_frog.death": "Copper Frog dies",
+  "subtitles.spindle.entity.copper_cat.ambient": "Copper Cat meows",
+  "subtitles.spindle.entity.copper_cat.hurt": "Copper Cat hurts",
+  "subtitles.spindle.entity.copper_wolf.ambient": "Copper Wolf barks",
+  "subtitles.spindle.entity.copper_wolf.hurt": "Copper Wolf hurts",
+  "subtitles.spindle.entity.copper_wolf.death": "Copper Wolf dies",
+  "subtitles.spindle.entity.copper_mob.shoot": "Laser shoots",
+  "subtitles.spindle.entity.copper_mob.short_circuit": "Electricity crackles",
+  "subtitles.spindle.entity.copper_pet_retrieve": "Copper pet retrieves",
+
+  "enchantment.spindle.technical": "Technical Enchantment | Ignore this!"
+}

@@ -1,0 +1,96 @@
+{
+  "pools": [
+    {
+      "rolls": 1,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "minecraft:bat_spawn_egg",
+          "functions": [
+            {
+              "function": "minecraft:set_components",
+              "components": {
+                "minecraft:max_stack_size": 1,
+                "minecraft:tooltip_style": "spindle:spindle",
+                "minecraft:item_model": "spindle:entity/copper_cat",
+                "minecraft:item_name": {
+                  "translate": "entity.spindle.copper_cat",
+                  "fallback": "%s",
+                  "with": [
+                    {
+                      "translate": "resourcePack.runtime_failure",
+                      "color": "red",
+                      "bold": true
+                    }
+                  ]
+                },
+                "minecraft:lore": [
+                  [
+                    {
+                      "text": "0 ",
+                      "color": "white",
+                      "font": "spindle:icon",
+                      "italic": false
+                    },
+                    {
+                      "translate": "ui.spindle.title",
+                      "color": "white",
+                      "font": "spindle:tooltip",
+                      "italic": false
+                    }
+                  ],
+                  {
+                    "translate": "item.spindle.copper_pet.desc1",
+                    "color": "gray",
+                    "italic": false,
+                    "with": [
+                      {
+                        "keybind": "key.use",
+                        "color": "gray",
+                        "italic": false
+                      }
+                    ]
+                  },
+                  {
+                    "translate": "item.spindle.copper_pet.desc2",
+                    "color": "gray",
+                    "italic": false,
+                    "with": [
+                      {
+                        "keybind": "key.use",
+                        "color": "gray",
+                        "italic": false
+                      }
+                    ]
+                  }
+                ],
+                "minecraft:entity_data": {
+                  "id": "minecraft:cat",
+                  "Silent": true,
+                  "CollarColor": 4,
+                  "variant": "spindle:copper",
+                  "Team": "spindle.no_nametag",
+                  "DeathLootTable": "spindle:entities/copper_cat",
+                  "CustomName": { "translate": "entity.spindle.copper_cat", "italic": false },
+                  "data": { "type": "minecraft:cat", "id": "copper_cat", "has_custom_name": false },
+                  "Tags": [ "smithed.entity", "spindle.entity", "spindle.copper_pet", "spindle.copper_cat" ]
+                },
+                "minecraft:custom_data": {
+                  "spindle": {
+                    "id": "copper_cat"
+                  },
+                  "smithed": {
+                    "ignore": {
+                      "functionality": true,
+                      "crafting": true
+                    }
+                  }
+                }
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

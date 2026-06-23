@@ -1,0 +1,12 @@
+[
+  {
+    "condition": "minecraft:location_check",
+    "predicate": {
+      "can_see_sky": true
+    }
+  },
+  {
+    "condition": "minecraft:weather_check",
+    "thundering": true
+  }
+]

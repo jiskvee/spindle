@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "key": {
+    "B": "minecraft:copper_block",
+    "I": "minecraft:copper_ingot",
+    "N": "minecraft:copper_nugget",
+    "U": "minecraft:copper_bulb",
+    "C": "minecraft:cod"
+  },
+  "pattern": [
+    " CI",
+    "BBU",
+    "NN "
+  ],
+  "result": {
+    "id": "minecraft:brick",
+    "count": 1,
+    "components": {
+      "minecraft:custom_data": {}
+    }
+  }
+}

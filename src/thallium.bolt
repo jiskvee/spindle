@@ -1,0 +1,18 @@
+# ============ LIST ============
+function spindle:technical/menu/list:
+	function thallium:technical/list/hook {namespace:"spindle",pack_text:[{text:"0 ",color:"white",font:"spindle:icon"},{translate:"ui.spindle.title",color:"white",font:"spindle:tooltip"}],version:{translate:"ui.spindle.version"},version_title:{translate:"ui.spindle.update",color:"#39b894",font:"thallium:5"}}
+
+append function_tag thallium:list {
+    "values": [
+        "spindle:technical/menu/list"
+    ]
+}
+
+# ============ UPDATER ============
+function spindle:technical/updater/preserve_components:
+	function thallium:technical/updater/preserve_components {component:"\"minecraft:custom_data\".spindle.gun"}
+append function_tag thallium:updater/preserve_components {
+	"values": [
+		"spindle:technical/updater/preserve_components"
+	]
+}

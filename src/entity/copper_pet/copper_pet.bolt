@@ -1,0 +1,133 @@
+function ./placed:
+	playsound minecraft:block.copper_golem_statue.place neutral "@c"
+	tag @s remove spindle.placed
+
+function ./raycast/start:
+	advancement revoke @s only spindle:technical/entity/copper_pet/retrieve
+
+	tag @s add spindle.raycast
+	scoreboard players set @s spindle.dummy 0
+	execute store result score @s spindle.dummy run attribute @s minecraft:entity_interaction_range get 100
+	scoreboard players add @s spindle.dummy 10
+	execute anchored eyes run function ./raycast/step
+
+function ./raycast/step:
+	scoreboard players remove @s spindle.dummy 1
+
+	ofs = 0.1
+	a = 1.0 - ofs
+	b = ofs / 2
+	execute positioned ~-b ~-b ~-b as @n[dx=0,type=#spindle:pets,tag=spindle.copper_pet] positioned ~-a ~-a ~-a if entity @s[dx=0] run function ./raycast/as_entity
+	execute unless score @s spindle.dummy matches 1.. run return run function ./raycast/end
+	execute positioned ^ ^ ^0.01 run function ./raycast/step
+
+function ./raycast/end:
+	scoreboard players set @s spindle.dummy 0
+	tag @s remove spindle.raycast
+
+function ./raycast/as_entity:
+	execute as @p[tag=spindle.raycast] run function ./raycast/end
+	execute at @s run function ./retrieve
+
+function ./set_owner:
+	playsound minecraft:block.copper_golem_statue.place neutral "@c"
+	data modify entity @s Owner set from entity @p UUID
+	tag @s add spindle.has_owner
+
+function ./retrieve:
+	# set up entity data
+	tag @s remove spindle.has_owner
+	data remove entity @s Owner
+	data modify storage spindle:temp root.pet.nbt set from entity @s
+	data remove storage spindle:temp root.pet.nbt.Rotation
+	data remove storage spindle:temp root.pet.nbt.Sitting
+	data remove storage spindle:temp root.pet.nbt.Motion
+	data remove storage spindle:temp root.pet.nbt.UUID
+	data remove storage spindle:temp root.pet.nbt.Pos
+
+	# copy stuff for the macro
+	data modify storage spindle:temp root.pet.id set from storage spindle:temp root.pet.nbt.data.id
+	data modify storage spindle:temp root.pet.custom_name set from storage spindle:temp root.pet.nbt.CustomName
+	#data modify storage spindle:temp root.pet.type set from storage spindle:temp root.pet.nbt.data.type
+
+	# copy "type" from data to the id for entity_data
+	data modify storage spindle:temp root.pet.nbt.id set from storage spindle:temp root.pet.nbt.data.type
+
+	# despawn
+	playsound spindle:entity.copper_pet_retrieve neutral "@c"
+	playsound spindle:entity.copper_pet_retrieve neutral "@c"
+	tp @s ~ -1024 ~
+
+	# name handling
+	execute if data storage spindle:temp root.pet.nbt.data{has_custom_name:false} run return run function ./no_name:
+		data modify storage spindle:temp root.pet.nbt.Team set value "spindle.no_nametag"
+		function ./drop_macro_normal with storage spindle:temp root.pet
+	function ./drop_macro_name with storage spindle:temp root.pet
+
+function ./drop_macro_normal:
+	# id - custom identifier "copper_wolf"
+	# nbt - entity nbt
+	$loot spawn ~ ~0.1 ~ loot {pools:[{rolls:1,entries:[{type:"minecraft:item",name:"minecraft:bat_spawn_egg",functions:[{function:"minecraft:set_components",components:{"minecraft:max_stack_size":1,"minecraft:tooltip_style":"spindle:spindle","minecraft:item_model":"spindle:entity/$(id)","minecraft:item_name":{translate:"entity.spindle.$(id)",fallback:"%s",with:[{translate:"resourcePack.runtime_failure",color:"red",bold:1b}]},"minecraft:lore":[[{text:"0 ",color:"white",font:"spindle:icon",italic:0b},{translate:"ui.spindle.title",color:"white",font:"spindle:tooltip",italic:0b}],{translate:"item.spindle.copper_pet.desc1",color:"gray",italic:0b,with:[{keybind:"key.use",color:"gray",italic:0b}]},{translate:"item.spindle.copper_pet.desc2",color:"gray",italic:0b,with:[{keybind:"key.use",color:"gray",italic:0b},{keybind:"key.use",color:"gray",italic:0b}]}],"minecraft:entity_data":$(nbt),"minecraft:custom_data":{spindle:{id:"$(id)"},smithed:{ignore:{functionality:1b,crafting:1b}}}}}]}]}]}
+
+function ./drop_macro_name:
+	# id - custom identifier "copper_wolf"
+	# custom_name - item name "Pepe"
+	# nbt - entity nbt
+	$loot spawn ~ ~0.1 ~ loot {pools:[{rolls:1,entries:[{type:"minecraft:item",name:"minecraft:bat_spawn_egg",functions:[{function:"minecraft:set_components",components:{"minecraft:max_stack_size":1,"minecraft:tooltip_style":"spindle:spindle","minecraft:item_model":"spindle:entity/$(id)","minecraft:item_name":{translate:"entity.spindle.$(id)",fallback:"%s",with:[{translate:"resourcePack.runtime_failure",color:"red",bold:1b}]},"minecraft:lore":[[{text:"0 ",color:"white",font:"spindle:icon",italic:0b},{translate:"ui.spindle.title",color:"white",font:"spindle:tooltip",italic:0b}],{translate:"item.spindle.copper_pet.desc1",color:"gray",italic:0b,with:[{keybind:"key.use",color:"gray",italic:0b}]},{translate:"item.spindle.copper_pet.desc2",color:"gray",italic:0b,with:[{keybind:"key.use",color:"gray",italic:0b},{keybind:"key.use",color:"gray",italic:0b}]}],"minecraft:entity_data":$(nbt),"minecraft:custom_data":{spindle:{id:"$(id)"},smithed:{ignore:{functionality:1b,crafting:1b}}},"minecraft:custom_name":"$(custom_name)"}}]}]}]}
+
+advancement spindle:technical/entity/copper_pet/retrieve {
+  "parent": "spindle:technical/root",
+  "criteria": {
+    "wolf": {
+      "trigger": "minecraft:player_interacted_with_entity",
+      "conditions": {
+        "player": {
+          "flags": {
+            "is_sneaking": true
+          },
+          "slots": {
+            "weapon.mainhand": {
+              "items": "minecraft:air"
+            }
+          }
+        },
+        "entity": {
+          "minecraft:entity_type": "minecraft:wolf",
+          "components": {
+            "minecraft:wolf/variant": "spindle:copper"
+          }
+        }
+      }
+    },
+    "cat": {
+      "trigger": "minecraft:player_interacted_with_entity",
+      "conditions": {
+        "player": {
+          "flags": {
+            "is_sneaking": true
+          },
+          "slots": {
+            "weapon.mainhand": {
+              "items": "minecraft:air"
+            }
+          }
+        },
+        "entity": {
+          "minecraft:entity_type": "minecraft:cat",
+          "components": {
+            "minecraft:cat/variant": "spindle:copper"
+          }
+        }
+      }
+    }
+  },
+  "requirements": [
+    [
+      "wolf",
+      "cat"
+    ]
+  ],
+  "rewards": {
+    "function": "spindle:entity/copper_pet/raycast/start"
+  }
+}

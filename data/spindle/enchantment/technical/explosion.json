@@ -1,0 +1,54 @@
+{
+  "anvil_cost": 0,
+  "description": {
+    "translate": "enchantment.spindle.technical"
+  },
+  "max_cost": {
+    "base": 0,
+    "per_level_above_first": 0
+  },
+  "max_level": 1,
+  "min_cost": {
+    "base": 0,
+    "per_level_above_first": 0
+  },
+  "slots": [
+    "feet"
+  ],
+  "supported_items": [ ],
+  "weight": 1,
+  "effects": {
+    "minecraft:location_changed": [
+      {
+        "requirements": {
+          "condition": "minecraft:enchantment_active_check",
+          "active": false
+        },
+        "effect": {
+          "type": "minecraft:all_of",
+          "effects": [
+            {
+              "type": "minecraft:run_function",
+              "function": "spindle:technical/kill"
+            },
+            {
+              "type": "minecraft:explode",
+              "damage_type": "minecraft:explosion",
+              "immune_blocks": "#minecraft:blocks_wind_charge_explosions",
+              "knockback_multiplier": 1,
+              "radius": 3,
+              "block_interaction": "none",
+              "small_particle": {
+                "type": "minecraft:explosion_emitter"
+              },
+              "large_particle": {
+                "type": "minecraft:explosion_emitter"
+              },
+              "sound": "minecraft:entity.generic.explode"
+            }
+          ]
+        }
+      }
+    ]
+  }
+}

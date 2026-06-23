@@ -1,0 +1,18 @@
+from beet import Predicate
+from camellia.utils import cit
+
+def random_chance(value):
+	registry:str = f"{ctx.project_name}:random_chance/{value}"
+	if registry in ctx.data.predicates:
+		return registry
+	ctx.data.predicates[registry] = Predicate({
+		"condition": "minecraft:random_chance",
+		"chance": value
+	})
+	return registry
+
+def modify_weapon(id:str, modifier:str, selector:str = '@s'):
+	ns:str = ctx.project_name
+	thing:str = cit(ns, id)
+	raw f'execute if items entity {selector} weapon.mainhand {thing} run item modify entity @s weapon.mainhand {modifier}'
+	raw f'execute if items entity {selector} weapon.offhand {thing} run item modify entity @s weapon.offhand {modifier}'

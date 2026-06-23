@@ -1,0 +1,13 @@
+{
+    "assets": {
+        "angry": "spindle:entity/wolf_variant/copper_wolf",
+        "tame": "spindle:entity/wolf_variant/copper_wolf",
+        "wild": "spindle:entity/wolf_variant/copper_wolf"
+    },
+    "baby_assets": {
+        "angry": "spindle:entity/wolf_variant/copper_wolf_baby",
+        "tame": "spindle:entity/wolf_variant/copper_wolf_baby",
+        "wild": "spindle:entity/wolf_variant/copper_wolf_baby"
+    },
+    "spawn_conditions": []
+}

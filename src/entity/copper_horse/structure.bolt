@@ -1,0 +1,129 @@
+function ./structure/detect/start:
+	advancement revoke @s only spindle:technical/entity/copper_horse/structure_check
+
+	scoreboard players set @s spindle.dummy 0
+	execute store result score @s spindle.dummy run attribute @s minecraft:block_interaction_range get 1
+	scoreboard players add @s spindle.dummy 2
+	execute anchored eyes positioned ^ ^ ^ run function ./structure/detect/raycast
+
+function ./structure/detect/raycast:
+	execute align xyz positioned ~0.5 ~0.5 ~0.5 run function ./structure/detect/scan
+	scoreboard players remove @s spindle.dummy 1
+	execute if score @s spindle.dummy matches 1.. positioned ^ ^ ^1 run function ./structure/detect/raycast
+
+function ./structure/detect/scan:
+	for y in range(2, -3, -1):
+		execute positioned ~ ~y ~ run function ./structure/detect/layer
+
+function ./structure/detect/layer:
+	for x in range(-2, 3):
+		for z in range(-2, 3):
+			execute positioned ~x ~ ~z if block ~ ~ ~ minecraft:redstone_block if block ~ ~-1 ~ #spindle:copper_bulbs if block ~ ~-1 ~-1 #spindle:copper_blocks run function ./structure/north
+			execute positioned ~x ~ ~z if block ~ ~ ~ minecraft:redstone_block if block ~ ~-1 ~ #spindle:copper_bulbs if block ~ ~-1 ~1 #spindle:copper_blocks run function ./structure/south
+			execute positioned ~x ~ ~z if block ~ ~ ~ minecraft:redstone_block if block ~ ~-1 ~ #spindle:copper_bulbs if block ~-1 ~-1 ~ #spindle:copper_blocks run function ./structure/west
+			execute positioned ~x ~ ~z if block ~ ~ ~ minecraft:redstone_block if block ~ ~-1 ~ #spindle:copper_bulbs if block ~1 ~-1 ~ #spindle:copper_blocks run function ./structure/east
+
+function ./structure/base:
+	setblock ~ ~-1 ~ air
+	setblock ~ ~ ~ air
+	execute positioned ~ ~-1.5 ~ run function ./structure/finish
+	execute as @a[distance=..5] at @s anchored eyes run particle minecraft:flash{color:[1,1,1,1]} ^ ^ ^1 0 0 0 0 2
+function ./structure/finish:
+	particle minecraft:wax_off ~ ~1 ~ 0.5 0.5 0.5 0 35
+	particle minecraft:flash{color:[1,1,1,1]} ~ ~1 ~ 0 0 0 0 2
+	particle minecraft:block{block_state:"minecraft:copper_bulb"} ~ ~1 ~ 0.5 0.5 0.5 0 100
+	particle minecraft:block{block_state:"minecraft:copper_block"} ~ ~1 ~ 0.5 0.5 0.5 0 100
+	particle minecraft:block{block_state:"minecraft:redstone_block"} ~ ~1 ~ 0.5 0.5 0.5 0 100
+	playsound minecraft:entity.lightning_bolt.thunder weather "@c" ~ ~ ~ 1 1
+	playsound spindle:entity.copper_horse.neigh neutral "@c" ~ ~ ~ 1 1
+	playsound minecraft:block.copper_bulb.break block "@c" ~ ~ ~ 1 1
+	playsound minecraft:block.copper.break block "@c" ~ ~ ~ 1 1
+	playsound minecraft:block.stone.break block "@c" ~ ~ ~ 1 1
+	function spindle:commands/summon/copper_horse
+
+function ./structure/north:
+	setblock ~ ~-1 ~-1 air
+	function ./structure/base
+function ./structure/south:
+	setblock ~ ~-1 ~1 air
+	function ./structure/base
+function ./structure/west:
+	setblock ~-1 ~-1 ~ air
+	function ./structure/base
+function ./structure/east:
+	setblock ~1 ~-1 ~ air
+	function ./structure/base
+
+advancement spindle:technical/entity/copper_horse/structure_check {
+  "parent": "spindle:technical/root",
+  "criteria": {
+    "requirement": {
+      "trigger": "minecraft:placed_block",
+      "conditions": {
+        "location": [
+          {
+            "condition": "minecraft:block_state_property",
+            "block": "minecraft:redstone_block"
+          },
+          {
+            "condition": "minecraft:location_check",
+            "offsetY": -1,
+            "predicate": {
+              "block": {
+                "blocks": "#spindle:copper_bulbs"
+              }
+            }
+          },
+          {
+            "condition": "minecraft:any_of",
+            "terms": [
+              {
+                "condition": "minecraft:location_check",
+                "offsetX": 1,
+                "offsetY": -1,
+                "predicate": {
+                  "block": {
+                    "blocks": "#spindle:copper_blocks"
+                  }
+                }
+              },
+              {
+                "condition": "minecraft:location_check",
+                "offsetX": -1,
+                "offsetY": -1,
+                "predicate": {
+                  "block": {
+                    "blocks": "#spindle:copper_blocks"
+                  }
+                }
+              },
+              {
+                "condition": "minecraft:location_check",
+                "offsetZ": 1,
+                "offsetY": -1,
+                "predicate": {
+                  "block": {
+                    "blocks": "#spindle:copper_blocks"
+                  }
+                }
+              },
+              {
+                "condition": "minecraft:location_check",
+                "offsetZ": -1,
+                "offsetY": -1,
+                "predicate": {
+                  "block": {
+                    "blocks": "#spindle:copper_blocks"
+                  }
+                }
+              }
+            ]
+          }
+        ]
+      }
+    }
+  },
+  "rewards": {
+    "function": "spindle:entity/copper_horse/structure/detect/start"
+  }
+}

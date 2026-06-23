@@ -1,0 +1,71 @@
+from camellia.clocks import tick, second_clock, ten_second_clock
+from spindle:utils import random_chance
+
+prepend function tick:
+	execute as @e[type=minecraft:cat,tag=spindle.copper_cat] at @s run function ./tick
+prepend function second_clock:
+	execute as @e[type=minecraft:cat,tag=spindle.copper_cat] at @s run function ./second_clock
+
+function spindle:commands/summon/copper_cat:
+	summon minecraft:cat ~ ~ ~ {Silent:true,CollarColor:4,variant:"spindle:copper",Team:"spindle.no_nametag",DeathLootTable:"spindle:entities/copper_cat",CustomName:{translate:"entity.spindle.copper_cat",italic:false},data:{type:"minecraft:cat",id:"copper_cat",has_custom_name:false},Tags:["smithed.entity","spindle.entity","spindle.copper_pet","spindle.copper_cat"]}
+	data modify entity @n[type=minecraft:cat,tag=spindle.copper_cat] Owner set from entity @s UUID
+
+function ./tick:
+	execute store result score @s spindle.hurt run data get entity @s HurtTime
+	execute if score @s spindle.hurt matches 1.. if entity @s[tag=!spindle.ouch] run function ./hurt/start:
+		tag @s add spindle.ouch
+		playsound spindle:entity.copper_cat.hurt neutral "@c" ~ ~ ~ 0.5
+	execute if score @s spindle.hurt matches 0 if entity @s[tag=spindle.ouch] run function ./hurt/stop:
+		tag @s remove spindle.ouch
+
+function ./second_clock:
+	scoreboard players add @s spindle.sound 1
+	execute if predicate random_chance(0.5) run scoreboard players add @s spindle.sound 1
+	execute if score @s spindle.sound matches 12.. run function ./ambient_sound:
+		playsound spindle:entity.copper_cat.ambient neutral "@c" ~ ~ ~ 0.25
+		scoreboard players reset @s spindle.sound
+
+	scoreboard players add @s spindle.entity 1
+	execute if predicate random_chance(0.5) run scoreboard players add @s spindle.entity 1
+	execute if score @s spindle.entity matches 16.. run function ./attack:
+		scoreboard players reset @s spindle.entity
+		execute if entity @n[type=#spindle:cat_attacks,distance=..24,tag=!smithed.strict] run function ./raycast/start
+
+	execute unless predicate spindle:location_check/in_water run return run scoreboard players remove @s[scores={spindle.explode=1..}] spindle.explode 1
+	execute if score @s spindle.explode matches 3 run function ./short_circuit
+	execute if score @s spindle.explode matches 5 run function ./short_circuit
+	execute if score @s spindle.explode matches 7.. run return run function ./explode
+	scoreboard players add @s spindle.explode 1
+
+function ./raycast/start:
+	rotate @s facing entity @n[type=#spindle:cat_attacks,distance=..24,tag=!smithed.strict]
+	playsound spindle:entity.copper_mob.shoot neutral "@c" ~ ~ ~ 1 1.2
+
+	tag @s add spindle.raycast
+	scoreboard players set @s spindle.dummy 260
+	execute facing entity @n[type=#spindle:cat_attacks,distance=..24,tag=!smithed.strict] feet anchored eyes run function ./raycast/step
+
+function ./raycast/step:
+	particle dust{color:[1.000,0.835,0.180],scale:1}
+	scoreboard players remove @s spindle.dummy 1
+
+	ofs = 0.5
+	a = 1.0 - ofs
+	b = ofs / 2
+	execute positioned ~-b ~-b ~-b as @n[dx=0,type=#spindle:cat_attacks,tag=!smithed.strict] positioned ~-a ~-a ~-a if entity @s[dx=0] run damage @s 12 minecraft:arrow by @n[type=minecraft:cat,tag=spindle.raycast]
+	execute unless block ~ ~ ~ #spindle:pass_through run return run function ./raycast/end
+	execute unless score @s spindle.dummy matches 1.. run return run function ./raycast/end
+	execute positioned ^ ^ ^0.1 run function ./raycast/step
+
+function ./raycast/end:
+	scoreboard players reset @s spindle.dummy
+	tag @s remove spindle.raycast
+
+function ./short_circuit:
+	playsound spindle:entity.copper_mob.short_circuit neutral "@c"
+	damage @s 0
+
+function ./explode:
+	data modify entity @s DeathTime set value 20
+	playsound spindle:entity.copper_cat.hurt neutral "@c"
+	item replace entity @s armor.feet with minecraft:poisonous_potato[equippable={slot:feet},enchantments={"spindle:technical/explosion":1}]

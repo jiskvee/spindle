@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "key": {
+    "B": "minecraft:copper_block",
+    "N": "minecraft:copper_nugget",
+    "U": "minecraft:copper_bulb",
+    "S": "minecraft:slime_ball"
+  },
+  "pattern": [
+    "USU",
+    "BSB",
+    "NBN"
+  ],
+  "result": {
+    "id": "minecraft:brick",
+    "count": 1,
+    "components": {
+      "minecraft:custom_data": {}
+    }
+  }
+}

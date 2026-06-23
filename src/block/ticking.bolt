@@ -1,0 +1,4 @@
+from camellia.clocks import tick, second_clock, ten_second_clock
+
+prepend function second_clock:
+	execute as @e[type=minecraft:interaction,tag=spindle.copper_wheel_interaction] at @s run function spindle:block/copper_wheel/break/check

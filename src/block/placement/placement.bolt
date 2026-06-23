@@ -1,0 +1,52 @@
+function ./start:
+	scoreboard players set @s spindle.dummy 0
+	execute store result score @s spindle.dummy run attribute @s minecraft:block_interaction_range get 1
+	scoreboard players add @s spindle.dummy 2
+	execute anchored eyes run function ./raycast
+	#execute as @e[type=minecraft:item_display,tag=tcc.newly_placed_update_light] at @s run function tcc:block/update_light/on_place
+	advancement revoke @s only spindle:technical/placed_custom_block
+
+function ./raycast:
+	execute align xyz positioned ~0.5 ~ ~0.5 run function ./check_blocks
+	scoreboard players remove @s spindle.dummy 1
+	execute if score @s spindle.dummy matches 1.. positioned ^ ^ ^1 run function ./raycast
+
+function ./check_blocks:
+	for y in range(-2, 3):
+		execute positioned ~ ~y ~ run function ./layer
+
+function ./layer:
+	for x in range(-2, 3):
+		for z in range(-2, 3):
+			execute positioned ~x ~ ~z if block ~ ~ ~ #spindle:block_placement if data block ~ ~ ~ components."minecraft:custom_data".spindle.custom_block run return run function ./place_macro with block ~ ~ ~ components."minecraft:custom_data".spindle
+
+function ./place_macro:
+	scoreboard players set @s spindle.dummy 0
+	$function spindle:block/$(id)/place/start
+
+advancement spindle:technical/placed_custom_block {
+  "criteria": {
+    "requirement": {
+      "trigger": "minecraft:placed_block",
+      "conditions": {
+        "location": [
+          {
+            "condition": "minecraft:match_tool",
+            "predicate": {
+              "predicates": {
+                "minecraft:custom_data": {
+                  "spindle": {
+                    "custom_block": true
+                  }
+                }
+              }
+            }
+          }
+        ]
+      }
+    }
+  },
+  "rewards": {
+    "function": "spindle:block/placement/start"
+  }
+}
