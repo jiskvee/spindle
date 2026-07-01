@@ -1,18 +1,22 @@
-function ./start:
-	schedule function ./scan 1t append
+from camellia.utils import Location
+
+this = Location(~/)
+
+function this.start:
+	schedule function this.scan 1t append
 	advancement revoke @s only spindle:technical/killed_custom_entity
 
-function ./scan:
-	execute as @e[type=item,nbt={Item:{components:{"minecraft:custom_data":{spindle:{death:{}}}}}}] at @s run function ./as_item:
+function this.scan:
+	execute as @e[type=item,nbt={Item:{components:{"minecraft:custom_data":{spindle:{death:{}}}}}}] at @s run function this.as_item:
 		data remove storage spindle:temp root
 		data modify storage spindle:temp root.death set from entity @s Item.components."minecraft:custom_data".spindle.death
-		function ./macro with storage spindle:temp root.death
+		function this.macro with storage spindle:temp root.death
 		data remove storage spindle:temp root
 
 		execute if data storage spindle:temp root.death.xp summon minecraft:experience_orb run data modify entity @s Value set from storage spindle:temp root.death.xp
 		kill @s
 
-function ./macro:
+function this.macro:
 	$playsound $(sound) $(sound_category) @a[distance=..16] ~ ~ ~ $(volume) $(pitch)
 	$function $(function)
 
@@ -32,6 +36,6 @@ advancement spindle:technical/killed_custom_entity {
     }
   },
   "rewards": {
-    "function": "spindle:entity/technical/kill/start"
+    "function": this.start()
   }
 }

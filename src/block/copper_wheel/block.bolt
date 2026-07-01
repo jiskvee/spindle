@@ -11,8 +11,6 @@ function ./place/fail:
 	loot spawn ~ ~ ~ loot spindle:items/copper_wheel
 
 function ./place/success:
-	#execute align xyz positioned ~0.5 ~0.5 ~0.5 run summon minecraft:item_display ~ ~ ~ {Tags:["smithed.block","smithed.entity","smithed.strict","spindle.block","spindle.copper_wheel"],item:{id:"minecraft:poisonous_potato",components:{"minecraft:item_model":"spindle:block/copper_wheel"}}}
-	#summon minecraft:interaction ~ ~ ~ {response:1b,width:1.01f,height:0.51f,Tags:["smithed.block","smithed.entity","smithed.strict","spindle.entity","spindle.copper_wheel_interaction"]}
 	summon minecraft:interaction ~ ~ ~ {width:1.01f,height:0.51f,response:0b,Tags:["smithed.block","smithed.entity","smithed.strict","spindle.entity","spindle.copper_wheel_interaction"],Passengers:[{id:"minecraft:item_display",Tags:["smithed.block","smithed.entity","smithed.strict","spindle.block","spindle.copper_wheel"],item:{id:"minecraft:egg",components:{"minecraft:item_model":"spindle:block/copper_wheel"}}}]}
 	playsound minecraft:block.copper.place block "@c"
 
@@ -30,13 +28,3 @@ function ./break/start:
 function ./left_click:
 	attack_adv("spindle.copper_wheel_interaction")
 	execute as @n[type=minecraft:interaction,tag=spindle.copper_wheel_interaction,nbt={attack:{}}] at @s positioned ~ ~0.5 ~ run function ./break/start	
-
-#function ./right_click:
-#	interact_adv("spindle.copper_wheel_interaction")
-#
-#	scoreboard players reset #count spindle.dummy
-#	execute store result score #count spindle.dummy if entity @e[type=minecraft:item_display,distance=..3]
-#	execute if items entity @s weapon.mainhand *[minecraft:custom_data~{spindle:{id:"copper_wheel"}}] run scoreboard players add #count spindle.dummy 1
-#	execute if items entity @s weapon.offhand *[minecraft:custom_data~{spindle:{id:"copper_wheel"}}] run scoreboard players add #count spindle.dummy 1
-#	execute if items entity @s armor.head *[minecraft:custom_data~{spindle:{id:"copper_wheel"}}] run scoreboard players add #count spindle.dummy 1
-#	execute if score #count spindle.dummy matches 30.. run function ./dimension/enter
