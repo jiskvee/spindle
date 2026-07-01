@@ -1,5 +1,5 @@
 function ./laser/tick:
-	execute if predicate spindle:entity_properties/input/sprint run return run function ./laser/pressing
+	execute if predicate spindle:input/sprint run return run function ./laser/pressing
 	execute if score @s spindle.laser matches 1.. run scoreboard players remove @s spindle.laser 1
 
 function ./laser/pressing:

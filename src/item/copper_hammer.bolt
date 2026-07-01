@@ -1,0 +1,104 @@
+from spindle:utils import random_chance
+from camellia.utils import Location, cit
+
+this = Location(~/)
+
+
+function this.tick:
+	if predicate spindle:tick/20 if predicate random_chance(0.5) if items entity @s weapon.* *[minecraft:custom_data~{spindle:{charge:4b}}] run 
+		playsound spindle:item.copper_hammer.spark player "@c" ~ ~ ~ 0.5 2
+
+	if score @s spindle.hammer.cd matches 1.. run return run scoreboard players remove @s spindle.hammer.cd 1
+	if predicate spindle:location/under_thunder if predicate spindle:entity/is_on_ground run function this.conductive:
+		if predicate random_chance(0.001) positioned over motion_blocking run summon minecraft:lightning_bolt
+		if predicate random_chance(0.1) run particle minecraft:electric_spark ~ ~0.1 ~ 0.2 0 0.2 0.1 2
+		if predicate random_chance(0.1) run particle minecraft:electric_spark ~ ~ ~ 0 1 0 1 0
+
+
+function this.hit.as_victim:
+	positioned over motion_blocking run summon minecraft:lightning_bolt
+	if predicate random_chance(0.33) run damage @s 6 spindle:lightning
+	damage @s 6 spindle:lightning
+
+
+function this.hit.as_attacker:
+	scoreboard players set @s spindle.hammer.cd 30
+	execute run function this.remove_charge:
+		playsound spindle:item.copper_hammer.discharge player "@c"
+		if items entity @s weapon.mainhand cit("spindle","copper_hammer") run return run
+			item modify entity @s weapon.mainhand spindle:hammer/remove_charge
+		if items entity @s weapon.offhand cit("spindle","copper_hammer") run
+			item modify entity @s weapon.offhand spindle:hammer/remove_charge
+
+
+function this.struck:
+	advancement revoke @s only this.struck
+	if score @s spindle.hammer.cd matches 1.. run return fail
+	scoreboard players set @s spindle.hammer.cd 30
+
+	execute run function this.add_charge:
+		if items entity @s weapon.mainhand cit("spindle","copper_hammer") run return run
+			item modify entity @s weapon.mainhand spindle:hammer/add_charge
+		if items entity @s weapon.offhand cit("spindle","copper_hammer") run
+			item modify entity @s weapon.offhand spindle:hammer/add_charge
+
+	if items entity @s weapon.* *[minecraft:custom_data~{spindle:{charge:4b}}] run return run function this.overcharge:
+		playsound spindle:item.copper_hammer.overcharge player "@c"
+		damage @s 8 spindle:lightning
+	playsound spindle:item.copper_hammer.charge player "@c"
+
+
+advancement this.struck {
+  "parent": "spindle:technical/root",
+  "criteria": {
+    "requirement": {
+      "trigger": "minecraft:entity_hurt_player",
+      "conditions": {
+        "player": [
+          {
+            "condition": "minecraft:entity_properties",
+            "entity": "this",
+            "predicate": {
+              "minecraft:slots": {
+                "weapon.*": {
+                  "predicates": {
+                    "minecraft:custom_data": {
+                      "spindle": {
+                        "id": "copper_hammer"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          {
+            "condition": "minecraft:inverted",
+            "term": {
+              "condition": "minecraft:entity_scores",
+              "entity": "this",
+              "scores": {
+                "spindle.hammer.cd": {
+                  "min": 1
+                }
+              }
+            }
+          }
+        ],
+        "damage": {
+          "type": {
+            "tags": [
+              {
+                "id": "minecraft:is_lightning",
+                "expected": true
+              }
+            ]
+          }
+        }
+      }
+    }
+  },
+  "rewards": {
+    "function": this.struck()
+  }
+}

@@ -18,6 +18,9 @@ function ./technical/load:
 	scoreboard objectives add spindle.shotgun.fw_time dummy # time + 1
 	scoreboard objectives add spindle.shotgun.display_pos dummy # pos + 1
 
+	# hammer
+	scoreboard objectives add spindle.hammer.cd dummy # silence between two strikes
+
 	# entities
 	scoreboard objectives add spindle.entity dummy
 	scoreboard objectives add spindle.sound dummy

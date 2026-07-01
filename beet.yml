@@ -10,22 +10,21 @@ description:
 data_pack:
   name: spindle-dp
   load:
-    - data: data
     - data/spindle/modules: src
-    - pack.png: pack.png
+    - .
 resource_pack:
   name: spindle-rp
-  load:
-    - assets: assets
-    - pack.png: pack.png
+  load: .
 
 require:
   - bolt
   - camellia.clocks
+  - camellia.item.load_items
 
 pipeline:
   - mecha
   - beet.contrib.find_replace
+  - camellia.item
   - camellia.gen.updater
   - camellia.gen.sounds_json
   - camellia.gen.recipe_outputs

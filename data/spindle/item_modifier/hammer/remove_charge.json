@@ -1,0 +1,64 @@
+{
+  "function": "minecraft:filtered",
+  "item_filter": {
+    "predicates": {
+      "minecraft:custom_data": {
+        "spindle": {
+          "charge": 1
+        }
+      }
+    }
+  },
+  "on_pass": {
+    "function": "minecraft:reference",
+    "name": "spindle:hammer/charge_0"
+  },
+  "on_fail": {
+    "function": "minecraft:filtered",
+    "item_filter": {
+      "predicates": {
+        "minecraft:custom_data": {
+          "spindle": {
+            "charge": 2
+          }
+        }
+      }
+    },
+    "on_pass": {
+      "function": "minecraft:reference",
+      "name": "spindle:hammer/charge_1"
+    },
+    "on_fail": {
+      "function": "minecraft:filtered",
+      "item_filter": {
+        "predicates": {
+          "minecraft:custom_data": {
+            "spindle": {
+              "charge": 3
+            }
+          }
+        }
+      },
+      "on_pass": {
+        "function": "minecraft:reference",
+        "name": "spindle:hammer/charge_2"
+      },
+      "on_fail": {
+        "function": "minecraft:filtered",
+        "item_filter": {
+          "predicates": {
+            "minecraft:custom_data": {
+              "spindle": {
+                "charge": 4
+              }
+            }
+          }
+        },
+        "on_pass": {
+          "function": "minecraft:reference",
+          "name": "spindle:hammer/charge_3"
+        }
+      }
+    }
+  }
+}

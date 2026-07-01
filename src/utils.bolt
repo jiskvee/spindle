@@ -2,7 +2,7 @@ from beet import Predicate
 from camellia.utils import cit
 
 def random_chance(value):
-	registry:str = f"{ctx.project_name}:random_chance/{value}"
+	registry:str = f"{ctx.project_name}:chance/{value}"
 	if registry in ctx.data.predicates:
 		return registry
 	ctx.data.predicates[registry] = Predicate({

@@ -1,0 +1,7 @@
+{
+	"parent": "spindle:item/copper_hammer/charge_0_3d",
+	"textures": {
+		"0": "spindle:item/copper_hammer/charge_1_3d",
+    "particle": "spindle:item/copper_hammer/charge_1"
+	}
+}

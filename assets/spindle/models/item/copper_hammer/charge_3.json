@@ -1,0 +1,6 @@
+{
+	"parent": "minecraft:item/generated",
+	"textures": {
+		"layer0": "spindle:item/copper_hammer/charge_3"
+	}
+}

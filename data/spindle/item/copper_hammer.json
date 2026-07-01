@@ -1,0 +1,132 @@
+{
+  "id": "copper_hammer",
+  "base_item": "minecraft:poisonous_potato",
+  "definition": "spindle:copper_hammer",
+  "category": "equipment",
+  "name": {
+    "translate": "item.spindle.copper_hammer",
+    "color": "yellow",
+    "fallback": "%s",
+    "with": [
+      {
+        "translate": "resourcePack.runtime_failure",
+        "color": "red",
+        "bold": true
+      }
+    ]
+  },
+  "description": [
+    {
+      "translate": "item.spindle.copper_hammer.desc1",
+      "color": "gray",
+      "italic": false
+    },
+    {
+      "translate": "item.spindle.copper_hammer.desc2",
+      "color": "gray",
+      "italic": false,
+      "with": [
+        {
+          "translate": "item.spindle.copper_hammer.charge",
+          "color": "gold",
+          "italic": false
+        }
+      ]
+    },
+    {
+      "translate": "item.spindle.copper_hammer.desc3",
+      "color": "gray",
+      "italic": false,
+      "with": [
+        {
+          "keybind": "key.use",
+          "color": "gray",
+          "italic": false
+        },
+        {
+          "translate": "item.spindle.copper_hammer.discharge",
+          "color": "dark_aqua",
+          "italic": false
+        }
+      ]
+    },
+    {
+      "translate": "item.spindle.copper_hammer.charge_display",
+      "color": "white",
+      "italic": false,
+      "with": [
+        {
+          "text": "0"
+        }
+      ]
+    }
+  ],
+  "components": {
+    "!minecraft:consumable": { },
+    "minecraft:weapon": { },
+    "minecraft:rarity": "uncommon",
+    "minecraft:tooltip_style": "spindle:spindle",
+    "minecraft:damage": 0,
+    "minecraft:max_damage": 400,
+    "minecraft:max_stack_size": 1,
+    "minecraft:minimum_attack_charge": 1,
+    "minecraft:enchantment_glint_override": false,
+    "minecraft:enchantments": {
+      "spindle:technical/hammer": 1
+    },
+    "minecraft:repairable": {
+      "items": "minecraft:copper_block"
+    },
+    "minecraft:custom_model_data": {
+      "floats": [ 0 ]
+    },
+    "minecraft:custom_data": {
+      "spindle": {
+        "id": "copper_hammer",
+        "charge": 0
+      },
+      "smithed": {
+        "ignore": {
+          "functionality": true,
+          "crafting": true
+        }
+      }
+    },
+    "minecraft:tool": {
+      "rules": [ ],
+      "default_mining_speed": 0.5,
+      "damage_per_block": 2,
+      "can_destroy_blocks_in_creative": false
+    },
+    "minecraft:attribute_modifiers": [
+      {
+        "type": "minecraft:attack_damage",
+        "id": "minecraft:base_attack_damage",
+        "amount": 4,
+        "operation": "add_value",
+        "slot": "mainhand"
+      },
+      {
+        "type": "minecraft:attack_speed",
+        "id": "minecraft:base_attack_speed",
+        "amount": -3.5,
+        "operation": "add_value",
+        "slot": "mainhand"
+      }
+    ]
+  },
+
+
+  "recipe": {
+    "type": "minecraft:crafting_shaped",
+    "key": {
+      "B": "minecraft:copper_block",
+      "S": "minecraft:gold_block"
+    },
+    "pattern": [
+      "BBB",
+      "BBB",
+      " S "
+    ]
+  }
+}

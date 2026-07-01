@@ -1,0 +1,169 @@
+{
+  "id": "copper_shotgun",
+  "base_item": "minecraft:poisonous_potato",
+  "definition": "spindle:copper_shotgun",
+  "category": "equipment",
+  "name": {
+    "translate": "item.spindle.copper_shotgun",
+    "color": "white",
+    "fallback": "%s",
+    "with": [
+      {
+        "translate": "resourcePack.runtime_failure",
+        "color": "red",
+        "bold": true
+      }
+    ]
+  },
+
+  "description": [
+    "",
+    {
+      "translate": "item.spindle.copper_shotgun.desc1",
+      "color": "gray",
+      "italic": false,
+      "with": [
+        {
+          "keybind": "key.use",
+          "color": "gray",
+          "italic": false
+        }
+      ]
+    },
+    {
+      "translate": "item.spindle.copper_shotgun.desc2",
+      "color": "gray",
+      "italic": false,
+      "with": [
+        {
+          "keybind": "key.use",
+          "color": "gray",
+          "italic": false
+        }
+      ]
+    },
+    "",
+    {
+      "translate": "item.spindle.modifiers.shooting",
+      "color": "gray",
+      "italic": false
+    },
+    [
+      {
+        "text": " 12 ",
+        "color": "dark_green",
+        "italic": false
+      },
+      {
+        "translate": "attribute.name.attack_damage",
+        "color": "dark_green",
+        "italic": false
+      }
+    ],
+    [
+      {
+        "text": " 2 ",
+        "color": "dark_green",
+        "italic": false
+      },
+      {
+        "translate": "attribute.name.attack_knockback",
+        "color": "dark_green",
+        "italic": false
+      }
+    ],
+    {
+      "translate": "item.spindle.copper_shotgun.ammo_display",
+      "color": "white",
+      "italic": false,
+      "with": [
+        {
+          "text": "0"
+        }
+      ]
+    }
+  ],
+
+  "components": {
+    "!minecraft:enchantable": { },
+    "minecraft:tooltip_style": "spindle:spindle",
+    "minecraft:damage": 0,
+    "minecraft:max_damage": 200,
+    "minecraft:max_stack_size": 1,
+    "minecraft:enchantment_glint_override": false,
+    "minecraft:attack_range": {
+      "max_reach": 0,
+      "max_creative_reach": 0,
+      "hitbox_margin": 0
+    },
+    "minecraft:enchantments": {
+      "spindle:technical/shotgun": 1
+    },
+    "minecraft:repairable": {
+      "items": "minecraft:copper_ingot"
+    },
+    "minecraft:charged_projectiles": [
+      {
+        "id": "minecraft:poisonous_potato",
+        "components": {
+          "minecraft:intangible_projectile": { }
+        }
+      }
+    ],
+    "minecraft:tooltip_display": {
+      "hidden_components": [
+        "minecraft:charged_projectiles"
+      ]
+    },
+    "minecraft:custom_model_data": {
+      "strings": [
+        "ready",
+        "normal"
+      ]
+    },
+    "minecraft:custom_data": {
+      "spindle": {
+        "id": "copper_shotgun",
+        "gun": {
+          "loaded": false,
+          "reload_step": 2,
+          "state": 0
+        }
+      },
+      "smithed": {
+        "ignore": {
+          "functionality": true,
+          "crafting": true
+        }
+      }
+    },
+    "minecraft:food": {
+      "nutrition": 0,
+      "saturation": 0,
+      "can_always_eat": true
+    },
+    "minecraft:consumable": {
+      "consume_seconds": 2147483647,
+      "has_consume_particles": false,
+      "sound": "minecraft:intentionally_empty",
+      "animation": "none"
+    }
+  },
+
+
+  "recipe": {
+    "type": "minecraft:crafting_shaped",
+    "key": {
+      "B": "minecraft:copper_block",
+      "I": "minecraft:copper_ingot",
+      "T": "minecraft:tripwire_hook",
+      "G": "minecraft:gold_ingot",
+      "R": "minecraft:redstone"
+    },
+    "pattern": [
+      "RI ",
+      "BBB",
+      "GT "
+    ]
+  }
+}

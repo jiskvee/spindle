@@ -14,7 +14,7 @@ function ./tick:
 	execute on passengers at @s run function ./laser/tick
 
 	# step sound
-	execute if predicate spindle:entity_properties/is_on_ground if predicate spindle:entity_properties/has_passenger if predicate spindle:entity_properties/walking run function ./step:
+	execute if predicate spindle:entity/is_on_ground if predicate spindle:entity/has_passenger if predicate spindle:entity/walking run function ./step:
 		scoreboard players add @s spindle.step 1
 		execute if score @s spindle.step matches 8.. run function ./step_sound:
 			playsound minecraft:entity.horse.gallop neutral "@c" ~ ~ ~ 0.25
@@ -40,7 +40,7 @@ function ./second_clock:
 		playsound spindle:entity.copper_horse.ambient neutral "@c"
 
 	# explosion
-	execute unless predicate spindle:location_check/in_water run return run scoreboard players remove @s[scores={spindle.explode=1..}] spindle.explode 1
+	execute unless predicate spindle:location/in_water run return run scoreboard players remove @s[scores={spindle.explode=1..}] spindle.explode 1
 	execute if score @s spindle.explode matches 3 run function ./short_circuit
 	execute if score @s spindle.explode matches 5 run function ./short_circuit
 	execute if score @s spindle.explode matches 7.. run return run function ./explode

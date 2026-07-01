@@ -31,7 +31,7 @@ function ./second_clock:
 		scoreboard players reset @s spindle.entity
 		execute if entity @n[type=#spindle:cat_attacks,distance=..24,tag=!smithed.strict] run function ./raycast/start
 
-	execute unless predicate spindle:location_check/in_water run return run scoreboard players remove @s[scores={spindle.explode=1..}] spindle.explode 1
+	execute unless predicate spindle:location/in_water run return run scoreboard players remove @s[scores={spindle.explode=1..}] spindle.explode 1
 	execute if score @s spindle.explode matches 3 run function ./short_circuit
 	execute if score @s spindle.explode matches 5 run function ./short_circuit
 	execute if score @s spindle.explode matches 7.. run return run function ./explode

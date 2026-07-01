@@ -2,7 +2,7 @@
   "function": "minecraft:set_custom_model_data",
   "strings": {
     "values": [
-      "normal"
+      "ready"
     ],
     "mode": "replace_section",
     "offset": 1

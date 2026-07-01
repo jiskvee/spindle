@@ -3,6 +3,7 @@
   "ui.spindle.version": "v1.1",
   "ui.spindle.update": "\"Rust in Peace\"",
 
+
   "item.spindle.copper_wheel": "Llanta de cobre",
   "item.spindle.copper_pet.desc1": "%s para desplegar",
   "item.spindle.copper_pet.desc2": "%s agachado con la mano vacía para recuperar",
@@ -16,8 +17,14 @@
   "item.spindle.copper_shotgun.message.no_ammo": "¡Sin %s en el inventario!",
   "item.spindle.copper_shell": "Cartucho de cobre",
   "item.spindle.copper_shell.desc1": "Usado para recargar la %s",
+  "item.spindle.copper_hammer": "Martillo de cobre",
+  "item.spindle.copper_hammer.desc1": "Atrae rayos al sostener",
+  "item.spindle.copper_hammer.desc2": "Absorber un rayo otorga una %s",
+  "item.spindle.copper_hammer.desc3": "Manten %s o haz un critico para %s",
+  "item.spindle.copper_hammer.charge": "carga",
+  "item.spindle.copper_hammer.discharge": "descargar",
+  "item.spindle.copper_hammer.charge_display": "Carga: %s/3",
 
-  "item.spindle.modifiers.using": "Al usarse:",
   "item.spindle.modifiers.shooting": "Al disparar:",
 
   "subtitles.spindle.item.copper_shotgun.shoot": "Escopeta dispara",
@@ -26,6 +33,11 @@
   "subtitles.spindle.item.copper_shotgun.rack": "Escopeta acciona",
   "subtitles.spindle.item.copper_shotgun.empty": "Escopeta hace clic",
   "subtitles.spindle.item.copper_shotgun.insert": "Escopeta carga",
+  "subtitles.spindle.item.copper_hammer.spark": "Electricidad chispea",
+  "subtitles.spindle.item.copper_hammer.charge": "Bateria se carga",
+  "subtitles.spindle.item.copper_hammer.discharge": "Bateria se descarga",
+  "subtitles.spindle.item.copper_hammer.overcharge": "Bateria se sobrecarga",
+
 
   "entity.spindle.copper_horse": "Caballo de cobre",
   "entity.spindle.copper_horse.instructions": "%s para disparar | %s para desmontar",
@@ -48,6 +60,7 @@
   "subtitles.spindle.entity.copper_mob.shoot": "Láser disparado",
   "subtitles.spindle.entity.copper_mob.short_circuit": "Electricidad crepita",
   "subtitles.spindle.entity.copper_pet_retrieve": "Mascota de cobre recuperada",
+
 
   "enchantment.spindle.technical": "Encantamiento técnico | ¡Ignora esto!"
 }

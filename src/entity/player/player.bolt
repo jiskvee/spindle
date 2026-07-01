@@ -7,7 +7,7 @@ prepend function tick:
 		#execute if score @s spindle.egg matches 1.. run function spindle:item/egg
 
 prepend function ten_second_clock:
-	execute as @a at @s if predicate spindle:location_check/under_thunder run function ./lightning_bolt_chance:
+	execute as @a at @s if predicate spindle:location/under_thunder run function ./lightning_bolt_chance:
 		scoreboard players reset @s spindle.dummy
 		execute store result score @s spindle.dummy if items entity @s armor.head minecraft:copper_helmet
 		execute store result score @s spindle.dummy if items entity @s armor.chest minecraft:copper_chestplate

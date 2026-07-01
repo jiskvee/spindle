@@ -1,0 +1,126 @@
+{
+  "swap_animation_scale": 1.8,
+  "model": {
+    "type": "minecraft:range_dispatch",
+    "property": "minecraft:custom_model_data",
+    "entries": [
+      {
+        "threshold": 1,
+        "model": {
+          "type": "minecraft:select",
+          "property": "minecraft:display_context",
+          "cases": [
+            {
+              "when": [
+                "gui",
+                "fixed",
+                "ground"
+              ],
+              "model": {
+                "type": "minecraft:model",
+                "model": "spindle:item/copper_hammer/charge_1"
+              }
+            }
+          ],
+          "fallback": {
+            "type": "minecraft:model",
+            "model": "spindle:item/copper_hammer/charge_1_3d"
+          }
+        }
+      },
+      {
+        "threshold": 2,
+        "model": {
+          "type": "minecraft:select",
+          "property": "minecraft:display_context",
+          "cases": [
+            {
+              "when": [
+                "gui",
+                "fixed",
+                "ground"
+              ],
+              "model": {
+                "type": "minecraft:model",
+                "model": "spindle:item/copper_hammer/charge_2"
+              }
+            }
+          ],
+          "fallback": {
+            "type": "minecraft:model",
+            "model": "spindle:item/copper_hammer/charge_2_3d"
+          }
+        }
+      },
+      {
+        "threshold": 3,
+        "model": {
+          "type": "minecraft:select",
+          "property": "minecraft:display_context",
+          "cases": [
+            {
+              "when": [
+                "gui",
+                "fixed",
+                "ground"
+              ],
+              "model": {
+                "type": "minecraft:model",
+                "model": "spindle:item/copper_hammer/charge_3"
+              }
+            }
+          ],
+          "fallback": {
+            "type": "minecraft:model",
+            "model": "spindle:item/copper_hammer/charge_3_3d"
+          }
+        }
+      },
+      {
+        "threshold": 4,
+        "model": {
+          "type": "minecraft:select",
+          "property": "minecraft:display_context",
+          "cases": [
+            {
+              "when": [
+                "gui",
+                "fixed",
+                "ground"
+              ],
+              "model": {
+                "type": "minecraft:model",
+                "model": "spindle:item/copper_hammer/charge_4"
+              }
+            }
+          ],
+          "fallback": {
+            "type": "minecraft:model",
+            "model": "spindle:item/copper_hammer/charge_4_3d"
+          }
+        }
+      }
+    ],
+    "fallback": {
+      "type": "minecraft:select",
+      "property": "minecraft:display_context",
+      "cases": [
+        {
+          "when": [
+            "gui",
+            "fixed",
+            "ground"
+          ],
+          "model": {
+            "type": "minecraft:model",
+            "model": "spindle:item/copper_hammer/charge_0"
+          }
+        }
+      ],
+      "fallback": {
+        "type": "minecraft:model",
+        "model": "spindle:item/copper_hammer/charge_0_3d"
+      }
+    }
+  }
+}
