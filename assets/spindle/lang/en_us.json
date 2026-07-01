@@ -25,7 +25,8 @@
   "item.spindle.copper_hammer.discharge": "discharge",
   "item.spindle.copper_hammer.charge_display": "Charge: %s/3",
 
-  "item.spindle.modifiers.shooting": "When shooting:",
+  "item.modifiers.spindle.shooting": "When shooting:",
+  "attribute.modifier.spindle.equals": " %s %s",
 
   "subtitles.spindle.item.copper_shotgun.shoot": "Shotgun fires",
   "subtitles.spindle.item.copper_shotgun.open": "Shotgun opens",

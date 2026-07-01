@@ -12,7 +12,7 @@
   "item.spindle.weathered_copper_shotgun": "Escopeta de cobre degradada",
   "item.spindle.oxidized_copper_shotgun": "Escopeta de cobre oxidada",
   "item.spindle.copper_shotgun.desc1": "Presiona %s para disparar",
-  "item.spindle.copper_shotgun.desc2": "Manten %s para disparar",
+  "item.spindle.copper_shotgun.desc2": "Manten %s para recargar",
   "item.spindle.copper_shotgun.ammo_display": "Municion: %s/1",
   "item.spindle.copper_shotgun.message.no_ammo": "¡Sin %s en el inventario!",
   "item.spindle.copper_shell": "Cartucho de cobre",
@@ -25,7 +25,8 @@
   "item.spindle.copper_hammer.discharge": "descargar",
   "item.spindle.copper_hammer.charge_display": "Carga: %s/3",
 
-  "item.spindle.modifiers.shooting": "Al disparar:",
+  "item.modifiers.spindle.shooting": "Al disparar:",
+  "attribute.modifier.spindle.equals": " %2$s: %1$s",
 
   "subtitles.spindle.item.copper_shotgun.shoot": "Escopeta dispara",
   "subtitles.spindle.item.copper_shotgun.open": "Escopeta abre",

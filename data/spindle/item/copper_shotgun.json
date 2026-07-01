@@ -2,7 +2,6 @@
   "id": "copper_shotgun",
   "base_item": "minecraft:poisonous_potato",
   "definition": "spindle:copper_shotgun",
-  "category": "equipment",
   "name": {
     "translate": "item.spindle.copper_shotgun",
     "color": "white",
@@ -17,7 +16,6 @@
   },
 
   "description": [
-    "",
     {
       "translate": "item.spindle.copper_shotgun.desc1",
       "color": "gray",
@@ -42,36 +40,6 @@
         }
       ]
     },
-    "",
-    {
-      "translate": "item.spindle.modifiers.shooting",
-      "color": "gray",
-      "italic": false
-    },
-    [
-      {
-        "text": " 12 ",
-        "color": "dark_green",
-        "italic": false
-      },
-      {
-        "translate": "attribute.name.attack_damage",
-        "color": "dark_green",
-        "italic": false
-      }
-    ],
-    [
-      {
-        "text": " 2 ",
-        "color": "dark_green",
-        "italic": false
-      },
-      {
-        "translate": "attribute.name.attack_knockback",
-        "color": "dark_green",
-        "italic": false
-      }
-    ],
     {
       "translate": "item.spindle.copper_shotgun.ammo_display",
       "color": "white",
@@ -79,6 +47,34 @@
       "with": [
         {
           "text": "0"
+        }
+      ]
+    },
+    "",
+    {
+      "translate": "item.modifiers.spindle.shooting",
+      "color": "gray",
+      "italic": false
+    },
+    {
+      "translate": "attribute.modifier.spindle.equals",
+      "color": "dark_green",
+      "italic": false,
+      "with": [
+        "12",
+        {
+          "translate": "attribute.name.attack_damage"
+        }
+      ]
+    },
+    {
+      "translate": "attribute.modifier.spindle.equals",
+      "color": "dark_green",
+      "italic": false,
+      "with": [
+        "2",
+        {
+          "translate": "attribute.name.attack_knockback"
         }
       ]
     }
@@ -153,6 +149,7 @@
 
   "recipe": {
     "type": "minecraft:crafting_shaped",
+    "category": "equipment",
     "key": {
       "B": "minecraft:copper_block",
       "I": "minecraft:copper_ingot",
