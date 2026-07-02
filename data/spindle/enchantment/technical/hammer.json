@@ -55,7 +55,7 @@
                 "entity": "direct_attacker",
                 "predicate": {
                   "minecraft:slots": {
-                    "weapon.*": {
+                    "weapon.mainhand": {
                       "predicates": {
                         "minecraft:custom_data": {
                           "spindle": {
@@ -72,7 +72,7 @@
                 "entity": "direct_attacker",
                 "predicate": {
                   "minecraft:slots": {
-                    "weapon.*": {
+                    "weapon.mainhand": {
                       "predicates": {
                         "minecraft:custom_data": {
                           "spindle": {
@@ -89,28 +89,11 @@
                 "entity": "direct_attacker",
                 "predicate": {
                   "minecraft:slots": {
-                    "weapon.*": {
+                    "weapon.mainhand": {
                       "predicates": {
                         "minecraft:custom_data": {
                           "spindle": {
                             "charge": 3
-                          }
-                        }
-                      }
-                    }
-                  }
-                }
-              },
-              {
-                "condition": "minecraft:entity_properties",
-                "entity": "direct_attacker",
-                "predicate": {
-                  "minecraft:slots": {
-                    "weapon.*": {
-                      "predicates": {
-                        "minecraft:custom_data": {
-                          "spindle": {
-                            "charge": 4
                           }
                         }
                       }
@@ -218,77 +201,21 @@
             }
           },
           {
-            "condition": "minecraft:any_of",
-            "terms": [
-              {
-                "condition": "minecraft:entity_properties",
-                "entity": "direct_attacker",
-                "predicate": {
-                  "minecraft:slots": {
-                    "weapon.*": {
-                      "predicates": {
-                        "minecraft:custom_data": {
-                          "spindle": {
-                            "charge": 1
-                          }
-                        }
-                      }
-                    }
-                  }
-                }
-              },
-              {
-                "condition": "minecraft:entity_properties",
-                "entity": "direct_attacker",
-                "predicate": {
-                  "minecraft:slots": {
-                    "weapon.*": {
-                      "predicates": {
-                        "minecraft:custom_data": {
-                          "spindle": {
-                            "charge": 2
-                          }
-                        }
-                      }
-                    }
-                  }
-                }
-              },
-              {
-                "condition": "minecraft:entity_properties",
-                "entity": "direct_attacker",
-                "predicate": {
-                  "minecraft:slots": {
-                    "weapon.*": {
-                      "predicates": {
-                        "minecraft:custom_data": {
-                          "spindle": {
-                            "charge": 3
-                          }
-                        }
-                      }
-                    }
-                  }
-                }
-              },
-              {
-                "condition": "minecraft:entity_properties",
-                "entity": "direct_attacker",
-                "predicate": {
-                  "minecraft:slots": {
-                    "weapon.*": {
-                      "predicates": {
-                        "minecraft:custom_data": {
-                          "spindle": {
-                            "charge": 4
-                          }
-                        }
+            "condition": "minecraft:entity_properties",
+            "entity": "direct_attacker",
+            "predicate": {
+              "minecraft:slots": {
+                "weapon.mainhand": {
+                  "predicates": {
+                    "minecraft:custom_data": {
+                      "spindle": {
+                        "charge": 4
                       }
                     }
                   }
                 }
               }
-            ]
+            }
           },
           {
             "condition": "minecraft:entity_properties",
@@ -372,6 +299,15 @@
             }
           }
         ],
+        "effect": {
+          "type": "minecraft:run_function",
+          "function": "spindle:item/copper_hammer/hit/as_victim_overcharge"
+        },
+        "enchanted": "attacker",
+        "affected": "victim"
+      },
+      {
+        "requirements": [ ],
         "effect": {
           "type": "minecraft:run_function",
           "function": "spindle:item/copper_hammer/hit/as_attacker"

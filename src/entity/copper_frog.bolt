@@ -28,7 +28,7 @@ function this.second_clock:
 		playsound spindle:entity.copper_frog.idle neutral "@c" ~ ~ ~ 0.25
 		scoreboard players reset @s spindle.sound
 
-	execute unless predicate spindle:location/in_water run return run scoreboard players remove @s[scores={spindle.explode=1..}] spindle.explode 1
+	execute unless predicate spindle:location/wet run return run scoreboard players remove @s[scores={spindle.explode=1..}] spindle.explode 1
 	execute if score @s spindle.explode matches 3 run function this.short_circuit
 	execute if score @s spindle.explode matches 5 run function this.short_circuit
 	execute if score @s spindle.explode matches 7.. run return run function this.explode

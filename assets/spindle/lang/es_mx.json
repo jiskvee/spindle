@@ -38,6 +38,7 @@
   "subtitles.spindle.item.copper_hammer.charge": "Bateria se carga",
   "subtitles.spindle.item.copper_hammer.discharge": "Bateria se descarga",
   "subtitles.spindle.item.copper_hammer.overcharge": "Bateria se sobrecarga",
+  "subtitles.spindle.item.copper_hammer.erupt": "Bateria estalla",
 
 
   "entity.spindle.copper_horse": "Caballo de cobre",
@@ -60,7 +61,7 @@
   "subtitles.spindle.entity.copper_wolf.death": "Lobo de cobre muerto",
   "subtitles.spindle.entity.copper_mob.shoot": "Láser disparado",
   "subtitles.spindle.entity.copper_mob.short_circuit": "Electricidad crepita",
-  "subtitles.spindle.entity.copper_pet_retrieve": "Mascota de cobre recuperada",
+  "subtitles.spindle.entity.copper_pet.retrieve": "Mascota de cobre recuperada",
 
 
   "enchantment.spindle.technical": "Encantamiento técnico | ¡Ignora esto!"

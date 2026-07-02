@@ -59,8 +59,8 @@ function this.retrieve:
 	data modify storage spindle:temp root.pet.nbt.id set from storage spindle:temp root.pet.nbt.data.type
 
 	# despawn
-	playsound spindle:entity.copper_pet_retrieve neutral "@c"
-	playsound spindle:entity.copper_pet_retrieve neutral "@c"
+	playsound spindle:entity.copper_pet.retrieve neutral "@c"
+	playsound spindle:entity.copper_pet.retrieve neutral "@c"
 	tp @s ~ -1024 ~
 
 	# name handling

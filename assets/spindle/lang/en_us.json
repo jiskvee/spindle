@@ -38,6 +38,7 @@
   "subtitles.spindle.item.copper_hammer.charge": "Battery charges",
   "subtitles.spindle.item.copper_hammer.discharge": "Battery discharges",
   "subtitles.spindle.item.copper_hammer.overcharge": "Battery overcharges",
+  "subtitles.spindle.item.copper_hammer.erupt": "Battery erupts",
 
 
   "entity.spindle.copper_horse": "Copper Horse",
@@ -60,7 +61,7 @@
   "subtitles.spindle.entity.copper_wolf.death": "Copper Wolf dies",
   "subtitles.spindle.entity.copper_mob.shoot": "Laser shoots",
   "subtitles.spindle.entity.copper_mob.short_circuit": "Electricity crackles",
-  "subtitles.spindle.entity.copper_pet_retrieve": "Copper pet retrieves",
+  "subtitles.spindle.entity.copper_pet.retrieve": "Copper pet retrieves",
 
 
   "enchantment.spindle.technical": "Technical Enchantment | Ignore this!"
