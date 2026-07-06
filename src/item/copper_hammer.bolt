@@ -22,14 +22,14 @@ function this.tick:
 
 function this.hit.as_victim:
 	positioned over motion_blocking run summon minecraft:lightning_bolt
-	positioned over motion_blocking unless entity @s[distance=..6] run return fail
+	positioned over motion_blocking unless entity @s[distance=..4.5] run return fail
 	if predicate random_chance(0.33) run damage @s 6 spindle:lightning
 	damage @s 6 spindle:lightning
 
 
 function this.hit.as_victim_overcharge:
 	positioned over motion_blocking run function this.lot_of_lightning:
-		if entity @s[distance=..6] run damage @s 15 spindle:lightning
+		if entity @s[distance=..4.5] run damage @s 15 spindle:lightning
 		summon minecraft:lightning_bolt
 		summon minecraft:lightning_bolt
 		summon minecraft:lightning_bolt
