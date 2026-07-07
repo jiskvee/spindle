@@ -1,0 +1,23 @@
+function ./egg:
+	scoreboard players reset @s spindle.egg
+	execute as @n[type=#spindle:pets,tag=!spindle.has_owner] run function spindle:entity/copper_pet/set_owner
+	execute as @n[type=#spindle:copper_entities,tag=spindle.placed] at @s run function spindle:entity/copper_pet/placed
+
+function ./crossbow/shoot:
+	advancement revoke @s only spindle:technical/shoot_crossbow
+	as @n[type=minecraft:arrow,distance=..2,predicate=spindle:entity/shotgun_arrow] run function ./crossbow/as_arrow:
+		stopsound "@c" player minecraft:item.crossbow.shoot
+		on origin run function ./copper_shotgun/shoot
+		kill @s
+
+advancement spindle:technical/shoot_crossbow {
+  "parent": "spindle:technical/root",
+  "criteria": {
+    "requirement": {
+      "trigger": "minecraft:shot_crossbow"
+    }
+  },
+  "rewards": {
+    "function": "spindle:item/crossbow/shoot"
+  }
+}

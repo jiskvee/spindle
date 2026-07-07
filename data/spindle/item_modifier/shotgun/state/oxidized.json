@@ -4,7 +4,6 @@
     "components": {
       "minecraft:item_name": {
         "translate": "item.spindle.oxidized_copper_shotgun",
-        "color": "white",
         "fallback": "%s",
         "with": [
           {

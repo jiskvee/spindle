@@ -7,6 +7,8 @@ this = Location(~/)
 prepend function tick:
 	as @a at @s run function this.tick:
 		if score @s spindle.egg matches 1.. run function spindle:item/egg
+		if predicate spindle:item/hammer/holding run function spindle:item/copper_hammer/tick
+		if predicate spindle:item/shotgun/holding run function spindle:item/copper_shotgun/tick
 
 prepend function ten_second_clock:
 	execute as @a[predicate=spindle:location/under_thunder] at @s run function this.lightning_bolt_chance:

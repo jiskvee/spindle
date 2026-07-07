@@ -1,0 +1,17 @@
+{
+  "condition": "minecraft:entity_properties",
+  "entity": "this",
+  "predicate": {
+    "minecraft:slots": {
+      "weapon.*": {
+        "predicates": {
+          "minecraft:custom_data": {
+            "spindle": {
+              "id": "copper_shotgun"
+            }
+          }
+        }
+      }
+    }
+  }
+}

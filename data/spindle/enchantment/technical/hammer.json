@@ -30,14 +30,6 @@
     "per_level_above_first": 0
   },
   "effects": {
-    "minecraft:tick": [
-      {
-        "effect": {
-          "type": "minecraft:run_function",
-          "function": "spindle:item/copper_hammer/tick"
-        }
-      }
-    ],
     "minecraft:post_attack": [
       {
         "requirements": [
@@ -307,7 +299,6 @@
         "affected": "victim"
       },
       {
-        "requirements": [ ],
         "effect": {
           "type": "minecraft:run_function",
           "function": "spindle:item/copper_hammer/hit/as_attacker"

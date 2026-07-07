@@ -5,7 +5,12 @@
       {
         "id": "minecraft:poisonous_potato",
         "components": {
-          "minecraft:intangible_projectile": {}
+          "minecraft:intangible_projectile": { },
+          "minecraft:custom_data": {
+            "spindle": {
+              "shotgun_arrow": true
+            }
+          }
         }
       }
     ]

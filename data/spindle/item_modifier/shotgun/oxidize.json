@@ -1,0 +1,52 @@
+{
+  "function": "minecraft:filtered",
+  "item_filter": {
+    "predicates": {
+      "minecraft:damage": {
+        "damage": {
+          "min": 150
+        }
+      }
+    }
+  },
+  "on_pass": {
+    "function": "minecraft:reference",
+    "name": "spindle:shotgun/state/oxidized"
+  },
+  "on_fail": {
+    "function": "minecraft:filtered",
+    "item_filter": {
+      "predicates": {
+        "minecraft:damage": {
+          "damage": {
+            "min": 100
+          }
+        }
+      }
+    },
+    "on_pass": {
+      "function": "minecraft:reference",
+      "name": "spindle:shotgun/state/weathered"
+    },
+    "on_fail": {
+      "function": "minecraft:filtered",
+      "item_filter": {
+        "predicates": {
+          "minecraft:damage": {
+            "damage": {
+              "min": 50
+            }
+          }
+        }
+      },
+      "on_pass": {
+        "function": "minecraft:reference",
+        "name": "spindle:shotgun/state/exposed"
+      },
+      "on_fail": {
+        "function": "minecraft:reference",
+        "name": "spindle:shotgun/state/normal"
+      }
+    }
+  }
+}

@@ -1,4 +1,5 @@
 from spindle:utils import modify_weapon
+from camellia.utils import cit
 
 function ./reload/check_ammo:
 	if entity @s[gamemode=creative] run return 1
@@ -7,9 +8,6 @@ function ./reload/check_ammo:
 	if items entity @s weapon.offhand *[custom_data~{spindle:{id:"copper_shell"}}] run return 1
 
 function ./reload/start:
-	# exit reload
-	if entity @s[tag=spindle.reloading] run return run function ./reload/end
-
 	# no ammo in inventory
 	unless function ./reload/check_ammo run return run function ./reload/no_ammo:
 		if entity @s[tag=spindle.ammoless] run return fail
@@ -19,7 +17,7 @@ function ./reload/start:
 
 	# get stats from item
 	execute run function ./reload/get_stats:
-		execute if items entity @s weapon.offhand *[minecraft:custom_data~{spindle:{id:"copper_shotgun"}}] run return run data modify storage spindle:temp root.stats set from entity @s equipment.offhand.components."minecraft:custom_data".spindle.gun
+		execute if items entity @s weapon.offhand cit("spindle","copper_shotgun") run return run data modify storage spindle:temp root.stats set from entity @s equipment.offhand.components."minecraft:custom_data".spindle.gun
 		data modify storage spindle:temp root.stats set from entity @s SelectedItem.components."minecraft:custom_data".spindle.gun
 	
 	scoreboard players set @s spindle.shotgun.pos 1
@@ -74,7 +72,7 @@ function ./reload/bar/display:
 	execute run function ./reload/bar/place_cartridge with storage spindle:shotgun root:
 		$data modify storage spindle:shotgun root.bar[$(pos)] set value "B"
 
-	# parse array
+	# parse array into a string
 	data modify storage spindle:shotgun root.parsed set value ""
 	execute run function ./reload/bar/parse:
 		# copy last element and remove it
@@ -100,7 +98,7 @@ function ./reload/end:
 
 function ./reload/determine:
 	execute if score @s spindle.shotgun.pos = @s spindle.shotgun.spot run return run function ./reload/success:
-		clear @s[gamemode=!creative] *[minecraft:custom_data~{spindle:{id:"copper_shell"}}] 1
+		clear @s[gamemode=!creative] cit("spindle","copper_shell") 1
 		modify_weapon('copper_shotgun', 'spindle:shotgun/ammo/load')
 		playsound spindle:item.copper_shotgun.rack player "@c" ~ ~ ~ 1 1
 		playsound spindle:item.copper_shotgun.reload_success player @s ~ ~ ~ 0.5 1

@@ -1,5 +1,5 @@
 from spindle:utils import random_chance
-from camellia.utils import Location, cit
+from camellia.utils import Location, cit, technical
 
 this = Location(~/)
 
@@ -54,7 +54,7 @@ function this.hit.as_attacker:
 
 
 function this.struck:
-	advancement revoke @s only this.struck
+	advancement revoke @s only technical(this.struck)
 	if score @s spindle.hammer.cd matches 1.. run return fail
 	scoreboard players set @s spindle.hammer.cd 30
 
@@ -70,7 +70,7 @@ function this.struck:
 	playsound spindle:item.copper_hammer.charge player "@c"
 
 
-advancement this.struck {
+advancement technical(this.struck) {
   "parent": "spindle:technical/root",
   "criteria": {
     "requirement": {
