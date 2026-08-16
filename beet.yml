@@ -1,10 +1,10 @@
 name: spindle
-version: 1.1.1
+version: "1.2"
 description:
   - text: "🔧 SPiNDLE 🔧"
     color: "#e77c56"
   - text: "\n"
-  - text: "<ʀᴜꜱᴛ ɪɴ ᴘᴇᴀᴄᴇ>"
+  - text: "<ʀɪᴅᴇ ᴛʜᴇ ʟɪɢʜᴛɴɪɴɢ>"
     color: "#39b894"
 
 data_pack:
@@ -25,7 +25,6 @@ pipeline:
   - mecha
   - beet.contrib.find_replace
   - camellia.item
-  - camellia.gen.updater
   - camellia.gen.sounds_json
   - camellia.gen.recipe_outputs
   - camellia.gen.copy_spanish

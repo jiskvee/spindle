@@ -1,15 +1,18 @@
-Have you ever felt like Minecraft was lacking some good old rusty copper content? Is the content of the Copper Age drop just not RUSTY enough for you?? Well... uhh you could be in luck. Am not sure, though.
-
 _Add more uses to copper you say? I know what you are. I have what you want._
+
+Have you ever felt like Minecraft was lacking some good old rusty copper content? Is the content of the Copper Age drop just not RUSTY enough for you?? Well... uhh you could be in luck. Am not sure, though.
 
 # Contents
 ### Features
+The datapack's features are vast. Including, but not limited to:
+- Copper SHOTGUN (cool)
+- Copper HAMMER (rad)
+- Copper HORSE (evil)
+- Copper FROG (awsum)
+- Copper WOLF (fierce)
+- Copper CAT (wicked)
+
 More content is planned for future updates, stay tunned.
-- Copper Horse
-- Copper Frog
-- Copper Wolf
-- Copper Cat
-- Copper... SHOTGUN?
 
 # Frequent Issues
 ### Missing item textures

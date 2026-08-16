@@ -310,7 +310,7 @@ wheels = [
 
 [[package]]
 name = "spindle"
-version = "1.1"
+version = "1.2"
 source = { virtual = "." }
 dependencies = [
     { name = "beet" },
