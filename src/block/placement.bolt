@@ -7,7 +7,6 @@ function this.start:
 	execute store result score @s spindle.dummy run attribute @s minecraft:block_interaction_range get 1
 	scoreboard players add @s spindle.dummy 2
 	execute anchored eyes run function this.raycast
-	#execute as @e[type=minecraft:item_display,tag=tcc.newly_placed_update_light] at @s run function tcc:block/update_light/on_place
 	advancement revoke @s only spindle:technical/placed_custom_block
 
 function this.raycast:
@@ -29,28 +28,23 @@ function this.place_macro:
 	$function spindle:block/$(id)/place/start
 
 advancement spindle:technical/placed_custom_block {
+  "parent": "spindle:technical/root",
   "criteria": {
     "requirement": {
       "trigger": "minecraft:placed_block",
       "conditions": {
-        "location": [
-          {
-            "condition": "minecraft:match_tool",
-            "predicate": {
-              "predicates": {
-                "minecraft:custom_data": {
-                  "spindle": {
-                    "custom_block": true
-                  }
-                }
-              }
+        "location": {
+          "type": "minecraft:match_tool",
+          "predicate": {
+            "predicates": {
+              "minecraft:custom_data": "{spindle:{custom_block:1b}}"
             }
           }
-        ]
+        }
       }
     }
   },
   "rewards": {
-    "function": "spindle:block/placement/start"
+    "function": this.start()
   }
 }

@@ -2,109 +2,101 @@
   "type": "minecraft:entity",
   "pools": [
     {
-      "bonus_rolls": 0.0,
-      "conditions": [
-        {
-          "condition": "minecraft:entity_properties",
-          "entity": "this",
-          "predicate": {
-            "type_specific/cube_mob": {
-              "size": 1
-            }
+      "condition": {
+        "type": "minecraft:entity_properties",
+        "entity": "this",
+        "predicate": {
+          "minecraft:type_specific/cube_mob": {
+            "size": 1
           }
         }
-      ],
+      },
       "entries": [
         {
           "type": "minecraft:item",
-          "conditions": [
-            {
-              "condition": "minecraft:inverted",
-              "term": {
-                "condition": "minecraft:damage_source_properties",
-                "predicate": {
-                  "source_entity": {
-                    "minecraft:entity_type": "minecraft:frog"
-                  }
-                }
-              }
-            }
-          ],
-          "functions": [
-            {
-              "add": false,
-              "count": {
-                "type": "minecraft:uniform",
-                "max": 2.0,
-                "min": 0.0
-              },
-              "function": "minecraft:set_count"
-            },
-            {
-              "count": {
-                "type": "minecraft:uniform",
-                "max": 1.0,
-                "min": 0.0
-              },
-              "enchantment": "minecraft:looting",
-              "function": "minecraft:enchanted_count_increase"
-            }
-          ],
-          "name": "minecraft:slime_ball"
-        },
-        {
-          "type": "minecraft:item",
-          "conditions": [
-            {
-              "condition": "minecraft:damage_source_properties",
+          "condition": {
+            "type": "minecraft:inverted",
+            "term": {
+              "type": "minecraft:damage_source_properties",
               "predicate": {
                 "source_entity": {
                   "minecraft:entity_type": "minecraft:frog"
                 }
               }
+            }
+          },
+          "modifier": [
+            {
+              "type": "minecraft:set_count",
+              "count": {
+                "type": "minecraft:uniform",
+                "max": 2,
+                "min": 0
+              }
             },
             {
-              "condition": "minecraft:inverted",
-              "term": {
-                "condition": "minecraft:damage_source_properties",
-                "predicate": {
-                  "source_entity": {
-                    "components": {
-                      "minecraft:frog/variant": "spindle:copper"
-                    }
-                  }
-                }
-              }
-            }
-          ],
-          "functions": [
-            {
-              "add": false,
-              "count": 1.0,
-              "function": "minecraft:set_count"
+              "type": "minecraft:enchanted_count_increase",
+              "count": {
+                "type": "minecraft:uniform",
+                "max": 1,
+                "min": 0
+              },
+              "enchantment": "minecraft:looting"
             }
           ],
           "name": "minecraft:slime_ball"
         },
         {
-          "type": "minecraft:loot_table",
-          "value": "spindle:gameplay/copper_frog_eat_slime",
-          "conditions": [
-            {
-              "condition": "minecraft:damage_source_properties",
-              "predicate": {
-                "source_entity": {
-                  "minecraft:entity_type": "minecraft:frog",
-                  "components": {
-                    "minecraft:frog/variant": "spindle:copper"
+          "type": "minecraft:item",
+          "condition": {
+            "type": "minecraft:all_of",
+            "terms": [
+              {
+                "type": "minecraft:damage_source_properties",
+                "predicate": {
+                  "source_entity": {
+                    "minecraft:entity_type": "minecraft:frog"
+                  }
+                }
+              },
+              {
+                "type": "minecraft:inverted",
+                "term": {
+                  "type": "minecraft:damage_source_properties",
+                  "predicate": {
+                    "source_entity": {
+                      "components": {
+                        "minecraft:frog/variant": "spindle:copper"
+                      }
+                    }
                   }
                 }
               }
+            ]
+          },
+          "modifier": {
+            "type": "minecraft:set_count",
+            "count": 1
+          },
+          "name": "minecraft:slime_ball"
+        },
+        {
+          "type": "minecraft:loot_table",
+          "value": "spindle:gameplay/copper_frog_eat_slime",
+          "condition": {
+            "type": "minecraft:damage_source_properties",
+            "predicate": {
+              "source_entity": {
+                "minecraft:entity_type": "minecraft:frog",
+                "components": {
+                  "minecraft:frog/variant": "spindle:copper"
+                }
+              }
             }
-          ]
+          }
         }
       ],
-      "rolls": 1.0
+      "rolls": 1
     }
   ],
   "random_sequence": "minecraft:entities/slime",
@@ -119,11 +111,11 @@
         }
       },
       {
-        "type": "append",
-        "target": "pools[0].entries[1].conditions",
+        "type": "replace",  
+        "target": "pools[0].entries[1].condition",
         "source": {
           "type": "reference",
-          "path": "pools[0].entries[1].conditions[1]"
+          "path": "pools[0].entries[1].condition"
         }
       }
     ]

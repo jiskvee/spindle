@@ -42,8 +42,12 @@ advancement spindle:technical/entity/nametag {
           "items": "minecraft:name_tag"
         },
         "entity": {
-          "minecraft:entity_type": "#spindle:copper_entities",
-          "team": "spindle.no_nametag"
+          "type": "minecraft:entity_properties",
+          "entity": "this",
+          "predicate": {
+            "minecraft:entity_type": "#spindle:copper_entities",
+            "minecraft:team": "spindle.no_nametag"
+          }
         }
       }
     }

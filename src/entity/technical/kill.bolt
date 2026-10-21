@@ -26,10 +26,14 @@ advancement spindle:technical/killed_custom_entity {
       "trigger": "minecraft:player_killed_entity",
       "conditions": {
         "entity": {
-          "minecraft:entity_tags": {
-            "any_of": [
-              "spindle.entity"
-            ]
+          "type": "minecraft:entity_properties",
+          "entity": "this",
+          "predicate": {
+            "minecraft:entity_tags": {
+              "any_of": [
+                "spindle.entity"
+              ]
+            }
           }
         }
       }

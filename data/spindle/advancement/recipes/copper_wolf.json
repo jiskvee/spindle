@@ -23,7 +23,7 @@
 		},
 		"has_the_recipe": {
 			"conditions": {
-				"recipe": "spindle:copper_wolf"
+				"recipes": "spindle:copper_wolf"
 			},
 			"trigger": "minecraft:recipe_unlocked"
 		}

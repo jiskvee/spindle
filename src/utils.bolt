@@ -6,7 +6,7 @@ def random_chance(value):
 	if registry in ctx.data.predicates:
 		return registry
 	ctx.data.predicates[registry] = Predicate({
-		"condition": "minecraft:random_chance",
+		"type": "minecraft:random_chance",
 		"chance": value
 	})
 	return registry

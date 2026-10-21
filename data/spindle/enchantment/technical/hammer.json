@@ -5,15 +5,9 @@
   "supported_items": [ ],
   "description": [
     {
-      "text": "0 ",
-      "color": "white",
-      "font": "spindle:icon",
-      "italic": false
-    },
-    {
-      "translate": "ui.spindle.title",
-      "color": "white",
+      "translate": "spindle.tooltip",
       "font": "spindle:tooltip",
+      "color": "white",
       "italic": false
     }
   ],
@@ -32,151 +26,154 @@
   "effects": {
     "minecraft:post_attack": [
       {
-        "requirements": [
-          {
-            "condition": "minecraft:location_check",
-            "predicate": {
-              "dimension": "minecraft:overworld"
-            }
-          },
-          {
-            "condition": "minecraft:any_of",
-            "terms": [
-              {
-                "condition": "minecraft:entity_properties",
-                "entity": "direct_attacker",
-                "predicate": {
-                  "minecraft:slots": {
-                    "weapon.mainhand": {
-                      "predicates": {
-                        "minecraft:custom_data": {
-                          "spindle": {
-                            "charge": 1
+        "requirements": {
+          "type": "minecraft:all_of",
+          "terms": [
+            {
+              "type": "minecraft:location_check",
+              "predicate": {
+                "dimension": "minecraft:overworld"
+              }
+            },
+            {
+              "type": "minecraft:any_of",
+              "terms": [
+                {
+                  "type": "minecraft:entity_properties",
+                  "entity": "direct_attacker",
+                  "predicate": {
+                    "minecraft:slots": {
+                      "weapon.mainhand": {
+                        "predicates": {
+                          "minecraft:custom_data": {
+                            "spindle": {
+                              "charge": 1
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                },
+                {
+                  "type": "minecraft:entity_properties",
+                  "entity": "direct_attacker",
+                  "predicate": {
+                    "minecraft:slots": {
+                      "weapon.mainhand": {
+                        "predicates": {
+                          "minecraft:custom_data": {
+                            "spindle": {
+                              "charge": 2
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                },
+                {
+                  "type": "minecraft:entity_properties",
+                  "entity": "direct_attacker",
+                  "predicate": {
+                    "minecraft:slots": {
+                      "weapon.mainhand": {
+                        "predicates": {
+                          "minecraft:custom_data": {
+                            "spindle": {
+                              "charge": 3
+                            }
                           }
                         }
                       }
                     }
                   }
                 }
-              },
-              {
-                "condition": "minecraft:entity_properties",
-                "entity": "direct_attacker",
-                "predicate": {
-                  "minecraft:slots": {
-                    "weapon.mainhand": {
-                      "predicates": {
-                        "minecraft:custom_data": {
-                          "spindle": {
-                            "charge": 2
-                          }
-                        }
-                      }
-                    }
-                  }
-                }
-              },
-              {
-                "condition": "minecraft:entity_properties",
-                "entity": "direct_attacker",
-                "predicate": {
-                  "minecraft:slots": {
-                    "weapon.mainhand": {
-                      "predicates": {
-                        "minecraft:custom_data": {
-                          "spindle": {
-                            "charge": 3
-                          }
-                        }
-                      }
-                    }
+              ]
+            },
+            {
+              "type": "minecraft:entity_properties",
+              "entity": "direct_attacker",
+              "predicate": {
+                "minecraft:movement": {
+                  "fall_distance": {
+                    "min": 0.1
                   }
                 }
               }
-            ]
-          },
-          {
-            "condition": "minecraft:entity_properties",
-            "entity": "direct_attacker",
-            "predicate": {
-              "minecraft:movement": {
-                "fall_distance": {
-                  "min": 0.1
+            },
+            {
+              "type": "minecraft:entity_properties",
+              "entity": "direct_attacker",
+              "predicate": {
+                "minecraft:flags": {
+                  "is_sprinting": false,
+                  "is_on_ground": false,
+                  "is_flying": false,
+                  "is_in_water": false
+                }
+              }
+            },
+            {
+              "type": "minecraft:inverted",
+              "term": {
+                "type": "minecraft:location_check",
+                "entity": "direct_attacker",
+                "predicate": {
+                  "block": {
+                    "blocks": "#minecraft:climbable"
+                  }
+                }
+              }
+            },
+            {
+              "type": "minecraft:inverted",
+              "term": {
+                "type": "minecraft:entity_properties",
+                "entity": "direct_attacker",
+                "predicate": {
+                  "minecraft:vehicle": { }
+                }
+              }
+            },
+            {
+              "type": "minecraft:inverted",
+              "term": {
+                "type": "minecraft:entity_properties",
+                "entity": "direct_attacker",
+                "predicate": {
+                  "minecraft:effects": {
+                    "minecraft:blindness": { }
+                  }
+                }
+              }
+            },
+            {
+              "type": "minecraft:inverted",
+              "term": {
+                "type": "minecraft:entity_properties",
+                "entity": "direct_attacker",
+                "predicate": {
+                  "minecraft:effects": {
+                    "minecraft:levitation": { }
+                  }
+                }
+              }
+            },
+            {
+              "type": "minecraft:inverted",
+              "term": {
+                "type": "minecraft:entity_properties",
+                "entity": "direct_attacker",
+                "predicate": {
+                  "minecraft:effects": {
+                    "minecraft:slow_falling": { }
+                  }
                 }
               }
             }
-          },
-          {
-            "condition": "minecraft:entity_properties",
-            "entity": "direct_attacker",
-            "predicate": {
-              "minecraft:flags": {
-                "is_sprinting": false,
-                "is_on_ground": false,
-                "is_flying": false,
-                "is_in_water": false
-              }
-            }
-          },
-          {
-            "condition": "minecraft:inverted",
-            "term": {
-              "condition": "minecraft:location_check",
-              "entity": "direct_attacker",
-              "predicate": {
-                "block": {
-                  "blocks": "#minecraft:climbable"
-                }
-              }
-            }
-          },
-          {
-            "condition": "minecraft:inverted",
-            "term": {
-              "condition": "minecraft:entity_properties",
-              "entity": "direct_attacker",
-              "predicate": {
-                "minecraft:vehicle": { }
-              }
-            }
-          },
-          {
-            "condition": "minecraft:inverted",
-            "term": {
-              "condition": "minecraft:entity_properties",
-              "entity": "direct_attacker",
-              "predicate": {
-                "minecraft:effects": {
-                  "minecraft:blindness": { }
-                }
-              }
-            }
-          },
-          {
-            "condition": "minecraft:inverted",
-            "term": {
-              "condition": "minecraft:entity_properties",
-              "entity": "direct_attacker",
-              "predicate": {
-                "minecraft:effects": {
-                  "minecraft:levitation": { }
-                }
-              }
-            }
-          },
-          {
-            "condition": "minecraft:inverted",
-            "term": {
-              "condition": "minecraft:entity_properties",
-              "entity": "direct_attacker",
-              "predicate": {
-                "minecraft:effects": {
-                  "minecraft:slow_falling": { }
-                }
-              }
-            }
-          }
-        ],
+          ]
+        },
         "effect": {
           "type": "minecraft:run_function",
           "function": "spindle:item/copper_hammer/hit/as_victim"
@@ -185,112 +182,115 @@
         "affected": "victim"
       },
       {
-        "requirements": [
-          {
-            "condition": "minecraft:location_check",
-            "predicate": {
-              "dimension": "minecraft:overworld"
-            }
-          },
-          {
-            "condition": "minecraft:entity_properties",
-            "entity": "direct_attacker",
-            "predicate": {
-              "minecraft:slots": {
-                "weapon.mainhand": {
-                  "predicates": {
-                    "minecraft:custom_data": {
-                      "spindle": {
-                        "charge": 4
+        "requirements": {
+          "type": "minecraft:all_of",
+          "terms": [
+            {
+              "type": "minecraft:location_check",
+              "predicate": {
+                "dimension": "minecraft:overworld"
+              }
+            },
+            {
+              "type": "minecraft:entity_properties",
+              "entity": "direct_attacker",
+              "predicate": {
+                "minecraft:slots": {
+                  "weapon.mainhand": {
+                    "predicates": {
+                      "minecraft:custom_data": {
+                        "spindle": {
+                          "charge": 4
+                        }
                       }
                     }
                   }
                 }
               }
-            }
-          },
-          {
-            "condition": "minecraft:entity_properties",
-            "entity": "direct_attacker",
-            "predicate": {
-              "minecraft:movement": {
-                "fall_distance": {
-                  "min": 0.1
+            },
+            {
+              "type": "minecraft:entity_properties",
+              "entity": "direct_attacker",
+              "predicate": {
+                "minecraft:movement": {
+                  "fall_distance": {
+                    "min": 0.1
+                  }
+                }
+              }
+            },
+            {
+              "type": "minecraft:entity_properties",
+              "entity": "direct_attacker",
+              "predicate": {
+                "minecraft:flags": {
+                  "is_sprinting": false,
+                  "is_on_ground": false,
+                  "is_flying": false,
+                  "is_in_water": false
+                }
+              }
+            },
+            {
+              "type": "minecraft:inverted",
+              "term": {
+                "type": "minecraft:location_check",
+                "entity": "direct_attacker",
+                "predicate": {
+                  "block": {
+                    "blocks": "#minecraft:climbable"
+                  }
+                }
+              }
+            },
+            {
+              "type": "minecraft:inverted",
+              "term": {
+                "type": "minecraft:entity_properties",
+                "entity": "direct_attacker",
+                "predicate": {
+                  "minecraft:vehicle": { }
+                }
+              }
+            },
+            {
+              "type": "minecraft:inverted",
+              "term": {
+                "type": "minecraft:entity_properties",
+                "entity": "direct_attacker",
+                "predicate": {
+                  "minecraft:effects": {
+                    "minecraft:blindness": { }
+                  }
+                }
+              }
+            },
+            {
+              "type": "minecraft:inverted",
+              "term": {
+                "type": "minecraft:entity_properties",
+                "entity": "direct_attacker",
+                "predicate": {
+                  "minecraft:effects": {
+                    "minecraft:levitation": { }
+                  }
+                }
+              }
+            },
+            {
+              "type": "minecraft:inverted",
+              "term": {
+                "type": "minecraft:entity_properties",
+                "entity": "direct_attacker",
+                "predicate": {
+                  "minecraft:effects": {
+                    "minecraft:slow_falling": { }
+                  }
                 }
               }
             }
-          },
-          {
-            "condition": "minecraft:entity_properties",
-            "entity": "direct_attacker",
-            "predicate": {
-              "minecraft:flags": {
-                "is_sprinting": false,
-                "is_on_ground": false,
-                "is_flying": false,
-                "is_in_water": false
-              }
-            }
-          },
-          {
-            "condition": "minecraft:inverted",
-            "term": {
-              "condition": "minecraft:location_check",
-              "entity": "direct_attacker",
-              "predicate": {
-                "block": {
-                  "blocks": "#minecraft:climbable"
-                }
-              }
-            }
-          },
-          {
-            "condition": "minecraft:inverted",
-            "term": {
-              "condition": "minecraft:entity_properties",
-              "entity": "direct_attacker",
-              "predicate": {
-                "minecraft:vehicle": { }
-              }
-            }
-          },
-          {
-            "condition": "minecraft:inverted",
-            "term": {
-              "condition": "minecraft:entity_properties",
-              "entity": "direct_attacker",
-              "predicate": {
-                "minecraft:effects": {
-                  "minecraft:blindness": { }
-                }
-              }
-            }
-          },
-          {
-            "condition": "minecraft:inverted",
-            "term": {
-              "condition": "minecraft:entity_properties",
-              "entity": "direct_attacker",
-              "predicate": {
-                "minecraft:effects": {
-                  "minecraft:levitation": { }
-                }
-              }
-            }
-          },
-          {
-            "condition": "minecraft:inverted",
-            "term": {
-              "condition": "minecraft:entity_properties",
-              "entity": "direct_attacker",
-              "predicate": {
-                "minecraft:effects": {
-                  "minecraft:slow_falling": { }
-                }
-              }
-            }
-          }
-        ],
+          ]
+        },
         "effect": {
           "type": "minecraft:run_function",
           "function": "spindle:item/copper_hammer/hit/as_victim_overcharge"

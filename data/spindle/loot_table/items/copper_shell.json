@@ -6,64 +6,54 @@
         {
           "type": "minecraft:item",
           "name": "minecraft:poisonous_potato",
-          "functions": [
-            {
-              "function": "minecraft:set_components",
-              "components": {
-                "!minecraft:consumable": { },
-                "minecraft:tooltip_style": "spindle:spindle",
-                "minecraft:item_model": "spindle:copper_shell",
-                "minecraft:item_name": {
-                  "translate": "item.spindle.copper_shell",
-                  "fallback": "%s",
+          "modifier": {
+            "type": "minecraft:set_components",
+            "components": {
+              "!minecraft:consumable": { },
+              "minecraft:tooltip_style": "spindle:spindle",
+              "minecraft:item_model": "spindle:copper_shell",
+              "minecraft:item_name": {
+                "translate": "item.spindle.copper_shell",
+                "fallback": "%s",
+                "with": [
+                  {
+                    "translate": "resourcePack.runtime_failure",
+                    "color": "red",
+                    "bold": true
+                  }
+                ]
+              },
+              "minecraft:lore": [
+                {
+                  "translate": "spindle.tooltip",
+                  "font": "spindle:tooltip",
+                  "color": "white",
+                  "italic": false
+                },
+                {
+                  "translate": "item.spindle.copper_shell.desc1",
+                  "color": "gray",
+                  "italic": false,
                   "with": [
                     {
-                      "translate": "resourcePack.runtime_failure",
-                      "color": "red",
-                      "bold": true
+                      "translate": "item.spindle.copper_shotgun"
                     }
                   ]
+                }
+              ],
+              "minecraft:custom_data": {
+                "spindle": {
+                  "id": "copper_shell"
                 },
-                "minecraft:lore": [
-                  [
-                    {
-                      "text": "0 ",
-                      "color": "white",
-                      "font": "spindle:icon",
-                      "italic": false
-                    },
-                    {
-                      "translate": "ui.spindle.title",
-                      "color": "white",
-                      "font": "spindle:tooltip",
-                      "italic": false
-                    }
-                  ],
-                  {
-                    "translate": "item.spindle.copper_shell.desc1",
-                    "color": "gray",
-                    "italic": false,
-                    "with": [
-                      {
-                        "translate": "item.spindle.copper_shotgun"
-                      }
-                    ]
-                  }
-                ],
-                "minecraft:custom_data": {
-                  "spindle": {
-                    "id": "copper_shell"
-                  },
-                  "smithed": {
-                    "ignore": {
-                      "functionality": true,
-                      "crafting": true
-                    }
+                "smithed": {
+                  "ignore": {
+                    "functionality": true,
+                    "crafting": true
                   }
                 }
               }
             }
-          ]
+          }
         }
       ]
     }

@@ -76,29 +76,29 @@ advancement technical(this.struck) {
     "requirement": {
       "trigger": "minecraft:entity_hurt_player",
       "conditions": {
-        "player": [
-          {
-            "condition": "minecraft:reference",
-            "name": "spindle:item/hammer/holding"
-          },
-          {
-            "condition": "minecraft:inverted",
-            "term": {
-              "condition": "minecraft:entity_scores",
-              "entity": "this",
-              "scores": {
-                "spindle.hammer.cd": {
-                  "min": 1
+        "player": {
+          "type": "minecraft:all_of",
+          "terms": [
+            "spindle:item/hammer/holding",
+            {
+              "type": "minecraft:inverted",
+              "term": {
+                "type": "minecraft:entity_scores",
+                "entity": "this",
+                "scores": {
+                  "spindle.hammer.cd": {
+                    "min": 1
+                  }
                 }
               }
             }
-          }
-        ],
+          ]
+        },
         "damage": {
           "type": {
             "tags": [
               {
-                "id": "minecraft:is_lightning",
+                "id": "#minecraft:is_lightning",
                 "expected": true
               }
             ]

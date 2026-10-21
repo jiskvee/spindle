@@ -15,20 +15,12 @@
   },
 
   "description": [
-    [
-      {
-        "text": "0 ",
-        "color": "white",
-        "font": "spindle:icon",
-        "italic": false
-      },
-      {
-        "translate": "ui.spindle.title",
-        "color": "white",
-        "font": "spindle:tooltip",
-        "italic": false
-      }
-    ],
+    {
+      "translate": "spindle.tooltip",
+      "font": "spindle:tooltip",
+      "color": "white",
+      "italic": false
+    },
     {
       "translate": "item.spindle.copper_shotgun.desc1",
       "color": "gray",

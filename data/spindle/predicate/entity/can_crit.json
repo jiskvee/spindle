@@ -1,83 +1,72 @@
-[
-  {
-    "condition": "minecraft:entity_properties",
-    "entity": "this",
-    "predicate": {
-      "minecraft:movement": {
-        "fall_distance": {
-          "min": 0.1
-        }
-      }
-    }
-  },
-  {
-    "condition": "minecraft:entity_properties",
-    "entity": "this",
-    "predicate": {
-      "minecraft:flags": {
-        "is_sprinting": false,
-        "is_on_ground": false,
-        "is_flying": false,
-        "is_in_water": false
-      }
-    }
-  },
-  {
-    "condition": "minecraft:inverted",
-    "term": {
-      "condition": "minecraft:location_check",
+{
+  "type": "minecraft:all_of",
+  "terms": [
+    {
+      "type": "minecraft:entity_properties",
       "entity": "this",
       "predicate": {
-        "block": {
-          "blocks": "#minecraft:climbable"
+        "minecraft:movement": {
+          "fall_distance": {
+            "min": 0.1
+          }
+        },
+        "minecraft:flags": {
+          "is_sprinting": false,
+          "is_on_ground": false,
+          "is_flying": false,
+          "is_in_water": false
         }
       }
-    }
-  },
-  {
-    "condition": "minecraft:inverted",
-    "term": {
-      "condition": "minecraft:entity_properties",
-      "entity": "this",
-      "predicate": {
-        "minecraft:vehicle": {}
+    },
+    {
+      "type": "minecraft:inverted",
+      "term": {
+        "type": "minecraft:any_of",
+        "terms": [
+          {
+            "type": "minecraft:location_check",
+            "predicate": {
+              "block": {
+                "blocks": "#minecraft:climbable"
+              }
+            }
+          },
+          {
+            "type": "minecraft:entity_properties",
+            "entity": "this",
+            "predicate": {
+              "minecraft:vehicle": {}
+            }
+          },
+          {
+            "type": "minecraft:entity_properties",
+            "entity": "this",
+            "predicate": {
+              "minecraft:effects": {
+                "minecraft:blindness": {}
+              }
+            }
+          },
+          {
+            "type": "minecraft:entity_properties",
+            "entity": "this",
+            "predicate": {
+              "minecraft:effects": {
+                "minecraft:levitation": {}
+              }
+            }
+          },
+          {
+            "type": "minecraft:entity_properties",
+            "entity": "this",
+            "predicate": {
+              "minecraft:effects": {
+                "minecraft:slow_falling": {}
+              }
+            }
+          }
+        ]
       }
     }
-  },
-  {
-    "condition": "minecraft:inverted",
-    "term": {
-      "condition": "minecraft:entity_properties",
-      "entity": "this",
-      "predicate": {
-        "minecraft:effects": {
-          "minecraft:blindness": {}
-        }
-      }
-    }
-  },
-  {
-    "condition": "minecraft:inverted",
-    "term": {
-      "condition": "minecraft:entity_properties",
-      "entity": "this",
-      "predicate": {
-        "minecraft:effects": {
-          "minecraft:levitation": {}
-        }
-      }
-    }
-  },
-  {
-    "condition": "minecraft:inverted",
-    "term": {
-      "condition": "minecraft:entity_properties",
-      "entity": "this",
-      "predicate": {
-        "minecraft:effects": {
-          "minecraft:slow_falling": {}
-        }
-      }
-    }
-  }
-]
+  ]
+}

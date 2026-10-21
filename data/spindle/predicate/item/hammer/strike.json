@@ -1,36 +1,33 @@
-[
-  {
-    "condition": "minecraft:location_check",
-    "predicate": {
-      "dimension": "minecraft:overworld"
-    }
-  },
-  {
-    "condition": "minecraft:reference",
-    "name": "spindle:item/hammer/holding"
-  },
-  {
-    "condition": "minecraft:inverted",
-    "term": {
-      "condition": "minecraft:entity_properties",
-      "entity": "this",
+{
+  "type": "minecraft:all_of",
+  "terms": [
+    {
+      "type": "minecraft:location_check",
       "predicate": {
-        "minecraft:slots": {
-          "weapon.mainhand": {
-            "predicates": {
-              "minecraft:custom_data": {
-                "spindle": {
-                  "charge": 0
+        "dimension": "minecraft:overworld"
+      }
+    },
+    "spindle:item/hammer/holding",
+    {
+      "type": "minecraft:inverted",
+      "term": {
+        "type": "minecraft:entity_properties",
+        "entity": "this",
+        "predicate": {
+          "minecraft:slots": {
+            "weapon.mainhand": {
+              "predicates": {
+                "minecraft:custom_data": {
+                  "spindle": {
+                    "charge": 0
+                  }
                 }
               }
             }
           }
         }
       }
-    }
-  },
-  {
-    "condition": "minecraft:reference",
-    "name": "spindle:entity/can_crit"
-  }
-]
+    },
+    "spindle:entity/can_crit"
+  ]
+}

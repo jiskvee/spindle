@@ -1,19 +1,22 @@
-[
-  {
-    "function": "minecraft:set_custom_data",
-    "tag": {
-      "spindle": {
-        "charge": 2
+{
+  "type": "minecraft:sequence",
+  "functions": [
+    {
+      "type": "minecraft:set_custom_data",
+      "tag": {
+        "spindle": {
+          "charge": 2
+        }
+      }
+    },
+    {
+      "type": "minecraft:set_custom_model_data",
+      "floats": {
+        "mode": "replace_all",
+        "values": [
+          2
+        ]
       }
     }
-  },
-  {
-    "function": "minecraft:set_custom_model_data",
-    "floats": {
-      "values": [
-        2
-      ],
-      "mode": "replace_all"
-    }
-  }
-]
+  ]
+}

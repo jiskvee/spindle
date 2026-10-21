@@ -1,7 +1,10 @@
 {
-  "ui.spindle.title": "Spindle",
-  "ui.spindle.version": "v1.2",
-  "ui.spindle.update": "\"Ride the Lightning\"",
+  "spindle.version": "v2.0",
+  "spindle.update": "\"Ride the Lightning\"",
+  "spindle.tooltip": "\ua001\ub001SPiNDLE",
+
+  "jade.modName.spindle": "SPiNDLE",
+  "itemGroup.spindle": "SPiNDLE",
 
 
   "item.spindle.copper_wheel": "Copper Wheel",

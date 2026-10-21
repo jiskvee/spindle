@@ -23,7 +23,7 @@
 		},
 		"has_the_recipe": {
 			"conditions": {
-				"recipe": "spindle:copper_cat"
+				"recipes": "spindle:copper_cat"
 			},
 			"trigger": "minecraft:recipe_unlocked"
 		}

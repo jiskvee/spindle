@@ -21,7 +21,7 @@
     "minecraft:location_changed": [
       {
         "requirements": {
-          "condition": "minecraft:enchantment_active_check",
+          "type": "minecraft:enchantment_active_check",
           "active": false
         },
         "effect": {

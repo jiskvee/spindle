@@ -60,66 +60,69 @@ advancement spindle:technical/entity/copper_horse/structure_check {
     "requirement": {
       "trigger": "minecraft:placed_block",
       "conditions": {
-        "location": [
-          {
-            "condition": "minecraft:block_state_property",
-            "block": "minecraft:redstone_block"
-          },
-          {
-            "condition": "minecraft:location_check",
-            "offsetY": -1,
-            "predicate": {
-              "block": {
-                "blocks": "#spindle:copper_bulbs"
+        "location": {
+          "type": "minecraft:all_of",
+          "terms": [
+            {
+              "type": "minecraft:match_block",
+              "blocks": "minecraft:redstone_block"
+            },
+            {
+              "type": "minecraft:location_check",
+              "offsetY": -1,
+              "predicate": {
+                "block": {
+                  "blocks": "#spindle:copper_bulbs"
+                }
               }
+            },
+            {
+              "type": "minecraft:any_of",
+              "terms": [
+                {
+                  "type": "minecraft:location_check",
+                  "offsetX": 1,
+                  "offsetY": -1,
+                  "predicate": {
+                    "block": {
+                      "blocks": "#spindle:copper_blocks"
+                    }
+                  }
+                },
+                {
+                  "type": "minecraft:location_check",
+                  "offsetX": -1,
+                  "offsetY": -1,
+                  "predicate": {
+                    "block": {
+                      "blocks": "#spindle:copper_blocks"
+                    }
+                  }
+                },
+                {
+                  "type": "minecraft:location_check",
+                  "offsetZ": 1,
+                  "offsetY": -1,
+                  "predicate": {
+                    "block": {
+                      "blocks": "#spindle:copper_blocks"
+                    }
+                  }
+                },
+                {
+                  "type": "minecraft:location_check",
+                  "offsetZ": -1,
+                  "offsetY": -1,
+                  "predicate": {
+                    "block": {
+                      "blocks": "#spindle:copper_blocks"
+                    }
+                  }
+                }
+              ]
             }
-          },
-          {
-            "condition": "minecraft:any_of",
-            "terms": [
-              {
-                "condition": "minecraft:location_check",
-                "offsetX": 1,
-                "offsetY": -1,
-                "predicate": {
-                  "block": {
-                    "blocks": "#spindle:copper_blocks"
-                  }
-                }
-              },
-              {
-                "condition": "minecraft:location_check",
-                "offsetX": -1,
-                "offsetY": -1,
-                "predicate": {
-                  "block": {
-                    "blocks": "#spindle:copper_blocks"
-                  }
-                }
-              },
-              {
-                "condition": "minecraft:location_check",
-                "offsetZ": 1,
-                "offsetY": -1,
-                "predicate": {
-                  "block": {
-                    "blocks": "#spindle:copper_blocks"
-                  }
-                }
-              },
-              {
-                "condition": "minecraft:location_check",
-                "offsetZ": -1,
-                "offsetY": -1,
-                "predicate": {
-                  "block": {
-                    "blocks": "#spindle:copper_blocks"
-                  }
-                }
-              }
-            ]
-          }
-        ]
+          ]
+        }
       }
     }
   },

@@ -11,10 +11,14 @@ def base_adv(trigger, tag):
 				"trigger": trigger,
 				"conditions": {
 					"entity": {
-						"minecraft:entity_tags": {
-							"any_of": [
-								tag
-							]
+						"type": "minecraft:entity_properties",
+						"entity": "this",
+						"predicate": {
+							"minecraft:entity_tags": {
+								"any_of": [
+									tag
+								]
+							}
 						}
 					}
 				}
@@ -41,10 +45,14 @@ def any_click_adv(tag):
 				"trigger": "minecraft:player_hurt_entity",
 				"conditions": {
 					"entity": {
-						"minecraft:entity_tags": {
-							"any_of": [
-								tag
-							]
+						"type": "minecraft:entity_properties",
+						"entity": "this",
+						"predicate": {
+							"minecraft:entity_tags": {
+								"any_of": [
+									tag
+								]
+							}
 						}
 					}
 				}
@@ -53,10 +61,14 @@ def any_click_adv(tag):
 				"trigger": "minecraft:player_interacted_with_entity",
 				"conditions": {
 					"entity": {
-						"minecraft:entity_tags": {
-							"any_of": [
-								tag
-							]
+						"type": "minecraft:entity_properties",
+						"entity": "this",
+						"predicate": {
+							"minecraft:entity_tags": {
+								"any_of": [
+									tag
+								]
+							}
 						}
 					}
 				}

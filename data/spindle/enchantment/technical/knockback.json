@@ -1,55 +1,55 @@
 {
-	"anvil_cost": 0,
-	"description": {
-		"translate": "enchantment.spindle.technical"
-	},
-	"max_cost": {
-		"base": 0,
-		"per_level_above_first": 0
-	},
-	"max_level": 1,
-	"min_cost": {
-		"base": 0,
-		"per_level_above_first": 0
-	},
-	"slots": [
-		"feet"
-	],
-	"supported_items": [],
-	"weight": 1,
-	"effects": {
-		"minecraft:location_changed": [
-			{
-				"requirements": {
-					"condition": "minecraft:enchantment_active_check",
-					"active": false
-				},
-				"effect": {
-					"type": "minecraft:all_of",
-					"effects": [
-						{
-							"type": "minecraft:run_function",
-							"function": "spindle:technical/kill"
-						},
-						{
-							"type": "minecraft:explode",
-							"immune_blocks": "#minecraft:blocks_wind_charge_explosions",
-							"knockback_multiplier": 0.35,
-							"radius": 2,
-							"block_interaction": "none",
-							"small_particle": {
-								"type": "minecraft:ash"
-							},
-							"large_particle": {
-								"type": "minecraft:ash"
-							},
-							"sound": {
-								"sound_id": ""
-							}
-						}
-					]
-				}
-			}
-		]
-	}
+  "anvil_cost": 0,
+  "description": {
+    "translate": "enchantment.spindle.technical"
+  },
+  "max_cost": {
+    "base": 0,
+    "per_level_above_first": 0
+  },
+  "max_level": 1,
+  "min_cost": {
+    "base": 0,
+    "per_level_above_first": 0
+  },
+  "slots": [
+    "feet"
+  ],
+  "supported_items": [ ],
+  "weight": 1,
+  "effects": {
+    "minecraft:location_changed": [
+      {
+        "requirements": {
+          "type": "minecraft:enchantment_active_check",
+          "active": false
+        },
+        "effect": {
+          "type": "minecraft:all_of",
+          "effects": [
+            {
+              "type": "minecraft:run_function",
+              "function": "spindle:technical/kill"
+            },
+            {
+              "type": "minecraft:explode",
+              "immune_blocks": "#minecraft:blocks_wind_charge_explosions",
+              "knockback_multiplier": 0.35,
+              "radius": 2,
+              "block_interaction": "none",
+              "small_particle": {
+                "type": "minecraft:ash"
+              },
+              "large_particle": {
+                "type": "minecraft:ash"
+              },
+              "sound": {
+                "sound_id": ""
+              }
+            }
+          ]
+        }
+      }
+    ]
+  }
 }

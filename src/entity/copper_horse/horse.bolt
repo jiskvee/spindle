@@ -70,16 +70,20 @@ advancement spindle:technical/entity/copper_horse/mount {
       "trigger": "minecraft:started_riding",
       "conditions": {
         "player": {
-          "vehicle": {
-            "minecraft:entity_type": "minecraft:skeleton_horse",
-            "slots": {
-              "saddle": {
-                "items": "minecraft:saddle",
-                "count": 1,
-                "predicates": {
-                  "minecraft:custom_data": {
-                    "spindle": {
-                      "id": "copper_horse"
+          "type": "minecraft:entity_properties",
+          "entity": "this",
+          "predicate": {
+            "minecraft:vehicle": {
+              "minecraft:entity_type": "minecraft:skeleton_horse",
+              "minecraft:slots": {
+                "saddle": {
+                  "items": "minecraft:saddle",
+                  "count": 1,
+                  "predicates": {
+                    "minecraft:custom_data": {
+                      "spindle": {
+                        "id": "copper_horse"
+                      }
                     }
                   }
                 }

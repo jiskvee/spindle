@@ -23,7 +23,7 @@
 		},
 		"has_the_recipe": {
 			"conditions": {
-				"recipe": "spindle:copper_frog"
+				"recipes": "spindle:copper_frog"
 			},
 			"trigger": "minecraft:recipe_unlocked"
 		}

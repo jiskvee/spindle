@@ -1,11 +1,9 @@
-[
-    {
-      "function": "minecraft:set_components",
-      "components": {
-        "minecraft:equippable": {
-          "slot": "saddle",
-          "asset_id": "spindle:copper_horse/default"
-        }
-      }
+{
+  "type": "minecraft:set_components",
+  "components": {
+    "minecraft:equippable": {
+      "slot": "saddle",
+      "asset_id": "spindle:copper_horse/default"
     }
-  ]
+  }
+}

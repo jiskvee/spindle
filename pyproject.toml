@@ -5,10 +5,10 @@ description = "COPPER IS LIFE. OVERWORLD IS FULL."
 readme = "README.md"
 requires-python = ">=3.14"
 dependencies = [
-    "beet>=0.115.0",
-    "bolt>=0.50.1",
+    "beet>=0.119.1",
+    "bolt>=0.51.0",
     "camellia",
-    "mecha>=0.103.0",
+    "mecha>=0.106.0",
 ]
 
 [tool.uv.sources]

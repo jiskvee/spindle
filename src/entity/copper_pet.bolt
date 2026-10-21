@@ -72,13 +72,13 @@ function this.retrieve:
 function this.drop_macro_normal:
 	# id - custom identifier "copper_wolf"
 	# nbt - entity nbt
-	$loot spawn ~ ~0.1 ~ loot {pools:[{rolls:1,entries:[{type:"minecraft:item",name:"minecraft:bat_spawn_egg",functions:[{function:"minecraft:set_components",components:{"minecraft:max_stack_size":1,"minecraft:tooltip_style":"spindle:spindle","minecraft:item_model":"spindle:entity/$(id)","minecraft:item_name":{translate:"entity.spindle.$(id)",fallback:"%s",with:[{translate:"resourcePack.runtime_failure",color:"red",bold:1b}]},"minecraft:lore":[[{text:"0 ",color:"white",font:"spindle:icon",italic:0b},{translate:"ui.spindle.title",color:"white",font:"spindle:tooltip",italic:0b}],{translate:"item.spindle.copper_pet.desc1",color:"gray",italic:0b,with:[{keybind:"key.use",color:"gray",italic:0b}]},{translate:"item.spindle.copper_pet.desc2",color:"gray",italic:0b,with:[{keybind:"key.use",color:"gray",italic:0b},{keybind:"key.use",color:"gray",italic:0b}]}],"minecraft:entity_data":$(nbt),"minecraft:custom_data":{spindle:{id:"$(id)"},smithed:{ignore:{functionality:1b,crafting:1b}}}}}]}]}]}
+	$loot spawn ~ ~0.1 ~ loot {pools:[{rolls:1,entries:[{type:"minecraft:item",name:"minecraft:bat_spawn_egg",modifier:{type:"minecraft:set_components",components:{"minecraft:max_stack_size":1,"minecraft:tooltip_style":"spindle:spindle","minecraft:item_model":"spindle:entity/$(id)","minecraft:item_name":{translate:"entity.spindle.$(id)",fallback:"%s",with:[{translate:"resourcePack.runtime_failure",color:"red",bold:1b}]},"minecraft:lore":[[{text:"0 ",color:"white",font:"spindle:icon",italic:0b},{translate:"ui.spindle.title",color:"white",font:"spindle:tooltip",italic:0b}],{translate:"item.spindle.copper_pet.desc1",color:"gray",italic:0b,with:[{keybind:"key.use",color:"gray",italic:0b}]},{translate:"item.spindle.copper_pet.desc2",color:"gray",italic:0b,with:[{keybind:"key.use",color:"gray",italic:0b},{keybind:"key.use",color:"gray",italic:0b}]}],"minecraft:entity_data":$(nbt),"minecraft:custom_data":{spindle:{id:"$(id)"},smithed:{ignore:{functionality:1b,crafting:1b}}}}}}]}]}
 
 function this.drop_macro_name:
 	# id - custom identifier "copper_wolf"
 	# custom_name - item name "Pepe"
 	# nbt - entity nbt
-	$loot spawn ~ ~0.1 ~ loot {pools:[{rolls:1,entries:[{type:"minecraft:item",name:"minecraft:bat_spawn_egg",functions:[{function:"minecraft:set_components",components:{"minecraft:max_stack_size":1,"minecraft:tooltip_style":"spindle:spindle","minecraft:item_model":"spindle:entity/$(id)","minecraft:item_name":{translate:"entity.spindle.$(id)",fallback:"%s",with:[{translate:"resourcePack.runtime_failure",color:"red",bold:1b}]},"minecraft:lore":[[{text:"0 ",color:"white",font:"spindle:icon",italic:0b},{translate:"ui.spindle.title",color:"white",font:"spindle:tooltip",italic:0b}],{translate:"item.spindle.copper_pet.desc1",color:"gray",italic:0b,with:[{keybind:"key.use",color:"gray",italic:0b}]},{translate:"item.spindle.copper_pet.desc2",color:"gray",italic:0b,with:[{keybind:"key.use",color:"gray",italic:0b},{keybind:"key.use",color:"gray",italic:0b}]}],"minecraft:entity_data":$(nbt),"minecraft:custom_data":{spindle:{id:"$(id)"},smithed:{ignore:{functionality:1b,crafting:1b}}},"minecraft:custom_name":"$(custom_name)"}}]}]}]}
+	$loot spawn ~ ~0.1 ~ loot {pools:[{rolls:1,entries:[{type:"minecraft:item",name:"minecraft:bat_spawn_egg",modifier:{type:"minecraft:set_components",components:{"minecraft:max_stack_size":1,"minecraft:tooltip_style":"spindle:spindle","minecraft:item_model":"spindle:entity/$(id)","minecraft:item_name":{translate:"entity.spindle.$(id)",fallback:"%s",with:[{translate:"resourcePack.runtime_failure",color:"red",bold:1b}]},"minecraft:lore":[[{text:"0 ",color:"white",font:"spindle:icon",italic:0b},{translate:"ui.spindle.title",color:"white",font:"spindle:tooltip",italic:0b}],{translate:"item.spindle.copper_pet.desc1",color:"gray",italic:0b,with:[{keybind:"key.use",color:"gray",italic:0b}]},{translate:"item.spindle.copper_pet.desc2",color:"gray",italic:0b,with:[{keybind:"key.use",color:"gray",italic:0b},{keybind:"key.use",color:"gray",italic:0b}]}],"minecraft:entity_data":$(nbt),"minecraft:custom_data":{spindle:{id:"$(id)"},smithed:{ignore:{functionality:1b,crafting:1b}}},"minecraft:custom_name":"$(custom_name)"}}}]}]}
 
 advancement spindle:technical/entity/copper_pet/retrieve {
   "parent": "spindle:technical/root",
@@ -87,19 +87,27 @@ advancement spindle:technical/entity/copper_pet/retrieve {
       "trigger": "minecraft:player_interacted_with_entity",
       "conditions": {
         "player": {
-          "flags": {
-            "is_sneaking": true
-          },
-          "slots": {
-            "weapon.mainhand": {
-              "items": "minecraft:air"
+          "type": "minecraft:entity_properties",
+          "entity": "this",
+          "predicate": {
+            "minecraft:flags": {
+              "is_sneaking": true
+            },
+            "minecraft:slots": {
+              "weapon.mainhand": {
+                "items": "minecraft:air"
+              }
             }
           }
         },
         "entity": {
-          "minecraft:entity_type": "minecraft:wolf",
-          "components": {
-            "minecraft:wolf/variant": "spindle:copper"
+          "type": "minecraft:entity_properties",
+          "entity": "this",
+          "predicate": {
+            "minecraft:entity_type": "minecraft:wolf",
+            "minecraft:components": {
+              "minecraft:wolf/variant": "spindle:copper"
+            }
           }
         }
       }
@@ -108,19 +116,27 @@ advancement spindle:technical/entity/copper_pet/retrieve {
       "trigger": "minecraft:player_interacted_with_entity",
       "conditions": {
         "player": {
-          "flags": {
-            "is_sneaking": true
-          },
-          "slots": {
-            "weapon.mainhand": {
-              "items": "minecraft:air"
+          "type": "minecraft:entity_properties",
+          "entity": "this",
+          "predicate": {
+            "minecraft:flags": {
+              "is_sneaking": true
+            },
+            "minecraft:slots": {
+              "weapon.mainhand": {
+                "items": "minecraft:air"
+              }
             }
           }
         },
         "entity": {
-          "minecraft:entity_type": "minecraft:cat",
-          "components": {
-            "minecraft:cat/variant": "spindle:copper"
+          "type": "minecraft:entity_properties",
+          "entity": "this",
+          "predicate": {
+            "minecraft:entity_type": "minecraft:cat",
+            "minecraft:components": {
+              "minecraft:cat/variant": "spindle:copper"
+            }
           }
         }
       }

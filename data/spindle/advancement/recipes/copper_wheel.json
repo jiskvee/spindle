@@ -13,7 +13,7 @@
 		},
 		"has_the_recipe": {
 			"conditions": {
-				"recipe": "spindle:copper_wheel"
+				"recipes": "spindle:copper_wheel"
 			},
 			"trigger": "minecraft:recipe_unlocked"
 		}
