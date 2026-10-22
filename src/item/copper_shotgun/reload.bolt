@@ -17,15 +17,15 @@ function ./reload/start:
 
 	# get stats from item
 	execute run function ./reload/get_stats:
-		execute if items entity @s weapon.offhand cit("spindle","copper_shotgun") run return run data modify storage spindle:temp root.stats set from entity @s equipment.offhand.components."minecraft:custom_data".spindle.gun
+		if items entity @s weapon.offhand cit("spindle","copper_shotgun") run return run data modify storage spindle:temp root.stats set from entity @s equipment.offhand.components."minecraft:custom_data".spindle.gun
 		data modify storage spindle:temp root.stats set from entity @s SelectedItem.components."minecraft:custom_data".spindle.gun
 	
 	scoreboard players set @s spindle.shotgun.pos 1
 	scoreboard players set @s spindle.shotgun.dir 1
 	scoreboard players set @s spindle.shotgun.time 0
-	execute store result score @s spindle.shotgun.spot run random value 3..8
-	execute store result score @s spindle.shotgun.step run data get storage spindle:temp root.stats.reload_step
-	execute store result score @s spindle.shotgun.state run data get storage spindle:temp root.stats.state
+	store result score @s spindle.shotgun.spot run random value 3..8
+	store result score @s spindle.shotgun.step run data get storage spindle:temp root.stats.reload_step
+	store result score @s spindle.shotgun.state run data get storage spindle:temp root.stats.state
 	data remove storage spindle:temp root
 
 	# awesome
@@ -39,8 +39,8 @@ function ./reload/bar/display:
 	data remove storage spindle:shotgun root
 	data merge storage spindle:shotgun {root:{bar:["E","E","E","E","E","E","E","E","E"]}}
 
-	execute store result storage spindle:shotgun root.spot int 1 run scoreboard players get @s spindle.shotgun.spot
-	#execute store result storage spindle:shotgun root.pos int 1 run scoreboard players get @s spindle.shotgun.pos
+	store result storage spindle:shotgun root.spot int 1 run scoreboard players get @s spindle.shotgun.spot
+	#store result storage spindle:shotgun root.pos int 1 run scoreboard players get @s spindle.shotgun.pos
 
 	# ----- FUTURE VISION WITCHCRAFT -----
     # copy current pos and time to temp scores
@@ -51,18 +51,18 @@ function ./reload/bar/display:
     scoreboard players add @s spindle.shotgun.next_time 1
     
     # if the bullet will move next tick, apply the movement to the display position NOW
-    execute if score @s spindle.shotgun.next_time >= @s spindle.shotgun.step:
+    if score @s spindle.shotgun.next_time >= @s spindle.shotgun.step:
 		scoreboard players operation @s spindle.shotgun.display_pos += @s spindle.shotgun.dir
     
     # pass the future display_pos to the storage instead of the actual pos
-    execute store result storage spindle:shotgun root.pos int 1 run scoreboard players get @s spindle.shotgun.display_pos
+    store result storage spindle:shotgun root.pos int 1 run scoreboard players get @s spindle.shotgun.display_pos
     # ------------------------------------
 
 	# get oxidization state for the font
 	execute run function ./reload/bar/state:
-		execute if score @s spindle.shotgun.state matches 0 run return run data modify storage spindle:shotgun root.state set value "normal"
-		execute if score @s spindle.shotgun.state matches 1 run return run data modify storage spindle:shotgun root.state set value "exposed"
-		execute if score @s spindle.shotgun.state matches 2 run return run data modify storage spindle:shotgun root.state set value "weathered"
+		if score @s spindle.shotgun.state matches 0 run return run data modify storage spindle:shotgun root.state set value "normal"
+		if score @s spindle.shotgun.state matches 1 run return run data modify storage spindle:shotgun root.state set value "exposed"
+		if score @s spindle.shotgun.state matches 2 run return run data modify storage spindle:shotgun root.state set value "weathered"
 		data modify storage spindle:shotgun root.state set value "oxidized"
 
 	# place bullet and hole
@@ -82,7 +82,7 @@ function ./reload/bar/display:
 		data remove storage spindle:shotgun root.bar[-1]
 
 		# loop if there are still elements left
-		execute if data storage spindle:shotgun root.bar[-1] run return run function ./reload/bar/parse
+		if data storage spindle:shotgun root.bar[-1] run return run function ./reload/bar/parse
 
 	# finally show bar
 	execute run function ./reload/bar/show with storage spindle:shotgun root:
@@ -97,7 +97,7 @@ function ./reload/end:
 
 
 function ./reload/determine:
-	execute if score @s spindle.shotgun.pos = @s spindle.shotgun.spot run return run function ./reload/success:
+	if score @s spindle.shotgun.pos = @s spindle.shotgun.spot run return run function ./reload/success:
 		clear @s[gamemode=!creative] cit("spindle","copper_shell") 1
 		modify_weapon('copper_shotgun', 'spindle:shotgun/ammo/load')
 		playsound spindle:item.copper_shotgun.rack player "@c" ~ ~ ~ 1 1

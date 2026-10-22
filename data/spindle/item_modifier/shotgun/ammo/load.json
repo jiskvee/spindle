@@ -32,9 +32,7 @@
           "color": "white",
           "italic": false,
           "with": [
-            {
-              "text": "1"
-            }
+            "1"
           ]
         }
       ],

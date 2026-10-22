@@ -17,6 +17,22 @@
           0
         ]
       }
+    },
+    {
+      "type": "minecraft:set_lore",
+      "entity": "this",
+      "mode": "replace_section",
+      "offset": 3,
+      "lore": [
+        {
+          "translate": "item.spindle.copper_hammer.charge_display",
+          "color": "white",
+          "italic": false,
+          "with": [
+            "0"
+          ]
+        }
+      ]
     }
   ]
 }
