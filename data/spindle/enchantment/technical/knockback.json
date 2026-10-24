@@ -34,17 +34,27 @@
             {
               "type": "minecraft:explode",
               "immune_blocks": "#minecraft:blocks_wind_charge_explosions",
-              "knockback_multiplier": 0.35,
+              "knockback_multiplier": 0.3,
               "radius": 2,
               "block_interaction": "none",
+              "sound": "minecraft:intentionally_empty",
               "small_particle": {
-                "type": "minecraft:ash"
+                "type": "minecraft:item",
+                "item": {
+                  "id": "minecraft:egg",
+                  "components": {
+                    "minecraft:item_model": "spindle:empty"
+                  }
+                }
               },
               "large_particle": {
-                "type": "minecraft:ash"
-              },
-              "sound": {
-                "sound_id": ""
+                "type": "minecraft:item",
+                "item": {
+                  "id": "minecraft:egg",
+                  "components": {
+                    "minecraft:item_model": "spindle:empty"
+                  }
+                }
               }
             }
           ]

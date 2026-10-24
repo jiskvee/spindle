@@ -1,5 +1,5 @@
 from camellia.clocks import tick, second_clock, ten_second_clock
-from camellia.utils import Location
+from camellia.utils import Location, technical
 from spindle:utils import random_chance
 
 this = Location(~/)
@@ -17,3 +17,23 @@ prepend function ten_second_clock:
 		if score @s spindle.dummy matches 2 if predicate random_chance(0.02) run return run execute positioned over motion_blocking run summon minecraft:lightning_bolt
 		if score @s spindle.dummy matches 3 if predicate random_chance(0.03) run return run execute positioned over motion_blocking run summon minecraft:lightning_bolt
 		if score @s spindle.dummy matches 4 if predicate random_chance(0.04) run return run execute positioned over motion_blocking run summon minecraft:lightning_bolt
+
+function this.clear_saddle:
+	item replace entity @s saddle with air
+
+function this.lightning_strike:
+	advancement revoke @s only technical(this.lightning_strike)
+	execute as @e[type=minecraft:guardian,distance=..256,tag=!smithed.entity] at @s if entity @e[type=minecraft:lightning_bolt,distance=..4] run function myriad:entity/guardian/transform_to_elder
+	say wow vieron eso
+
+advancement technical(this.lightning_strike) {
+  "parent": "spindle:technical/root",
+  "criteria": {
+    "requirement": {
+      "trigger": "minecraft:lightning_strike"
+    }
+  },
+  "rewards": {
+    "function": this.lightning_strike()
+  }
+}

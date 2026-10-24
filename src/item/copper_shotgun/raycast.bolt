@@ -1,5 +1,5 @@
 function ./raycast/start:
-	attribute @s minecraft:explosion_knockback_resistance modifier add spindle:copper_shotgun_knockback 1 add_value
+	attribute @s minecraft:explosion_knockback_resistance modifier add spindle:copper_shotgun_knockback 2 add_value
 	tag @s add spindle.shooting
 	scoreboard players set @s spindle.dummy 9
 	#scoreboard players set @s spindle.dummy 20
@@ -22,7 +22,7 @@ function ./raycast/step:
 
 
 function ./raycast/as_entity:
-	summon minecraft:armor_stand ~ ~ ~ {Invisible:1b,equipment:{feet:{id:"minecraft:poisonous_potato",components:{"minecraft:enchantments":{"spindle:technical/knockback":1}}}}}
+	summon minecraft:armor_stand ^ ^ ^-1 {Invisible:1b,equipment:{feet:{id:"minecraft:poisonous_potato",components:{"minecraft:enchantments":{"spindle:technical/knockback":1}}}}}
 	$damage @s 12 minecraft:arrow by @p[nbt={UUID:$(UUID)}]
 	$execute as @p[nbt={UUID:$(UUID)}] run function spindle:item/copper_shotgun/raycast/end
 

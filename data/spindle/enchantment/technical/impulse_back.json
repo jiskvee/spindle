@@ -1,0 +1,45 @@
+{
+  "anvil_cost": 0,
+  "description": {
+    "translate": "enchantment.spindle.technical"
+  },
+  "max_cost": {
+    "base": 0,
+    "per_level_above_first": 0
+  },
+  "max_level": 1,
+  "min_cost": {
+    "base": 0,
+    "per_level_above_first": 0
+  },
+  "slots": [
+    "saddle"
+  ],
+  "supported_items": [ ],
+  "weight": 1,
+  "effects": {
+    "minecraft:location_changed": [
+      {
+        "requirements": {
+          "type": "minecraft:enchantment_active_check",
+          "active": false
+        },
+        "effect": {
+          "type": "minecraft:all_of",
+          "effects": [
+            {
+              "type": "minecraft:run_function",
+              "function": "spindle:entity/player/clear_saddle"
+            },
+            {
+              "type": "minecraft:apply_impulse",
+              "direction": [ 0, 0, -1 ],
+              "coordinate_scale": [ 1, 1, 1 ],
+              "magnitude": 0.25
+            }
+          ]
+        }
+      }
+    ]
+  }
+}
