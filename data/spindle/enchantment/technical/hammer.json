@@ -3,14 +3,9 @@
   "max_level": 1,
   "anvil_cost": 0,
   "supported_items": [ ],
-  "description": [
-    {
-      "translate": "spindle.tooltip",
-      "font": "spindle:tooltip",
-      "color": "white",
-      "italic": false
-    }
-  ],
+  "description": {
+    "translate": "enchantment.spindle.technical"
+  },
   "slots": [
     "mainhand",
     "offhand"

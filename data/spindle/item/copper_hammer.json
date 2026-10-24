@@ -17,6 +17,12 @@
   },
   "description": [
     {
+      "translate": "spindle.tooltip",
+      "font": "spindle:tooltip",
+      "color": "white",
+      "italic": false
+    },
+    {
       "translate": "item.spindle.copper_hammer.desc1",
       "color": "gray",
       "italic": false
@@ -69,6 +75,9 @@
     "minecraft:enchantment_glint_override": false,
     "minecraft:enchantments": {
       "spindle:technical/hammer": 1
+    },
+    "minecraft:tooltip_display": {
+      "hidden_components": ["minecraft:enchantments"]
     },
     "minecraft:repairable": {
       "items": "minecraft:copper_block"
