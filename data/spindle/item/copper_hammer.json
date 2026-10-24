@@ -5,7 +5,7 @@
   "category": "equipment",
   "name": {
     "translate": "item.spindle.copper_hammer",
-    "color": "yellow",
+    "color": "white",
     "fallback": "%s",
     "with": [
       {
@@ -54,17 +54,13 @@
       "translate": "item.spindle.copper_hammer.charge_display",
       "color": "white",
       "italic": false,
-      "with": [
-        {
-          "text": "0"
-        }
-      ]
+      "with": [ "0" ]
     }
   ],
   "components": {
     "!minecraft:consumable": { },
     "minecraft:weapon": { },
-    "minecraft:rarity": "uncommon",
+    "minecraft:rarity": "common",
     "minecraft:tooltip_style": "spindle:spindle",
     "minecraft:damage": 0,
     "minecraft:max_damage": 400,

@@ -20,6 +20,8 @@ function ./technical/load:
 
 	# hammer
 	scoreboard objectives add spindle.hammer.cd dummy # silence between two strikes
+	scoreboard objectives add spindle.hammer.rc dummy # for detecting first hold tick
+	scoreboard objectives add spindle.hammer.hold dummy # caution!
 
 	# entities
 	scoreboard objectives add spindle.entity dummy

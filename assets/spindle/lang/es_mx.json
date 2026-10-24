@@ -23,7 +23,7 @@
   "item.spindle.copper_hammer": "Martillo de cobre",
   "item.spindle.copper_hammer.desc1": "Atrae rayos al sostener",
   "item.spindle.copper_hammer.desc2": "Absorber un rayo otorga una %s",
-  "item.spindle.copper_hammer.desc3": "Manten %s o haz un critico para %s",
+  "item.spindle.copper_hammer.desc3": "Haz un critico o manten %s para %s",
   "item.spindle.copper_hammer.charge": "carga",
   "item.spindle.copper_hammer.discharge": "descargar",
   "item.spindle.copper_hammer.charge_display": "Carga: %s/3",

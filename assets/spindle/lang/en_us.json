@@ -23,7 +23,7 @@
   "item.spindle.copper_hammer": "Copper Hammer",
   "item.spindle.copper_hammer.desc1": "Attract lightning while held",
   "item.spindle.copper_hammer.desc2": "Absorbing a strike grants a %s",
-  "item.spindle.copper_hammer.desc3": "Hold %s or crit to %s",
+  "item.spindle.copper_hammer.desc3": "Hit a crit or hold %s to %s",
   "item.spindle.copper_hammer.charge": "charge",
   "item.spindle.copper_hammer.discharge": "discharge",
   "item.spindle.copper_hammer.charge_display": "Charge: %s/3",

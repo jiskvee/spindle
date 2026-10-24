@@ -33,6 +33,7 @@ function ./reload_tick:
 function ./shoot:
 	advancement revoke @s only shoot_adv
 	modify_weapon('copper_shotgun', 'spindle:shotgun/ammo/unload')
+	item replace entity @s saddle with egg[enchantments={"spindle:technical/impulse_back":1},equippable={slot:saddle,equip_sound:"minecraft:intentionally_empty"}]
 
 	rotate @s ~ ~-5
 	playsound spindle:item.copper_shotgun.shoot player "@c" ~ ~ ~ 0.6 1

@@ -17,12 +17,5 @@
     "sounds": [
       "mob/zombie/metal3"
     ]
-  },
-  "item.copper_hammer.erupt": {
-    "sounds": [
-      "item/trident/thunder1",
-      "item/trident/thunder2"
-    ],
-    "subtitle": "subtitles.spindle.item.copper_hammer.erupt"
   }
 }

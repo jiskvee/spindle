@@ -33,6 +33,13 @@
           ]
         }
       ]
+    },
+    {
+      "type": "minecraft:set_components",
+      "components": {
+        "!minecraft:food": {},
+        "!minecraft:consumable": {}
+      }
     }
   ]
 }
