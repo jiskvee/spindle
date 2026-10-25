@@ -1,0 +1,6 @@
+{
+  "asset_id": "spindle:entity/copper_chicken/overcharged",
+  "baby_asset_id": "spindle:entity/copper_chicken/baby_overcharged",
+  "model": "cold",
+  "spawn_conditions": []
+}

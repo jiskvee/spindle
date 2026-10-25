@@ -1,9 +1,30 @@
 {
-  "type": "minecraft:set_components",
-  "components": {
-    "minecraft:equippable": {
-      "slot": "saddle",
-      "asset_id": "spindle:copper_horse/hurt"
+  "type": "minecraft:filtered",
+  "item_filter": {
+    "predicates": {
+      "minecraft:custom_data": {
+        "spindle": {
+          "overcharged": true
+        }
+      }
+    }
+  },
+  "on_pass": {
+    "type": "minecraft:set_components",
+    "components": {
+      "minecraft:equippable": {
+        "slot": "saddle",
+        "asset_id": "spindle:copper_horse/overcharged_hurt"
+      }
+    }
+  },
+  "on_fail": {
+    "type": "minecraft:set_components",
+    "components": {
+      "minecraft:equippable": {
+        "slot": "saddle",
+        "asset_id": "spindle:copper_horse/hurt"
+      }
     }
   }
 }

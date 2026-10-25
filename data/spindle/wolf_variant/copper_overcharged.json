@@ -1,0 +1,13 @@
+{
+    "assets": {
+        "angry": "spindle:entity/copper_wolf/overcharged",
+        "tame": "spindle:entity/copper_wolf/overcharged",
+        "wild": "spindle:entity/copper_wolf/overcharged"
+    },
+    "baby_assets": {
+        "angry": "spindle:entity/copper_wolf/baby_overcharged",
+        "tame": "spindle:entity/copper_wolf/baby_overcharged",
+        "wild": "spindle:entity/copper_wolf/baby_overcharged"
+    },
+    "spawn_conditions": []
+}

@@ -1,5 +1,5 @@
 {
-    "asset_id": "spindle:entity/cat_variant/copper_cat",
-    "baby_asset_id": "spindle:entity/cat_variant/copper_cat_baby",
+    "asset_id": "spindle:entity/copper_cat/default",
+    "baby_asset_id": "spindle:entity/copper_cat/baby",
     "spawn_conditions": []
 }

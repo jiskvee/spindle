@@ -1,6 +1,6 @@
 {
-  "asset_id": "spindle:entity/copper_chicken",
-  "baby_asset_id": "minecraft:entity/chicken/chicken_cold_baby",
+  "asset_id": "spindle:entity/copper_chicken/default",
+  "baby_asset_id": "spindle:entity/copper_chicken/baby",
   "model": "cold",
   "spawn_conditions": []
 }

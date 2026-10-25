@@ -6,39 +6,42 @@ this = Location(~/)
 raycast = Location(~/raycast)
 
 prepend function tick:
-	execute as @e[type=minecraft:wolf,tag=spindle.copper_wolf] at @s run function this.tick
+	as @e[type=minecraft:wolf,tag=spindle.copper_wolf] at @s run function this.tick
 prepend function second_clock:
-	execute as @e[type=minecraft:wolf,tag=spindle.copper_wolf] at @s run function this.second_clock
+	as @e[type=minecraft:wolf,tag=spindle.copper_wolf] at @s run function this.second_clock
+prepend function spindle:technical/40t:
+	as @e[type=minecraft:wolf,tag=spindle.copper_wolf] run data modify entity @s InLove set value 0
 
 function spindle:commands/summon/copper_wolf:
-	summon minecraft:wolf ~ ~ ~ {Silent:true,CollarColor:4,variant:"spindle:copper",Team:"spindle.no_nametag",DeathLootTable:"spindle:entities/copper_wolf",CustomName:{translate:"entity.spindle.copper_wolf",italic:false},data:{type:"minecraft:wolf",id:"copper_wolf",has_custom_name:false},Tags:["smithed.entity","spindle.entity","spindle.copper_pet","spindle.copper_wolf"]}
+	summon minecraft:wolf ~ ~ ~ {Silent:true,CollarColor:4,variant:"spindle:copper",Team:"spindle.no_nametag",DeathLootTable:"spindle:entities/copper_wolf",drop_chances:{body:0},equipment:{body:{id:"minecraft:poisonous_potato",components:{enchantments:{"spindle:technical/lightning_protection":1}}}},CustomName:{translate:"entity.spindle.copper_wolf",italic:false},data:{type:"minecraft:wolf",id:"copper_wolf",has_custom_name:false},Tags:["smithed.entity","spindle.entity","spindle.copper_pet","spindle.copper_wolf"]}
 	data modify entity @n[type=minecraft:wolf,tag=spindle.copper_wolf] Owner set from entity @s UUID
 
 function this.tick:
-	execute store result score @s spindle.hurt run data get entity @s HurtTime
-	execute if score @s spindle.hurt matches 1.. if entity @s[tag=!spindle.ouch] run function this.hurt.start:
+	store result score @s spindle.hurt run data get entity @s HurtTime
+	if score @s spindle.hurt matches 1.. if entity @s[tag=!spindle.ouch] run function this.hurt.start:
 		tag @s add spindle.ouch
 		playsound spindle:entity.copper_wolf.hurt neutral "@c" ~ ~ ~ 0.5
-	execute if score @s spindle.hurt matches 0 if entity @s[tag=spindle.ouch] run function this.hurt.stop:
+	if score @s spindle.hurt matches 0 if entity @s[tag=spindle.ouch] run function this.hurt.stop:
 		tag @s remove spindle.ouch
 
 function this.second_clock:
 	scoreboard players add @s spindle.sound 1
-	execute if predicate random_chance(0.5) run scoreboard players add @s spindle.sound 1
-	execute if score @s spindle.sound matches 12.. run function this.ambient_sound:
+	if predicate random_chance(0.5) run scoreboard players add @s spindle.sound 1
+	if score @s spindle.sound matches 12.. run function this.ambient_sound:
 		playsound spindle:entity.copper_wolf.ambient neutral "@c" ~ ~ ~ 0.25
 		scoreboard players reset @s spindle.sound
 
 	scoreboard players add @s spindle.entity 1
-	execute if predicate random_chance(0.5) run scoreboard players add @s spindle.entity 1
-	execute if score @s spindle.entity matches 8.. run function this.attack:
+	if predicate random_chance(0.5) run scoreboard players add @s spindle.entity 1
+	if entity @s[tag=spindle.overcharged] run scoreboard players add @s spindle.entity 2
+	if score @s spindle.entity matches 8.. run function this.attack:
 		scoreboard players reset @s spindle.entity
-		execute if entity @n[type=#spindle:wolf_attacks,distance=..8,tag=!smithed.strict] run function raycast.start
+		if entity @n[type=#spindle:wolf_attacks,distance=..8,tag=!smithed.strict] run function raycast.start
 
-	execute unless predicate spindle:location/wet run return run scoreboard players remove @s[scores={spindle.explode=1..}] spindle.explode 1
-	execute if score @s spindle.explode matches 3 run function this.short_circuit
-	execute if score @s spindle.explode matches 5 run function this.short_circuit
-	execute if score @s spindle.explode matches 7.. run return run function this.explode
+	unless predicate spindle:location/wet run return run scoreboard players remove @s[scores={spindle.explode=1..}] spindle.explode 1
+	if score @s spindle.explode matches 3 run function this.short_circuit
+	if score @s spindle.explode matches 5 run function this.short_circuit
+	if score @s spindle.explode matches 7.. run return run function this.explode
 	scoreboard players add @s spindle.explode 1
 
 function raycast.start:
@@ -47,7 +50,7 @@ function raycast.start:
 
 	tag @s add spindle.raycast
 	scoreboard players set @s spindle.dummy 100
-	execute facing entity @n[type=#spindle:wolf_attacks,distance=..8,tag=!smithed.strict] feet anchored eyes run function raycast.step
+	facing entity @n[type=#spindle:wolf_attacks,distance=..8,tag=!smithed.strict] feet anchored eyes run function raycast.step
 
 function raycast.step:
 	particle dust{color:[1.000,0.835,0.180],scale:1}
@@ -56,10 +59,10 @@ function raycast.step:
 	ofs = 0.5
 	a = 1.0 - ofs
 	b = ofs / 2
-	execute positioned ~-b ~-b ~-b as @n[dx=0,type=#spindle:wolf_attacks,tag=!smithed.strict] positioned ~-a ~-a ~-a if entity @s[dx=0] run return run function raycast.as_entity
-	execute unless block ~ ~ ~ #spindle:pass_through run return run function raycast.end
-	execute unless score @s spindle.dummy matches 1.. run return run function raycast.end
-	execute positioned ^ ^ ^0.1 run function raycast.step
+	positioned ~-b ~-b ~-b as @n[dx=0,type=#spindle:wolf_attacks,tag=!smithed.strict] positioned ~-a ~-a ~-a if entity @s[dx=0] run return run function raycast.as_entity
+	unless block ~ ~ ~ #spindle:pass_through run return run function raycast.end
+	unless score @s spindle.dummy matches 1.. run return run function raycast.end
+	positioned ^ ^ ^0.1 run function raycast.step
 
 function raycast.end:
 	scoreboard players reset @s spindle.dummy
@@ -67,7 +70,7 @@ function raycast.end:
 
 function raycast.as_entity:
 	damage @s 6 minecraft:arrow by @n[type=minecraft:wolf,tag=spindle.raycast]
-	execute as @n[type=minecraft:wolf,tag=spindle.raycast] run function raycast.end
+	as @n[type=minecraft:wolf,tag=spindle.raycast] run function raycast.end
 
 function this.short_circuit:
 	playsound spindle:entity.copper_mob.short_circuit neutral "@c"
@@ -77,3 +80,14 @@ function this.explode:
 	data modify entity @s DeathTime set value 20
 	playsound spindle:entity.copper_wolf.death neutral "@c"
 	item replace entity @s armor.feet with minecraft:poisonous_potato[equippable={slot:feet},enchantments={"spindle:technical/explosion":1}]
+
+function this.lightning_strike:
+	if entity @s[tag=spindle.overcharged] run return run function this.explode
+
+	playsound spindle:item.copper_hammer.overcharge neutral "@c"
+	data modify entity @s variant set value "spindle:copper_overcharged"
+	data modify entity @s CollarColor set value 9
+	tag @s add spindle.overcharged
+	attribute @s minecraft:max_health base set 20
+	attribute @s minecraft:attack_damage base set 6
+	damage @s 0

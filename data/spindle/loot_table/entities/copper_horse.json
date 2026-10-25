@@ -52,7 +52,15 @@
             "type": "minecraft:all_of",
             "terms": [
               {
-                "type": "minecraft:killed_by_player"
+                "type": "minecraft:entity_properties",
+                "entity": "this",
+                "predicate": {
+                  "minecraft:entity_tags": {
+                    "none_of": [
+                      "spindle.overcharged"
+                    ]
+                  }
+                }
               },
               {
                 "type": "minecraft:inverted",
@@ -63,6 +71,70 @@
                     "minecraft:entity_type": "minecraft:wolf"
                   }
                 }
+              },
+              {
+                "type": "minecraft:killed_by_player"
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "rolls": 1,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "minecraft:poisonous_potato",
+          "modifier": [
+            {
+              "type": "minecraft:set_components",
+              "components": {
+                "minecraft:item_model": "spindle:empty"
+              }
+            },
+            {
+              "type": "minecraft:set_custom_data",
+              "tag": {
+                "spindle": {
+                  "death": {
+                    "id": "copper_horse",
+                    "sound": "spindle:entity.copper_horse.death",
+                    "sound_category": "neutral",
+                    "function": "spindle:entity/copper_horse/die",
+                    "volume": 1,
+                    "pitch": 1
+                  }
+                }
+              }
+            }
+          ],
+          "condition": {
+            "type": "minecraft:all_of",
+            "terms": [
+              {
+                "type": "minecraft:entity_properties",
+                "entity": "this",
+                "predicate": {
+                  "minecraft:entity_tags": {
+                    "any_of": [
+                      "spindle.overcharged"
+                    ]
+                  }
+                }
+              },
+              {
+                "type": "minecraft:inverted",
+                "term": {
+                  "type": "minecraft:entity_properties",
+                  "entity": "this",
+                  "predicate": {
+                    "minecraft:entity_type": "minecraft:wolf"
+                  }
+                }
+              },
+              {
+                "type": "minecraft:killed_by_player"
               }
             ]
           }

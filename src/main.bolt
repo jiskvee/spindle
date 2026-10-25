@@ -39,6 +39,10 @@ function ./technical/load:
 	# fckin copper wheel lmao
 	scoreboard objectives add spindle.wheel dummy
 
+append function ./technical/40t:
+	append function_tag minecraft:load { "values": [f"{~/}"] }
+	schedule function ~/ 40t replace
+
 function ./technical/kill:
 	damage @s 1000 minecraft:explosion
 	kill @s

@@ -23,8 +23,10 @@ function this.clear_saddle:
 
 function this.lightning_strike:
 	advancement revoke @s only technical(this.lightning_strike)
-	execute as @e[type=minecraft:guardian,distance=..256,tag=!smithed.entity] at @s if entity @e[type=minecraft:lightning_bolt,distance=..4] run function myriad:entity/guardian/transform_to_elder
-	say wow vieron eso
+	execute as @e[type=minecraft:cat,distance=..256,tag=spindle.copper_cat] at @s if entity @e[type=minecraft:lightning_bolt,distance=..4] run function ./copper_cat/lightning_strike
+	execute as @e[type=minecraft:wolf,distance=..256,tag=spindle.copper_wolf] at @s if entity @e[type=minecraft:lightning_bolt,distance=..4] run function ./copper_wolf/lightning_strike
+	execute as @e[type=minecraft:frog,distance=..256,tag=spindle.copper_frog] at @s if entity @e[type=minecraft:lightning_bolt,distance=..4] run function ./copper_frog/lightning_strike
+	execute as @e[type=minecraft:skeleton_horse,distance=..256,tag=spindle.copper_horse] at @s if entity @e[type=minecraft:lightning_bolt,distance=..4] run function ./copper_horse/lightning_strike
 
 advancement technical(this.lightning_strike) {
   "parent": "spindle:technical/root",

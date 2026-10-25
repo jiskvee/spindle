@@ -2,32 +2,32 @@ function ./structure/detect/start:
 	advancement revoke @s only spindle:technical/entity/copper_horse/structure_check
 
 	scoreboard players set @s spindle.dummy 0
-	execute store result score @s spindle.dummy run attribute @s minecraft:block_interaction_range get 1
+	store result score @s spindle.dummy run attribute @s minecraft:block_interaction_range get 1
 	scoreboard players add @s spindle.dummy 2
-	execute anchored eyes positioned ^ ^ ^ run function ./structure/detect/raycast
+	anchored eyes positioned ^ ^ ^ run function ./structure/detect/raycast
 
 function ./structure/detect/raycast:
-	execute align xyz positioned ~0.5 ~0.5 ~0.5 run function ./structure/detect/scan
+	align xyz positioned ~0.5 ~0.5 ~0.5 run function ./structure/detect/scan
 	scoreboard players remove @s spindle.dummy 1
-	execute if score @s spindle.dummy matches 1.. positioned ^ ^ ^1 run function ./structure/detect/raycast
+	if score @s spindle.dummy matches 1.. positioned ^ ^ ^1 run function ./structure/detect/raycast
 
 function ./structure/detect/scan:
 	for y in range(2, -3, -1):
-		execute positioned ~ ~y ~ run function ./structure/detect/layer
+		positioned ~ ~y ~ run function ./structure/detect/layer
 
 function ./structure/detect/layer:
 	for x in range(-2, 3):
 		for z in range(-2, 3):
-			execute positioned ~x ~ ~z if block ~ ~ ~ minecraft:redstone_block if block ~ ~-1 ~ #spindle:copper_bulbs if block ~ ~-1 ~-1 #spindle:copper_blocks run function ./structure/north
-			execute positioned ~x ~ ~z if block ~ ~ ~ minecraft:redstone_block if block ~ ~-1 ~ #spindle:copper_bulbs if block ~ ~-1 ~1 #spindle:copper_blocks run function ./structure/south
-			execute positioned ~x ~ ~z if block ~ ~ ~ minecraft:redstone_block if block ~ ~-1 ~ #spindle:copper_bulbs if block ~-1 ~-1 ~ #spindle:copper_blocks run function ./structure/west
-			execute positioned ~x ~ ~z if block ~ ~ ~ minecraft:redstone_block if block ~ ~-1 ~ #spindle:copper_bulbs if block ~1 ~-1 ~ #spindle:copper_blocks run function ./structure/east
+			positioned ~x ~ ~z if block ~ ~ ~ minecraft:redstone_block if block ~ ~-1 ~ minecraft:copper_bulb if block ~ ~-1 ~-1 minecraft:copper_block run function ./structure/north
+			positioned ~x ~ ~z if block ~ ~ ~ minecraft:redstone_block if block ~ ~-1 ~ minecraft:copper_bulb if block ~ ~-1 ~1 minecraft:copper_block run function ./structure/south
+			positioned ~x ~ ~z if block ~ ~ ~ minecraft:redstone_block if block ~ ~-1 ~ minecraft:copper_bulb if block ~-1 ~-1 ~ minecraft:copper_block run function ./structure/west
+			positioned ~x ~ ~z if block ~ ~ ~ minecraft:redstone_block if block ~ ~-1 ~ minecraft:copper_bulb if block ~1 ~-1 ~ minecraft:copper_block run function ./structure/east
 
 function ./structure/base:
 	setblock ~ ~-1 ~ air
 	setblock ~ ~ ~ air
-	execute positioned ~ ~-1.5 ~ run function ./structure/finish
-	execute as @a[distance=..5] at @s anchored eyes run particle minecraft:flash{color:[1,1,1,1]} ^ ^ ^1 0 0 0 0 2
+	positioned ~ ~-1.5 ~ run function ./structure/finish
+	as @a[distance=..5] at @s anchored eyes run particle minecraft:flash{color:[1,1,1,1]} ^ ^ ^1 0 0 0 0 2
 function ./structure/finish:
 	particle minecraft:wax_off ~ ~1 ~ 0.5 0.5 0.5 0 35
 	particle minecraft:flash{color:[1,1,1,1]} ~ ~1 ~ 0 0 0 0 2
@@ -72,7 +72,7 @@ advancement spindle:technical/entity/copper_horse/structure_check {
               "offsetY": -1,
               "predicate": {
                 "block": {
-                  "blocks": "#spindle:copper_bulbs"
+                  "blocks": "minecraft:copper_bulb"
                 }
               }
             },
@@ -85,7 +85,7 @@ advancement spindle:technical/entity/copper_horse/structure_check {
                   "offsetY": -1,
                   "predicate": {
                     "block": {
-                      "blocks": "#spindle:copper_blocks"
+                      "blocks": "minecraft:copper_block"
                     }
                   }
                 },
@@ -95,7 +95,7 @@ advancement spindle:technical/entity/copper_horse/structure_check {
                   "offsetY": -1,
                   "predicate": {
                     "block": {
-                      "blocks": "#spindle:copper_blocks"
+                      "blocks": "minecraft:copper_block"
                     }
                   }
                 },
@@ -105,7 +105,7 @@ advancement spindle:technical/entity/copper_horse/structure_check {
                   "offsetY": -1,
                   "predicate": {
                     "block": {
-                      "blocks": "#spindle:copper_blocks"
+                      "blocks": "minecraft:copper_block"
                     }
                   }
                 },
@@ -115,7 +115,7 @@ advancement spindle:technical/entity/copper_horse/structure_check {
                   "offsetY": -1,
                   "predicate": {
                     "block": {
-                      "blocks": "#spindle:copper_blocks"
+                      "blocks": "minecraft:copper_block"
                     }
                   }
                 }

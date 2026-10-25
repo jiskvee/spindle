@@ -1,5 +1,6 @@
 {
   "model": {
-    "type": "minecraft:empty"
+    "type": "minecraft:model",
+    "model": "spindle:item/empty"
   }
 }

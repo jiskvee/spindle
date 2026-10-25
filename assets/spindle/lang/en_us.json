@@ -45,7 +45,7 @@
 
 
   "entity.spindle.copper_horse": "Copper Horse",
-  "entity.spindle.copper_horse.instructions": "%s to shoot | %s to Dismount",
+  "entity.spindle.copper_horse.instructions": "%s to shoot | %s to dismount",
   "entity.spindle.copper_frog": "Copper Frog",
   "entity.spindle.copper_wolf": "Copper Wolf",
   "entity.spindle.copper_cat": "Copper Cat",

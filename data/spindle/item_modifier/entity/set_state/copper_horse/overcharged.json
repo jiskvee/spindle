@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:sequence",
+  "functions": [
+    {
+      "type": "minecraft:set_components",
+      "components": {
+        "minecraft:equippable": {
+          "slot": "saddle",
+          "asset_id": "spindle:copper_horse/overcharged"
+        }
+      }
+    },
+    {
+      "type": "minecraft:set_custom_data",
+      "tag": {
+        "spindle": {
+          "overcharged": true
+        }
+      }
+    }
+  ]
+}

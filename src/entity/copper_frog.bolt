@@ -6,32 +6,34 @@ this = Location(~/)
 raycast = Location(~/raycast)
 
 prepend function tick:
-	execute as @e[type=minecraft:frog,tag=spindle.copper_frog] at @s run function this.tick
+	as @e[type=minecraft:frog,tag=spindle.copper_frog] at @s run function this.tick
 prepend function second_clock:
-	execute as @e[type=minecraft:frog,tag=spindle.copper_frog] at @s run function this.second_clock
+	as @e[type=minecraft:frog,tag=spindle.copper_frog] at @s run function this.second_clock
+prepend function spindle:technical/40t:
+	as @e[type=minecraft:frog,tag=spindle.copper_frog] run data modify entity @s InLove set value 0
 
 function spindle:commands/summon/copper_frog:
-	summon minecraft:frog ~ ~ ~ {Silent:true,variant:"spindle:copper",Team:"spindle.no_nametag",DeathLootTable:"spindle:entities/copper_frog",CustomName:{translate:"entity.spindle.copper_frog",italic:false},data:{type:"minecraft:frog",id:"copper_frog",has_custom_name:false},Tags:["smithed.entity","spindle.entity","spindle.copper_frog"]}
+	summon minecraft:frog ~ ~ ~ {Silent:true,variant:"spindle:copper",Team:"spindle.no_nametag",DeathLootTable:"spindle:entities/copper_frog",drop_chances:{body:0},equipment:{body:{id:"minecraft:poisonous_potato",components:{enchantments:{"spindle:technical/lightning_protection":1}}}},CustomName:{translate:"entity.spindle.copper_frog",italic:false},data:{type:"minecraft:frog",id:"copper_frog",has_custom_name:false},Tags:["smithed.entity","spindle.entity","spindle.copper_frog"]}
 
 function this.tick:
-	execute store result score @s spindle.hurt run data get entity @s HurtTime
-	execute if score @s spindle.hurt matches 1.. if entity @s[tag=!spindle.ouch] run function this.hurt.start:
+	store result score @s spindle.hurt run data get entity @s HurtTime
+	if score @s spindle.hurt matches 1.. if entity @s[tag=!spindle.ouch] run function this.hurt.start:
 		tag @s add spindle.ouch
 		playsound spindle:entity.copper_frog.hurt neutral "@c" ~ ~ ~ 0.5
-	execute if score @s spindle.hurt matches 0 if entity @s[tag=spindle.ouch] run function this.hurt.stop:
+	if score @s spindle.hurt matches 0 if entity @s[tag=spindle.ouch] run function this.hurt.stop:
 		tag @s remove spindle.ouch
 
 function this.second_clock:
 	scoreboard players add @s spindle.sound 1
-	execute if predicate random_chance(0.5) run scoreboard players add @s spindle.sound 1
-	execute if score @s spindle.sound matches 12.. run function this.ambient_sound:
+	if predicate random_chance(0.5) run scoreboard players add @s spindle.sound 1
+	if score @s spindle.sound matches 12.. run function this.ambient_sound:
 		playsound spindle:entity.copper_frog.idle neutral "@c" ~ ~ ~ 0.25
 		scoreboard players reset @s spindle.sound
 
-	execute unless predicate spindle:location/wet run return run scoreboard players remove @s[scores={spindle.explode=1..}] spindle.explode 1
-	execute if score @s spindle.explode matches 3 run function this.short_circuit
-	execute if score @s spindle.explode matches 5 run function this.short_circuit
-	execute if score @s spindle.explode matches 7.. run return run function this.explode
+	unless predicate spindle:location/wet run return run scoreboard players remove @s[scores={spindle.explode=1..}] spindle.explode 1
+	if score @s spindle.explode matches 3 run function this.short_circuit
+	if score @s spindle.explode matches 5 run function this.short_circuit
+	if score @s spindle.explode matches 7.. run return run function this.explode
 	scoreboard players add @s spindle.explode 1
 
 function this.short_circuit:
@@ -42,3 +44,8 @@ function this.explode:
 	data modify entity @s DeathTime set value 20
 	playsound spindle:entity.copper_frog.death neutral "@c"
 	item replace entity @s armor.feet with minecraft:poisonous_potato[equippable={slot:feet},enchantments={"spindle:technical/explosion":1}]
+
+function this.lightning_strike:
+	playsound spindle:item.copper_hammer.overcharge neutral "@c"
+	particle minecraft:electric_spark ~ ~0.25 ~ 0 0 0 2 100
+	function this.explode

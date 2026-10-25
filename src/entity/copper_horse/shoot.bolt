@@ -1,21 +1,20 @@
 function ./laser/tick:
-	execute if predicate spindle:input/sprint run return run function ./laser/pressing
-	execute if score @s spindle.laser matches 1.. run scoreboard players remove @s spindle.laser 1
+	if predicate spindle:input/sprint run return run function ./laser/pressing
+	if score @s spindle.laser matches 1.. run scoreboard players remove @s spindle.laser 1
 
 function ./laser/pressing:
-	execute unless score @s spindle.laser matches 1.. run function ./raycast/start
+	unless score @s spindle.laser matches 1.. run function ./raycast/start
 
 function ./raycast/start:
 	scoreboard players set @s spindle.laser 2
 	playsound spindle:entity.copper_mob.shoot neutral "@c" ~ ~ ~ 1 1.2
 
 	tag @s add spindle.laser.shooting
-	execute on vehicle run tag @s add spindle.laser.shooting
+	on vehicle run tag @s add spindle.laser.shooting
 
 	scoreboard players set @s spindle.dummy 30
 	data modify storage spindle:temp root.raycast.UUID set from entity @s UUID
-	#execute on vehicle at @s anchored eyes run function ./raycast/step
-	execute anchored eyes positioned ^ ^-0.6 ^ run function ./raycast/step
+	anchored eyes positioned ^ ^-0.6 ^ run function ./raycast/step
 
 function ./raycast/step:
 	particle dust{color:[1.000,0.835,0.180],scale:1}
@@ -24,10 +23,10 @@ function ./raycast/step:
 	ofs = 0.5
 	a = 1.0 - ofs
 	b = ofs / 2
-	execute positioned ~-b ~-b ~-b as @n[dx=0,type=!#spindle:ignore,tag=!spindle.laser.shooting,tag=!smithed.strict] positioned ~-a ~-a ~-a if entity @s[dx=0] run return run function ./raycast/as_entity with storage spindle:temp root.raycast
-	execute unless block ~ ~ ~ #spindle:pass_through run return run function ./raycast/end
-	execute unless score @s spindle.dummy matches 1.. run return run function ./raycast/end
-	execute positioned ^ ^ ^0.5 run function ./raycast/step
+	positioned ~-b ~-b ~-b as @n[dx=0,type=!#spindle:ignore,tag=!spindle.laser.shooting,tag=!smithed.strict] positioned ~-a ~-a ~-a if entity @s[dx=0] run return run function ./raycast/as_entity with storage spindle:temp root.raycast
+	unless block ~ ~ ~ #spindle:pass_through run return run function ./raycast/end
+	unless score @s spindle.dummy matches 1.. run return run function ./raycast/end
+	positioned ^ ^ ^0.5 run function ./raycast/step
 
 function ./raycast/as_entity:
 	$damage @s 5 minecraft:arrow by @p[nbt={UUID:$(UUID)}]
@@ -36,5 +35,5 @@ function ./raycast/as_entity:
 function ./raycast/end:
 	scoreboard players set @s spindle.dummy 0
 	tag @s remove spindle.laser.shooting
-	execute on vehicle run tag @s remove spindle.laser.shooting
+	on vehicle run tag @s remove spindle.laser.shooting
 	data remove storage spindle:temp root

@@ -51,7 +51,18 @@
                 "DeathLootTable": "spindle:entities/copper_frog",
                 "CustomName": { "translate": "entity.spindle.copper_frog", "italic": false },
                 "data": { "type": "minecraft:frog", "id": "copper_frog", "has_custom_name": false },
-                "Tags": [ "smithed.entity", "spindle.entity", "spindle.placed", "spindle.copper_frog" ]
+                "Tags": [ "smithed.entity", "spindle.entity", "spindle.placed", "spindle.copper_frog" ],
+                "drop_chances": { "body": 0 },
+                "equipment": {
+                  "body": {
+                    "id": "minecraft:poisonous_potato",
+                    "components": {
+                      "minecraft:enchantments": {
+                        "spindle:technical/lightning_protection": 1
+                      }
+                    }
+                  }
+                }
               },
               "minecraft:custom_data": {
                 "spindle": {

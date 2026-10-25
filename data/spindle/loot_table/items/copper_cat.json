@@ -64,7 +64,18 @@
                 "DeathLootTable": "spindle:entities/copper_cat",
                 "CustomName": { "translate": "entity.spindle.copper_cat", "italic": false },
                 "data": { "type": "minecraft:cat", "id": "copper_cat", "has_custom_name": false },
-                "Tags": [ "smithed.entity", "spindle.entity", "spindle.copper_pet", "spindle.copper_cat" ]
+                "Tags": [ "smithed.entity", "spindle.entity", "spindle.copper_pet", "spindle.copper_cat" ],
+                "drop_chances": { "body": 0 },
+                "equipment": {
+                  "body": {
+                    "id": "minecraft:poisonous_potato",
+                    "components": {
+                      "minecraft:enchantments": {
+                        "spindle:technical/lightning_protection": 1
+                      }
+                    }
+                  }
+                }
               },
               "minecraft:custom_data": {
                 "spindle": {
