@@ -6,6 +6,7 @@ function ./technical/load:
 
 	# general use
 	scoreboard objectives add spindle.dummy dummy
+	scoreboard players set #20 spindle.dummy 20
 
 	# shotgun
 	scoreboard objectives add spindle.shotgun.state dummy # oxidization state

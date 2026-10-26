@@ -1,0 +1,19 @@
+{
+  "providers": [
+    {
+      "type": "bitmap",
+      "file": "spindle:gui/sprites/charge_bar/overcharged.png",
+      "height": 11,
+      "ascent": 10,
+      "chars": [
+        "(XEO)"
+      ]
+    },
+    {
+      "type": "space",
+      "advances": {
+        " ": -1
+      }
+    }
+  ]
+}

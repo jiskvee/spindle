@@ -1,0 +1,78 @@
+{
+  "type": "minecraft:all_of",
+  "terms": [
+    {
+      "type": "minecraft:entity_properties",
+      "entity": "this",
+      "predicate": {
+        "minecraft:slots": {
+          "weapon.mainhand": {
+            "predicates": {
+              "minecraft:custom_data": {
+                "spindle": {
+                  "id": "copper_hammer"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "type": "minecraft:any_of",
+      "terms": [
+        {
+          "type": "minecraft:entity_properties",
+          "entity": "this",
+          "predicate": {
+            "minecraft:slots": {
+              "weapon.mainhand": {
+                "predicates": {
+                  "minecraft:custom_data": {
+                    "spindle": {
+                      "charge": 1
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "type": "minecraft:entity_properties",
+          "entity": "this",
+          "predicate": {
+            "minecraft:slots": {
+              "weapon.mainhand": {
+                "predicates": {
+                  "minecraft:custom_data": {
+                    "spindle": {
+                      "charge": 2
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "type": "minecraft:entity_properties",
+          "entity": "this",
+          "predicate": {
+            "minecraft:slots": {
+              "weapon.mainhand": {
+                "predicates": {
+                  "minecraft:custom_data": {
+                    "spindle": {
+                      "charge": 3
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      ]
+    }
+  ]
+}

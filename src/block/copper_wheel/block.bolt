@@ -1,10 +1,10 @@
 from spindle:advancements import attack_adv, interact_adv
 
 function ./place/start:
-	scoreboard players set #place spindle.dummy 0
-	execute positioned ~ ~0.5 ~ unless entity @n[type=minecraft:item_display,tag=smithed.block,distance=..0.99] run scoreboard players set #place spindle.dummy 1
-	execute if score #place spindle.dummy matches 0 run function ./place/fail
-	execute if score #place spindle.dummy matches 1 run function ./place/success
+	scoreboard players set $bool spindle.dummy 0
+	execute positioned ~ ~0.5 ~ unless entity @n[type=minecraft:item_display,tag=smithed.block,distance=..0.99] run scoreboard players set $bool spindle.dummy 1
+	execute if score $bool spindle.dummy matches 0 run function ./place/fail
+	execute if score $bool spindle.dummy matches 1 run function ./place/success
 	setblock ~ ~ ~ air
 
 function ./place/fail:

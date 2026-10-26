@@ -9,7 +9,7 @@
         "entity": "this",
         "predicate": {
           "minecraft:slots": {
-            "weapon.mainhand": {
+            "weapon.*": {
               "predicates": {
                 "minecraft:custom_data": {
                   "spindle": {

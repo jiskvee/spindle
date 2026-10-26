@@ -31,6 +31,7 @@ function this.rc:
 	unless predicate spindle:item/hammer/holding_charged run return fail
 
 	scoreboard players set @s spindle.step 1
+	scoreboard players add @s spindle.hammer.hold 1
 	if entity @s[tag=!spindle.discharging] run function this.discharge.start_hold:
 		playsound spindle:item.copper_hammer.spark player "@c" ~ ~ ~ 1 2
 		tag @s add spindle.discharging
@@ -39,12 +40,34 @@ function this.rc:
 	if predicate random_chance(0.5) positioned over motion_blocking run particle minecraft:electric_spark ~ ~0.1 ~ 0 1 0 1 0
 	if predicate random_chance(0.15) run playsound spindle:item.copper_hammer.spark player "@c" ~ ~ ~ 0.5 2
 
-	scoreboard players add @s spindle.hammer.hold 1
+	# determine if the hammer discharging is overcharged
+	scoreboard players set $bool spindle.dummy 0
+	if items entity @s weapon.* *[minecraft:custom_data~{spindle:{charge:4b}}] scoreboard players set $bool spindle.dummy 1
+	if predicate spindle:item/hammer/mainhand_no_overcharge run scoreboard players set $bool spindle.dummy 0
+
+	# charge bar
+	scoreboard players operation $temp spindle.dummy = @s spindle.hammer.hold
+	scoreboard players operation $temp spindle.dummy /= #20 spindle.dummy
+	def show_bar(variant):
+		if score $temp spindle.dummy matches 0 return run title @s actionbar {text:"( X E E E E )",font:f"spindle:charge_bar/{variant}"}
+		if score $temp spindle.dummy matches 1 return run title @s actionbar {text:"( X O E E E )",font:f"spindle:charge_bar/{variant}"}
+		if score $temp spindle.dummy matches 2 return run title @s actionbar {text:"( X O O E E )",font:f"spindle:charge_bar/{variant}"}
+		if score $temp spindle.dummy matches 3 return run title @s actionbar {text:"( X O O O E )",font:f"spindle:charge_bar/{variant}"}
+		if score $temp spindle.dummy matches 4 return run title @s actionbar {text:"( X O O O O )",font:f"spindle:charge_bar/{variant}"}
+	if score $bool spindle.dummy matches 0 run function this.charge_bar.default:
+		show_bar("default")
+	if score $bool spindle.dummy matches 1 run function this.charge_bar.overcharged:
+		show_bar("overcharged")
+
+	# release the boom!
 	if score @s spindle.hammer.hold matches 80.. run function this.discharge.action:
 		scoreboard players set @s spindle.hammer.cd 60
 		scoreboard players reset @s spindle.hammer.hold
-		execute run function this.discharge.effect:
-			if items entity @s weapon.mainhand *[minecraft:custom_data~{spindle:{charge:4b}}] run return run function this.discharge.overcharged:
+		execute run function this.discharge.switch:
+			if score $bool spindle.dummy matches 0 run return run function this.discharge.normal:
+				function this.hit.as_victim
+				playsound spindle:item.copper_hammer.discharge player "@c"
+			if score $bool spindle.dummy matches 1 run return run function this.discharge.overcharged:
 				function this.hit.as_victim_overcharge
 				playsound spindle:item.copper_hammer.erupt player "@c"
 				if predicate spindle:weather/thunder run return fail
@@ -52,9 +75,13 @@ function this.rc:
 				if predicate spindle:weather/rain run weather thunder 8000
 				playsound spindle:item.copper_hammer.erupt player @a
 				effect give @s minecraft:blindness 1 0 true
-			function this.hit.as_victim
-		playsound spindle:item.copper_hammer.discharge player "@c"
-		function this.charge.remove
+			function this.discharge.normal
+
+		execute run function this.charge.remove:
+			if items entity @s weapon.mainhand cit("spindle","copper_hammer") run return run
+				item modify entity @s weapon.mainhand spindle:hammer/remove_charge
+			if items entity @s weapon.offhand cit("spindle","copper_hammer") run
+				item modify entity @s weapon.offhand spindle:hammer/remove_charge
 
 
 function this.hit.as_victim:
@@ -75,19 +102,13 @@ function this.hit.as_attacker:
 	unless predicate spindle:item/hammer/strike run return fail
 	scoreboard players set @s spindle.hammer.cd 40
 	scoreboard players reset @s spindle.hammer.hold
-
 	execute run function this.hit.effects:
 		if items entity @s weapon.mainhand *[minecraft:custom_data~{spindle:{charge:4b}}] run return run function this.hit.as_attacker_overcharge:
 			playsound spindle:item.copper_hammer.erupt player "@c"
 			damage @s 10 spindle:lightning
 		playsound spindle:item.copper_hammer.discharge player "@c"
 		damage @s 6 spindle:lightning
-
-	execute run function this.charge.remove:
-		if items entity @s weapon.mainhand cit("spindle","copper_hammer") run return run
-			item modify entity @s weapon.mainhand spindle:hammer/remove_charge
-		if items entity @s weapon.offhand cit("spindle","copper_hammer") run
-			item modify entity @s weapon.offhand spindle:hammer/remove_charge
+	item modify entity @s weapon.mainhand spindle:hammer/remove_charge
 
 
 function this.struck: # by lightning!
