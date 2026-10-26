@@ -22,7 +22,7 @@
       "type": "minecraft:set_lore",
       "entity": "this",
       "mode": "replace_section",
-      "offset": 3,
+      "offset": 4,
       "lore": [
         {
           "translate": "item.spindle.copper_hammer.charge_display",

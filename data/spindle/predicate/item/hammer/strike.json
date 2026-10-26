@@ -7,27 +7,7 @@
         "dimension": "minecraft:overworld"
       }
     },
-    "spindle:item/hammer/holding",
-    {
-      "type": "minecraft:inverted",
-      "term": {
-        "type": "minecraft:entity_properties",
-        "entity": "this",
-        "predicate": {
-          "minecraft:slots": {
-            "weapon.mainhand": {
-              "predicates": {
-                "minecraft:custom_data": {
-                  "spindle": {
-                    "charge": 0
-                  }
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "spindle:entity/can_crit"
+    "spindle:entity/can_crit",
+    "spindle:item/hammer/holding_charged"
   ]
 }

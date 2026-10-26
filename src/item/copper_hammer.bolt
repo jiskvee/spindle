@@ -5,22 +5,56 @@ this = Location(~/)
 
 
 function this.tick:
-	if score @s spindle.hammer.rc matches 0 run scoreboard players reset @s spindle.hammer.hold
-	if score @s spindle.hammer.rc matches 1.. run scoreboard players remove @s spindle.hammer.rc 1
+	if score @s spindle.step matches 1.. run return run scoreboard players remove @s spindle.step 1
+	scoreboard players reset @s spindle.hammer.hold
+	tag @s remove spindle.discharging
 
 	if score @s spindle.hammer.cd matches 1.. run return run scoreboard players remove @s spindle.hammer.cd 1
 	unless predicate spindle:item/hammer/lightning_strikable run return fail
 
-	if items entity @s weapon.* *[minecraft:custom_data~{spindle:{charge:4b}}] positioned over motion_blocking run return run function this.tick_overcharge:
+	if items entity @s weapon.* *[minecraft:custom_data~{spindle:{charge:4b}}] positioned over motion_blocking run return run function this.overcharge.conductive:
 		if predicate spindle:tick/20 if predicate random_chance(0.4) run playsound spindle:item.copper_hammer.spark player "@c" ~ ~ ~ 0.5 2
-		if predicate random_chance(0.002) run summon minecraft:lightning_bolt
+		if predicate random_chance(0.0015) run summon minecraft:lightning_bolt
 		if predicate random_chance(0.2) run particle minecraft:electric_spark ~ ~0.1 ~ 0.2 0 0.2 0.1 2
-		if predicate random_chance(0.2) run particle minecraft:electric_spark ~ ~ ~ 0 1 0 1 0
+		if predicate random_chance(0.2) run particle minecraft:electric_spark ~ ~0.1 ~ 0 1 0 1 0
 
 	positioned over motion_blocking run function this.conductive:
 		if predicate random_chance(0.001) run summon minecraft:lightning_bolt
 		if predicate random_chance(0.1) run particle minecraft:electric_spark ~ ~0.1 ~ 0.2 0 0.2 0.1 2
-		if predicate random_chance(0.1) run particle minecraft:electric_spark ~ ~ ~ 0 1 0 1 0
+		if predicate random_chance(0.1) run particle minecraft:electric_spark ~ ~0.1 ~ 0 1 0 1 0
+
+
+function this.rc:
+	advancement revoke @s only technical(this.rc)
+	if score @s spindle.hammer.cd matches 1.. run return fail
+	unless predicate spindle:item/hammer/can_discharge run return fail
+	unless predicate spindle:item/hammer/holding_charged run return fail
+
+	scoreboard players set @s spindle.step 1
+	if entity @s[tag=!spindle.discharging] run function this.discharge.start_hold:
+		playsound spindle:item.copper_hammer.spark player "@c" ~ ~ ~ 1 2
+		tag @s add spindle.discharging
+
+	positioned over motion_blocking run particle minecraft:electric_spark ~ ~0.1 ~ 0.2 0 0.2 0.1 1
+	if predicate random_chance(0.5) positioned over motion_blocking run particle minecraft:electric_spark ~ ~0.1 ~ 0 1 0 1 0
+	if predicate random_chance(0.15) run playsound spindle:item.copper_hammer.spark player "@c" ~ ~ ~ 0.5 2
+
+	scoreboard players add @s spindle.hammer.hold 1
+	if score @s spindle.hammer.hold matches 80.. run function this.discharge.action:
+		scoreboard players set @s spindle.hammer.cd 60
+		scoreboard players reset @s spindle.hammer.hold
+		execute run function this.discharge.effect:
+			if items entity @s weapon.mainhand *[minecraft:custom_data~{spindle:{charge:4b}}] run return run function this.discharge.overcharged:
+				function this.hit.as_victim_overcharge
+				playsound spindle:item.copper_hammer.erupt player "@c"
+				if predicate spindle:weather/thunder run return fail
+				weather thunder 6000
+				if predicate spindle:weather/rain run weather thunder 8000
+				playsound spindle:item.copper_hammer.erupt player @a
+				effect give @s minecraft:blindness 1 0 true
+			function this.hit.as_victim
+		playsound spindle:item.copper_hammer.discharge player "@c"
+		function this.charge.remove
 
 
 function this.hit.as_victim:
@@ -28,7 +62,6 @@ function this.hit.as_victim:
 	positioned over motion_blocking unless entity @s[distance=..4.5] run return fail
 	if predicate random_chance(0.33) run damage @s 6 spindle:lightning
 	damage @s 6 spindle:lightning
-
 
 function this.hit.as_victim_overcharge:
 	positioned over motion_blocking run function this.lot_of_lightning:
@@ -43,65 +76,37 @@ function this.hit.as_attacker:
 	scoreboard players set @s spindle.hammer.cd 40
 	scoreboard players reset @s spindle.hammer.hold
 
-	execute run function this.effects:
+	execute run function this.hit.effects:
 		if items entity @s weapon.mainhand *[minecraft:custom_data~{spindle:{charge:4b}}] run return run function this.hit.as_attacker_overcharge:
 			playsound spindle:item.copper_hammer.erupt player "@c"
-			damage @s 8 spindle:lightning
+			damage @s 10 spindle:lightning
 		playsound spindle:item.copper_hammer.discharge player "@c"
+		damage @s 6 spindle:lightning
 
-	execute run function this.remove_charge:
+	execute run function this.charge.remove:
 		if items entity @s weapon.mainhand cit("spindle","copper_hammer") run return run
 			item modify entity @s weapon.mainhand spindle:hammer/remove_charge
 		if items entity @s weapon.offhand cit("spindle","copper_hammer") run
 			item modify entity @s weapon.offhand spindle:hammer/remove_charge
 
 
-function this.struck:
+function this.struck: # by lightning!
 	advancement revoke @s only technical(this.struck)
 	if score @s spindle.hammer.cd matches 1.. run return fail
 	scoreboard players set @s spindle.hammer.cd 40
 	scoreboard players reset @s spindle.hammer.hold
 
-	execute run function this.add_charge:
+	execute run function this.charge.add:
 		if items entity @s weapon.mainhand cit("spindle","copper_hammer") run return run
 			item modify entity @s weapon.mainhand spindle:hammer/add_charge
 		if items entity @s weapon.offhand cit("spindle","copper_hammer") run
 			item modify entity @s weapon.offhand spindle:hammer/add_charge
 
-	if items entity @s weapon.* *[minecraft:custom_data~{spindle:{charge:4b}}] run return run function this.overcharge:
+	if items entity @s weapon.* *[minecraft:custom_data~{spindle:{charge:4b}}] run return run function this.overcharge.struck:
 		playsound spindle:item.copper_hammer.overcharge player "@c"
-		damage @s 8 spindle:lightning
+		damage @s 10 spindle:lightning
 	playsound spindle:item.copper_hammer.charge player "@c"
-
-
-function this.rc:
-	advancement revoke @s only technical(this.rc)
-	if score @s spindle.hammer.cd matches 1.. run return fail
-	unless predicate spindle:item/hammer/can_discharge run return fail
-	unless predicate spindle:item/hammer/holding_charged run return fail
-
-	positioned over motion_blocking run particle minecraft:electric_spark ~ ~0.1 ~ 0.2 0 0.2 0.1 1
-	if predicate random_chance(0.15) run playsound spindle:item.copper_hammer.spark player "@c" ~ ~ ~ 0.5 2
-	#if predicate spindle:tick/10 if predicate random_chance(0.8) run playsound spindle:item.copper_hammer.spark player "@c" ~ ~ ~ 0.5 2
-	#playsound spindle:item.copper_hammer.spark player "@c" ~ ~ ~ 0.5 2
-
-	scoreboard players add @s spindle.hammer.rc 1
-	if score @s spindle.hammer.rc matches 1 run scoreboard players add @s spindle.hammer.hold 1
-
-	if score @s spindle.hammer.hold matches 80.. run function this.forced_discharge:
-		scoreboard players set @s spindle.hammer.cd 60
-		scoreboard players reset @s spindle.hammer.hold
-		execute run function this.forced_switch:
-			if items entity @s weapon.mainhand *[minecraft:custom_data~{spindle:{charge:4b}}] run return run function this.forced_overcharge:
-				function this.hit.as_victim_overcharge
-				playsound spindle:item.copper_hammer.erupt player "@c"
-				if predicate spindle:weather/thunder run return fail
-				weather thunder 6000
-				if predicate spindle:weather/only_rain run weather thunder 12000
-				playsound spindle:item.copper_hammer.erupt player @a
-			function this.hit.as_victim
-		playsound spindle:item.copper_hammer.discharge player "@c"
-		function this.remove_charge
+	damage @s 6 spindle:lightning
 
 
 advancement technical(this.struck) {

@@ -1,12 +1,6 @@
 {
   "type": "minecraft:all_of",
   "terms": [
-    {
-      "type": "minecraft:location_check",
-      "predicate": {
-        "dimension": "minecraft:overworld"
-      }
-    },
     "spindle:item/hammer/holding",
     {
       "type": "minecraft:inverted",

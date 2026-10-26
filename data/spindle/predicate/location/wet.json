@@ -13,17 +13,8 @@
       "type": "minecraft:all_of",
       "terms": [
         {
-          "type": "minecraft:any_of",
-          "terms": [
-            {
-              "type": "minecraft:weather_check",
-              "raining": true
-            },
-            {
-              "type": "minecraft:weather_check",
-              "thundering": true
-            }
-          ]
+          "type": "minecraft:weather_check",
+          "raining": true
         },
         {
           "type": "minecraft:location_check",

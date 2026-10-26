@@ -77,7 +77,7 @@
       "spindle:technical/hammer": 1
     },
     "minecraft:tooltip_display": {
-      "hidden_components": ["minecraft:enchantments"]
+      "hidden_components": [ "minecraft:enchantments" ]
     },
     "minecraft:repairable": {
       "items": "minecraft:copper_block"
@@ -125,13 +125,14 @@
   "recipe": {
     "type": "minecraft:crafting_shaped",
     "key": {
-      "B": "minecraft:copper_block",
-      "S": "minecraft:gold_block"
+      "C": "minecraft:copper_block",
+      "B": "minecraft:copper_bulb",
+      "G": "minecraft:gold_block"
     },
     "pattern": [
-      "BBB",
-      "BBB",
-      " S "
+      "CBC",
+      "CCC",
+      " G "
     ]
   }
 }
