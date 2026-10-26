@@ -17,5 +17,29 @@
     "sounds": [
       "mob/zombie/metal3"
     ]
+  },
+  "item.coppertendo_switch.ring": {
+    "sounds": [
+      "spindle:item/coppertendo_switch/ring"
+    ],
+    "subtitle": "subtitles.spindle.item.coppertendo_switch.ring"
+  },
+  "item.coppertendo_switch.howayu": {
+    "sounds": [
+      "spindle:item/coppertendo_switch/howayu"
+    ],
+    "subtitle": "subtitles.spindle.item.coppertendo_switch.ring"
+  },
+  "item.coppertendo_switch.bark": {
+    "sounds": [
+      "spindle:item/coppertendo_switch/bark"
+    ],
+    "subtitle": "subtitles.spindle.item.coppertendo_switch.ring"
+  },
+  "item.coppertendo_switch.ayayay": {
+    "sounds": [
+      "spindle:item/coppertendo_switch/ayayay"
+    ],
+    "subtitle": "subtitles.spindle.item.coppertendo_switch.ring"
   }
 }

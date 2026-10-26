@@ -1,0 +1,71 @@
+from camellia.utils import Location, cit, simple_model, technical
+
+simple_model(ctx, "coppertendo_switch")
+this = Location(~/)
+
+function this.right_click:
+	advancement revoke @s only technical(this.right_click)
+	#function ./right_click/main
+	tag @s add spindle.used
+	scoreboard players set $bool spindle.dummy 0
+	if items entity @s weapon.mainhand *[custom_data~{spindle:{noise_maker:{}}}] summon item_display run function this.from_mainhand:
+		item replace entity @s contents from entity @p[tag=spindle.used] weapon.mainhand
+		scoreboard players set $bool spindle.dummy 0
+		function this.set_data
+	if items entity @s weapon.offhand *[custom_data~{spindle:{noise_maker:{}}}]summon item_display run function this.from_offhand:
+		item replace entity @s contents from entity @p[tag=spindle.used] weapon.offhand
+		scoreboard players set $bool spindle.dummy 1
+		function this.set_data
+
+	tag @s remove spindle.used
+	execute run function this.play_sound_macro with storage spindle:noise_maker root:
+		$playsound $(sound) player @a[distance=..16]
+		$execute if score $bool spindle.dummy matches 0 run return run item modify entity @s weapon.mainhand {type:"set_custom_data",tag:{spindle:{noise_maker:{curindex:$(index)}}}}
+		$item modify entity @s weapon.offhand {type:"set_custom_data",tag:{spindle:{noise_maker:{curindex:$(index)}}}}
+
+
+function this.set_data:
+	data modify storage spindle:noise_maker root.data set from entity @s item.components."minecraft:custom_data".spindle.noise_maker
+	data modify storage spindle:noise_maker root.index set from storage spindle:noise_maker root.data.curindex
+	execute run function this.pick_sound_macro with storage spindle:noise_maker root:
+		$data modify storage spindle:noise_maker root.sound set from storage spindle:noise_maker root.data.sounds[$(index)]
+
+	data modify storage spindle:noise_maker root.index set compute default integer this.add
+	execute run function this.check_index_macro with storage spindle:noise_maker root:
+		$execute unless data storage spindle:noise_maker root.data.sounds[$(index)] run data modify storage spindle:noise_maker root.index set value 0
+	kill @s
+
+context_int_provider this.add {
+  "type": "minecraft:add",
+  "inputs": [
+    1,
+    {
+      "type": "minecraft:storage",
+      "storage": "spindle:noise_maker",
+      "path": "root.index"
+    }
+  ]
+}
+
+advancement technical(this.right_click) {
+  "parent": "spindle:technical/root",
+  "criteria": {
+    "requirement": {
+      "trigger": "minecraft:consume_item",
+      "conditions": {
+        "item": {
+          "predicates": {
+            "minecraft:custom_data": {
+              "spindle": {
+                "noise_maker": {}
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "rewards": {
+    "function": this.right_click()
+  }
+}

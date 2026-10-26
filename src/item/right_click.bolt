@@ -1,0 +1,39 @@
+from camellia.utils import Location, technical
+
+this = Location(~/)
+
+#advancement technical(this.right_click) 
+{
+  "parent": "spindle:technical/root",
+  "criteria": {
+    "requirement": {
+      "trigger": "minecraft:consume_item",
+      "conditions": {
+        "item": {
+          "predicates": {
+            "minecraft:custom_data": {
+              "spindle": {
+                "right_click": true
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "rewards": {
+    "function": this.right_click.main()
+  }
+}
+
+function this.right_click.main:
+	#advancement revoke @s only technical(this.right_click)
+	#execute if items entity @s weapon.mainhand *[consumable, !use_remainder, custom_data~{spindle:{right_click:true}}] run return run function this.right_click.mainhand:
+	execute if items entity @s weapon.mainhand *[custom_data~{spindle:{right_click:true}}] run return run function this.right_click.mainhand:
+		item modify entity @s weapon.mainhand spindle:right_click/off
+		item modify entity @s weapon.mainhand spindle:right_click/on
+
+	#execute if items entity @s weapon.offhand *[consumable, !use_remainder, custom_data~{spindle:{right_click:true}}] run return run function this.right_click.offhand:
+	execute if items entity @s weapon.offhand *[custom_data~{spindle:{right_click:true}}] run return run function this.right_click.offhand:
+		item modify entity @s weapon.offhand spindle:right_click/off
+		item modify entity @s weapon.offhand spindle:right_click/on

@@ -27,6 +27,9 @@
   "item.spindle.copper_hammer.charge": "charge",
   "item.spindle.copper_hammer.discharge": "discharge",
   "item.spindle.copper_hammer.charge_display": "Charge: %s/3",
+  "item.spindle.coppertendo_switch": "Coppertendo Switch (2026)",
+  "item.spindle.coppertendo_switch.desc1": "Just like the old days!",
+  "item.spindle.coppertendo_switch.desc2": "Smithed at the top of a great summit.",
 
   "item.modifiers.spindle.shooting": "When shooting:",
   "attribute.modifier.spindle.equals": " %s %s",
@@ -42,6 +45,7 @@
   "subtitles.spindle.item.copper_hammer.discharge": "Battery discharges",
   "subtitles.spindle.item.copper_hammer.overcharge": "Battery overcharges",
   "subtitles.spindle.item.copper_hammer.erupt": "Battery erupts",
+  "subtitles.spindle.item.coppertendo_switch.ring": "Coppertendo Switch rings",
 
 
   "entity.spindle.copper_horse": "Copper Horse",
