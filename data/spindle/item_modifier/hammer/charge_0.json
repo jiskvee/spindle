@@ -20,7 +20,6 @@
     },
     {
       "type": "minecraft:set_lore",
-      "entity": "this",
       "mode": "replace_section",
       "offset": 4,
       "lore": [
@@ -37,7 +36,6 @@
     {
       "type": "minecraft:set_components",
       "components": {
-        "!minecraft:food": {},
         "!minecraft:consumable": {}
       }
     }

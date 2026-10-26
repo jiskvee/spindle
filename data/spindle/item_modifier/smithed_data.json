@@ -1,0 +1,11 @@
+{
+  "type": "set_custom_data",
+  "tag": {
+    "smithed": {
+      "ignore": {
+        "functionality": true,
+        "crafting": true
+      }
+    }
+  }
+}

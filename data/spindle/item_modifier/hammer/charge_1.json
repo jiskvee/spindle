@@ -20,7 +20,6 @@
     },
     {
       "type": "minecraft:set_lore",
-      "entity": "this",
       "mode": "replace_section",
       "offset": 4,
       "lore": [
@@ -37,11 +36,6 @@
     {
       "type": "minecraft:set_components",
       "components": {
-        "minecraft:food": {
-          "nutrition": 0,
-          "saturation": 0,
-          "can_always_eat": true
-        },
         "minecraft:consumable": {
           "consume_seconds": 2147483647,
           "has_consume_particles": false,

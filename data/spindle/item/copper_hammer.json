@@ -62,6 +62,7 @@
     }
   ],
   "components": {
+    "!minecraft:food": { },
     "!minecraft:consumable": { },
     "minecraft:weapon": { },
     "minecraft:tooltip_style": "spindle:spindle",
