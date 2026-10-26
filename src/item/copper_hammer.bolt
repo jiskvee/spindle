@@ -24,8 +24,8 @@ function this.tick:
 		if predicate random_chance(0.1) run particle minecraft:electric_spark ~ ~0.1 ~ 0 1 0 1 0
 
 
-function this.rc:
-	advancement revoke @s only technical(this.rc)
+function this.right_click:
+	advancement revoke @s only technical(this.right_click)
 	if score @s spindle.hammer.cd matches 1.. run return fail
 	unless predicate spindle:item/hammer/can_discharge run return fail
 	unless predicate spindle:item/hammer/holding_charged run return fail
@@ -49,11 +49,11 @@ function this.rc:
 	scoreboard players operation $temp spindle.dummy = @s spindle.hammer.hold
 	scoreboard players operation $temp spindle.dummy /= #20 spindle.dummy
 	def show_bar(variant):
-		if score $temp spindle.dummy matches 0 return run title @s actionbar {text:"( X E E E E )",font:f"spindle:charge_bar/{variant}"}
-		if score $temp spindle.dummy matches 1 return run title @s actionbar {text:"( X O E E E )",font:f"spindle:charge_bar/{variant}"}
-		if score $temp spindle.dummy matches 2 return run title @s actionbar {text:"( X O O E E )",font:f"spindle:charge_bar/{variant}"}
-		if score $temp spindle.dummy matches 3 return run title @s actionbar {text:"( X O O O E )",font:f"spindle:charge_bar/{variant}"}
-		if score $temp spindle.dummy matches 4 return run title @s actionbar {text:"( X O O O O )",font:f"spindle:charge_bar/{variant}"}
+		if score $temp spindle.dummy matches 0 return run title @s actionbar {text:"( X O E E E E )",font:f"spindle:charge_bar/{variant}"}
+		if score $temp spindle.dummy matches 1 return run title @s actionbar {text:"( X O O E E E )",font:f"spindle:charge_bar/{variant}"}
+		if score $temp spindle.dummy matches 2 return run title @s actionbar {text:"( X O O O E E )",font:f"spindle:charge_bar/{variant}"}
+		if score $temp spindle.dummy matches 3 return run title @s actionbar {text:"( X O O O O E )",font:f"spindle:charge_bar/{variant}"}
+		if score $temp spindle.dummy matches 4 return run title @s actionbar {text:"( X O O O O O )",font:f"spindle:charge_bar/{variant}"}
 	if score $bool spindle.dummy matches 0 run function this.charge_bar.default:
 		show_bar("default")
 	if score $bool spindle.dummy matches 1 run function this.charge_bar.overcharged:
@@ -172,7 +172,7 @@ advancement technical(this.struck) {
   }
 }
 
-advancement technical(this.rc) {
+advancement technical(this.right_click) {
   "parent": "spindle:technical/root",
   "criteria": {
     "requirement": {
@@ -191,6 +191,6 @@ advancement technical(this.rc) {
     }
   },
   "rewards": {
-    "function": this.rc()
+    "function": this.right_click()
   }
 }
