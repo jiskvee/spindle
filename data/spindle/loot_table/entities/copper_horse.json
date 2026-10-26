@@ -99,11 +99,11 @@
                 "spindle": {
                   "death": {
                     "id": "copper_horse",
-                    "sound": "spindle:entity.copper_horse.death",
+                    "sound": "empty",
                     "sound_category": "neutral",
-                    "function": "spindle:entity/copper_horse/die",
-                    "volume": 1,
-                    "pitch": 1
+                    "function": "spindle:entity/copper_horse/overcharged_die",
+                    "volume": 0,
+                    "pitch": 0
                   }
                 }
               }

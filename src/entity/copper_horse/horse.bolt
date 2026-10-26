@@ -7,7 +7,7 @@ prepend function second_clock:
 	as @e[type=minecraft:skeleton_horse,tag=spindle.copper_horse] at @s run function ./second_clock
 
 function spindle:commands/summon/copper_horse:
-	summon minecraft:skeleton_horse ~ ~ ~ {Silent:1b,Tame:1b,CustomName:{translate:"entity.spindle.copper_horse"},DeathLootTable:"spindle:entities/copper_horse",Team:"spindle.no_nametag",Tags:["smithed.entity","spindle.entity","spindle.copper_horse"],equipment:{saddle:{id:"minecraft:saddle",count:1,components:{"minecraft:equippable":{slot:"saddle",asset_id:"spindle:copper_horse/default"},"minecraft:item_model":"spindle:gui/blocked_slot","minecraft:enchantment_glint_override":false,"minecraft:enchantments":{"minecraft:binding_curse":1},"minecraft:tooltip_display":{hide_tooltip:true},"minecraft:custom_data":{spindle:{id:"copper_horse"}}}}},drop_chances:{saddle:0.000},attributes:[{id:"minecraft:jump_strength",base:1.0},{id:"minecraft:max_health",base:30},{id:"minecraft:movement_speed",base:0.3375}]}
+	summon minecraft:skeleton_horse ~ ~ ~ {Silent:1b,Tame:1b,CustomName:{translate:"entity.spindle.copper_horse"},DeathLootTable:"spindle:entities/copper_horse",Team:"spindle.no_nametag",Tags:["smithed.entity","spindle.entity","spindle.copper_horse"],equipment:{saddle:{id:"minecraft:saddle",count:1,components:{"minecraft:equippable":{slot:"saddle",asset_id:"spindle:copper_horse/default"},"minecraft:item_model":"spindle:gui/blocked_slot","minecraft:enchantment_glint_override":false,"minecraft:enchantments":{"minecraft:binding_curse":1},"minecraft:tooltip_display":{hide_tooltip:true},"minecraft:custom_data":{spindle:{id:"copper_horse"}}}}},drop_chances:{saddle:0.000},attributes:[{id:"minecraft:jump_strength",base:1.0},{id:"minecraft:max_health",base:30},{id:"minecraft:movement_speed",base:0.32}]}
 
 function ./tick:
 	# laser
@@ -39,9 +39,12 @@ function ./second_clock:
 		if predicate random_chance(0.01) run return run playsound spindle:entity.copper_horse.neigh neutral "@c" ~ ~ ~ 0.5
 		playsound spindle:entity.copper_horse.ambient neutral "@c"
 
-	if entity @s[tag=spindle.overcharged] if predicate random_chance(0.15) on passengers run function ./mount_overcharged:
-		playsound spindle:item.copper_hammer.spark player "@c" ~ ~ ~ 0.5 2
-		damage @s 2 spindle:lightning
+	# overcharged damage
+	if entity @s[tag=spindle.overcharged] on passengers run function ./overcharged_clock:
+		if predicate random_chance(0.25) run playsound spindle:item.copper_hammer.spark player "@c" ~ ~ ~ 0.5 2
+		if predicate random_chance(0.15) run function ./damage_passenger:
+			playsound spindle:item.copper_hammer.spark player "@c" ~ ~ ~ 1 2
+			damage @s 3 spindle:lightning
 
 	# explosion
 	unless predicate spindle:location/wet run return run scoreboard players remove @s[scores={spindle.explode=1..}] spindle.explode 1
@@ -50,7 +53,8 @@ function ./second_clock:
 	if score @s spindle.explode matches 7.. run return run function ./explode
 	scoreboard players add @s spindle.explode 1
 
-function ./die:
+function ./overcharged_die:
+	playsound spindle:entity.copper_horse.death neutral "@c"
 	summon armor_stand ~ ~ ~ {Invisible:1b,equipment:{feet:{id:"poisonous_potato",components:{"enchantments":{"spindle:technical/explosion":1}}}}}
 
 function ./short_circuit:
@@ -65,7 +69,7 @@ function ./explode:
 function ./lightning_strike:
 	playsound spindle:item.copper_hammer.overcharge neutral "@c"
 	item modify entity @s saddle spindle:entity/set_state/copper_horse/overcharged
-	attribute @s minecraft:movement_speed base set 0.4
+	attribute @s minecraft:movement_speed base set 0.42
 	tag @s add spindle.overcharged
 	damage @s 0
 
