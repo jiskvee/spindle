@@ -2,10 +2,8 @@
   "id": "copper_hammer",
   "base_item": "minecraft:poisonous_potato",
   "definition": "spindle:copper_hammer",
-  "category": "equipment",
   "name": {
     "translate": "item.spindle.copper_hammer",
-    "color": "white",
     "fallback": "%s",
     "with": [
       {
@@ -66,7 +64,6 @@
   "components": {
     "!minecraft:consumable": { },
     "minecraft:weapon": { },
-    "minecraft:rarity": "common",
     "minecraft:tooltip_style": "spindle:spindle",
     "minecraft:damage": 0,
     "minecraft:max_damage": 400,
@@ -124,6 +121,7 @@
 
   "recipe": {
     "type": "minecraft:crafting_shaped",
+    "category": "equipment",
     "key": {
       "C": "minecraft:copper_block",
       "B": "minecraft:copper_bulb",

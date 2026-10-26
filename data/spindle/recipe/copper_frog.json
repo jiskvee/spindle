@@ -8,7 +8,7 @@
     "S": "minecraft:slime_ball"
   },
   "pattern": [
-    "USU",
+    "U U",
     "BSB",
     "NBN"
   ],
