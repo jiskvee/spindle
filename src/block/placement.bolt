@@ -1,31 +1,44 @@
 from camellia.utils import Location
-
 this = Location(~/)
 
 function this.start:
-	scoreboard players set @s spindle.dummy 0
-	execute store result score @s spindle.dummy run attribute @s minecraft:block_interaction_range get 1
-	scoreboard players add @s spindle.dummy 2
-	execute anchored eyes run function this.raycast
 	advancement revoke @s only spindle:technical/placed_custom_block
+	scoreboard players set @s spindle.dummy 0
+	store result score @s spindle.dummy run attribute @s minecraft:block_interaction_range get 1
+	scoreboard players add @s spindle.dummy 2
+	anchored eyes run function this.raycast
 
 function this.raycast:
-	execute align xyz positioned ~0.5 ~ ~0.5 run function this.check_blocks
+	align xyz positioned ~0.5 ~0.5 ~0.5 run function this.scan
 	scoreboard players remove @s spindle.dummy 1
-	execute if score @s spindle.dummy matches 1.. positioned ^ ^ ^1 run function this.raycast
+	if score @s spindle.dummy matches 1.. positioned ^ ^ ^1 run function this.raycast
 
-function this.check_blocks:
+function this.scan:
 	for y in range(-2, 3):
-		execute positioned ~ ~y ~ run function this.layer
+		positioned ~ ~y ~ run function this.layer
 
 function this.layer:
 	for x in range(-2, 3):
 		for z in range(-2, 3):
-			execute positioned ~x ~ ~z if block ~ ~ ~ #spindle:block_placement if data block ~ ~ ~ components."minecraft:custom_data".spindle.custom_block run return run function this.place_macro with block ~ ~ ~ components."minecraft:custom_data".spindle
+			positioned ~x ~ ~z if block ~ ~ ~ #spindle:player_heads{components:{"minecraft:custom_data":{spindle:{}}}} run return run function this.end with block ~ ~ ~ components."minecraft:custom_data".spindle.block
 
-function this.place_macro:
+function this.get_rotation:
+	for i in range(0, 16):
+		if block ~ ~ ~ player_head[rotation=i] run return run scoreboard players set #rotation spindle.dummy i
+	if block ~ ~ ~ player_wall_head[facing=west] run return run scoreboard players set $rotation spindle.dummy 0
+	if block ~ ~ ~ player_wall_head[facing=north] run return run scoreboard players set $rotation spindle.dummy 4
+	if block ~ ~ ~ player_wall_head[facing=east] run return run scoreboard players set $rotation spindle.dummy 8
+	if block ~ ~ ~ player_wall_head[facing=south] run return run scoreboard players set $rotation spindle.dummy 12
+
+function this.end:
 	scoreboard players set @s spindle.dummy 0
-	$function spindle:block/$(id)/place/start
+	function this.get_rotation
+	data modify block ~ ~ ~ components."minecraft:profile" set value {texture:"spindle:item/empty"}
+	$function $(place_function)
+	if block ~ ~ ~ #spindle:player_heads run setblock ~ ~ ~ air
+
+function this.cancel:
+	$summon minecraft:item ~ ~ ~ {Item:{count:1,id:"minecraft:player_head",components:$(components)},PickupDelay:0}
 
 advancement spindle:technical/placed_custom_block {
   "parent": "spindle:technical/root",
@@ -34,10 +47,15 @@ advancement spindle:technical/placed_custom_block {
       "trigger": "minecraft:placed_block",
       "conditions": {
         "location": {
-          "type": "minecraft:match_tool",
+          "type": "minecraft:location_check",
           "predicate": {
-            "predicates": {
-              "minecraft:custom_data": "{spindle:{custom_block:1b}}"
+            "block": {
+              "blocks": "#spindle:player_heads",
+              "predicates": {
+                "minecraft:custom_data": {
+                  "spindle": {}
+                }
+              }
             }
           }
         }

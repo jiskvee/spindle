@@ -1,30 +1,44 @@
 from spindle:advancements import attack_adv, interact_adv
+from camellia.utils import Location
+this = Location(~/..)
 
-function ./place/start:
-	scoreboard players set $bool spindle.dummy 0
-	execute positioned ~ ~0.5 ~ unless entity @n[type=minecraft:item_display,tag=smithed.block,distance=..0.99] run scoreboard players set $bool spindle.dummy 1
-	execute if score $bool spindle.dummy matches 0 run function ./place/fail
-	execute if score $bool spindle.dummy matches 1 run function ./place/success
-	setblock ~ ~ ~ air
+function this.place:
+	if entity @n[type=item_display,tag=smithed.block,distance=..0.99] run return run function spindle:block/placement/cancel with block ~ ~ ~
+	if block ~ ~-1 ~ #spindle:pass_through run return run function spindle:block/placement/cancel with block ~ ~ ~
 
-function ./place/fail:
-	loot spawn ~ ~ ~ loot spindle:items/copper_wheel
-
-function ./place/success:
-	summon minecraft:interaction ~ ~ ~ {width:1.01f,height:0.51f,response:0b,Tags:["smithed.block","smithed.entity","smithed.strict","spindle.entity","spindle.copper_wheel_interaction"],Passengers:[{id:"minecraft:item_display",Tags:["smithed.block","smithed.entity","smithed.strict","spindle.block","spindle.copper_wheel"],item:{id:"minecraft:egg",components:{"minecraft:item_model":"spindle:block/copper_wheel"}}}]}
 	playsound minecraft:block.copper.place block "@c"
+	summon item_display ~ ~-0.5 ~ {
+		Tags:["spindle.copper_wheel","smithed.block","smithed.entity"],
+		item:{id:"egg",components:{"minecraft:item_model":"spindle:block/copper_wheel"}},
+		transformation:{translation:[0.0f,0.5f,0.0f],left_rotation:[0.0f,0.0f,0.0f,1.0f],scale:[1.0f,1.0f,1.0f],right_rotation:[0.0f,0.0f,0.0f,1.0f]},
+		Passengers:[{
+			id:"interaction", response: false, width: 1.01f, height: 0.51f,
+			Tags:["spindle.copper_wheel","smithed.block","smithed.entity",],
+		}]
+	}
 
-function ./break/check:
-	execute positioned ~ ~0.5 ~ unless block ~ ~ ~ #spindle:pass_through run function ./break/start
+function this.gobblerift:
+	summon minecraft:item_display ~ ~ ~ {
+		Passengers:[{
+			Tags:["myriad.gobblerift.tall","myriad.gobblerift.hungry","myriad.gobblerift.can_reproduce","myriad.gobblerift","smithed.entity","smithed.block"],
+			response:true,id:"minecraft:interaction",Invulnerable:true,width:1.0f,height:2.0f,Rotation:[0.0f,0.0f]
+		}],
+		Rotation:[0.0f,0.0f],Tags:["myriad.block","myriad.item_display","smithed.entity","smithed.block","myriad.gobblerift","myriad.gobblerift.start"],
+		transformation:{translation:[0.0f,0.5f,0.0f],left_rotation:[0.0f,0.0f,0.0f,1.0f],scale:[1.0f,1.0f,1.0f],right_rotation:[0.0f,0.0f,0.0f,1.0f]},
+		item:{id:"minecraft:stone",count:1,components:{"minecraft:custom_data":{break_state:0},"minecraft:item_model":"myriad:block/gobblerift","minecraft:custom_model_data":{"strings":["hungry"],flags:[false]}}},
+		view_range:4.0f
+	}
 
-function ./break/start:
+function this.second_clock:
+	execute positioned ~ ~0.5 ~ unless block ~ ~ ~ #spindle:pass_through run function this.break
+
+function this.break:
 	playsound minecraft:block.copper.break block "@c"
-	particle minecraft:item{item:{id:"minecraft:poisonous_potato",components:{"minecraft:item_model":"spindle:copper_wheel"}}} ~ ~ ~ 0.25 0.25 0.25 0.1 15
+	particle item{item:{id:"egg",components:{"minecraft:item_model":"spindle:copper_wheel"}}} ~ ~ ~ 0.25 0.25 0.25 0.1 15
 	loot spawn ~ ~ ~ loot spindle:items/copper_wheel
-
-	execute on passengers run kill @s
+	execute on vehicle run kill @s
 	kill @s
 
-function ./left_click:
-	attack_adv("spindle.copper_wheel_interaction")
-	execute as @n[type=minecraft:interaction,tag=spindle.copper_wheel_interaction,nbt={attack:{}}] at @s positioned ~ ~0.5 ~ run function ./break/start	
+function this.left_click:
+	attack_adv("spindle.copper_wheel")
+	as @n[type=minecraft:interaction,tag=spindle.copper_wheel,nbt={attack:{}}] at @s positioned ~ ~0.5 ~ run function this.break

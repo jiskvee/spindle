@@ -1,0 +1,134 @@
+{
+  "id": "copper_wheel",
+  "base_item": "minecraft:player_head",
+  "definition": "spindle:copper_wheel",
+  "name": {
+    "translate": "item.spindle.copper_wheel",
+    "color": "white",
+    "fallback": "%s",
+    "with": [
+      {
+        "translate": "resourcePack.runtime_failure",
+        "color": "red",
+        "bold": true
+      }
+    ]
+  },
+  "description": [
+    {
+      "translate": "spindle.tooltip",
+      "font": "spindle:tooltip",
+      "color": "white",
+      "italic": false
+    }
+  ],
+  "components": {
+    "minecraft:tooltip_style": "spindle:spindle",
+    "minecraft:profile": {
+      "texture": "spindle:item/empty"
+    },
+    "minecraft:enchantment_glint_override": false,
+    "minecraft:enchantments": {
+      "spindle:technical/wheel": 1
+    },
+    "minecraft:tooltip_display": {
+      "hidden_components": [ "minecraft:enchantments" ]
+    },
+    "minecraft:equippable": {
+      "slot": "head",
+      "equip_sound": "minecraft:item.armor.equip_generic"
+    },
+    "minecraft:custom_data": {
+      "spindle": {
+        "id": "copper_wheel",
+        "block": {
+          "place_function": "spindle:block/copper_wheel/place",
+          "loot_table": "spindle:items/copper_wheel"
+        }
+      },
+      "smithed": {
+        "ignore": {
+          "functionality": true,
+          "crafting": true
+        }
+      }
+    },
+    "minecraft:attribute_modifiers": [
+      {
+        "type": "minecraft:gravity",
+        "id": "minecraft:gravity.mainhand",
+        "amount": 0.15,
+        "operation": "add_value",
+        "slot": "mainhand",
+        "display": {
+          "type": "hidden"
+        }
+      },
+      {
+        "type": "minecraft:movement_speed",
+        "id": "minecraft:movement_speed.mainhand",
+        "amount": -0.07,
+        "operation": "add_value",
+        "slot": "mainhand",
+        "display": {
+          "type": "hidden"
+        }
+      },
+      {
+        "type": "minecraft:gravity",
+        "id": "minecraft:gravity.offhand",
+        "amount": 0.15,
+        "operation": "add_value",
+        "slot": "offhand",
+        "display": {
+          "type": "hidden"
+        }
+      },
+      {
+        "type": "minecraft:movement_speed",
+        "id": "minecraft:movement_speed.offhand",
+        "amount": -0.07,
+        "operation": "add_value",
+        "slot": "offhand",
+        "display": {
+          "type": "hidden"
+        }
+      },
+      {
+        "type": "minecraft:gravity",
+        "id": "minecraft:gravity.head",
+        "amount": 0.15,
+        "operation": "add_value",
+        "slot": "head",
+        "display": {
+          "type": "hidden"
+        }
+      },
+      {
+        "type": "minecraft:movement_speed",
+        "id": "minecraft:movement_speed.head",
+        "amount": -0.07,
+        "operation": "add_value",
+        "slot": "head",
+        "display": {
+          "type": "hidden"
+        }
+      }
+    ]
+  },
+
+
+  "recipe": {
+    "type": "minecraft:crafting_shaped",
+    "category": "equipment",
+    "key": {
+      "B": "minecraft:copper_block",
+      "O": "minecraft:oxidized_chiseled_copper"
+    },
+    "pattern": [
+      "BBB",
+      "BOB",
+      "BBB"
+    ]
+  }
+}
