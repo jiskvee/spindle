@@ -29,8 +29,8 @@ function ./raycast/step:
 	positioned ^ ^ ^0.5 run function ./raycast/step
 
 function ./raycast/as_entity:
-	$damage @s 5 minecraft:arrow by @p[nbt={UUID:$(UUID)}]
-	$execute as @p[nbt={UUID:$(UUID)},tag=spindle.laser.shooting] run function spindle:entity/copper_horse/raycast/end
+	$damage @s 5 minecraft:arrow by @a[limit=1,nbt={UUID:$(UUID)}]
+	$execute as @a[limit=1,nbt={UUID:$(UUID)},tag=spindle.laser.shooting] run function spindle:entity/copper_horse/raycast/end
 
 function ./raycast/end:
 	scoreboard players set @s spindle.dummy 0

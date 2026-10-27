@@ -23,8 +23,8 @@ function ./raycast/step:
 
 function ./raycast/as_entity:
 	summon minecraft:armor_stand ^ ^ ^-1 {Invisible:1b,equipment:{feet:{id:"minecraft:poisonous_potato",components:{"minecraft:enchantments":{"spindle:technical/knockback":1}}}}}
-	$damage @s 12 minecraft:arrow by @p[nbt={UUID:$(UUID)}]
-	$execute as @p[nbt={UUID:$(UUID)}] run function spindle:item/copper_shotgun/raycast/end
+	$damage @s 12 minecraft:arrow by @a[limit=1,nbt={UUID:$(UUID)}]
+	$execute as @a[limit=1,nbt={UUID:$(UUID)}] run function spindle:item/copper_shotgun/raycast/end
 
 
 function ./raycast/end:

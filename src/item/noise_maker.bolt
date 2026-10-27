@@ -5,16 +5,16 @@ this = Location(~/)
 
 function this.right_click:
 	advancement revoke @s only technical(this.right_click)
-	#function ./right_click/main
 	tag @s add spindle.used
 	scoreboard players set $bool spindle.dummy 0
-	if items entity @s weapon.mainhand *[custom_data~{spindle:{noise_maker:{}}}] summon item_display run function this.from_mainhand:
-		item replace entity @s contents from entity @p[tag=spindle.used] weapon.mainhand
-		scoreboard players set $bool spindle.dummy 0
+	if items entity @s weapon.offhand *[custom_data~{spindle:{noise_maker:{}}}] scoreboard players set $bool spindle.dummy 1
+	if items entity @s weapon.mainhand *[custom_data~{spindle:{noise_maker:{}}}] scoreboard players set $bool spindle.dummy 0
+
+	if score $bool spindle.dummy matches 0 summon item_display run function this.from_mainhand:
+		item replace entity @s contents from entity @a[distance=0,limit=1,tag=spindle.used] weapon.mainhand
 		function this.set_data
-	if items entity @s weapon.offhand *[custom_data~{spindle:{noise_maker:{}}}]summon item_display run function this.from_offhand:
-		item replace entity @s contents from entity @p[tag=spindle.used] weapon.offhand
-		scoreboard players set $bool spindle.dummy 1
+	if score $bool spindle.dummy matches 1 summon item_display run function this.from_offhand:
+		item replace entity @s contents from entity @a[distance=0,limit=1,tag=spindle.used] weapon.offhand
 		function this.set_data
 
 	tag @s remove spindle.used
@@ -22,6 +22,7 @@ function this.right_click:
 		$playsound $(sound) player @a[distance=..16]
 		$execute if score $bool spindle.dummy matches 0 run return run item modify entity @s weapon.mainhand {type:"set_custom_data",tag:{spindle:{noise_maker:{curindex:$(index)}}}}
 		$item modify entity @s weapon.offhand {type:"set_custom_data",tag:{spindle:{noise_maker:{curindex:$(index)}}}}
+	data remove storage spindle:noise_maker root
 
 
 function this.set_data:

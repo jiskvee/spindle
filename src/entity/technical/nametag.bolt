@@ -27,7 +27,7 @@ function raycast.end:
 	tag @s remove spindle.raycast
 
 function this.show_name:
-	execute as @p[tag=spindle.raycast] run function raycast.end
+	execute as @a[limit=1,tag=spindle.raycast] run function raycast.end
 	data modify entity @s data.has_custom_name set value true
 	team leave @s
 
