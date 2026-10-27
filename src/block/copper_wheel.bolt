@@ -1,7 +1,7 @@
 from spindle:advancements import attack_adv, interact_adv
 from camellia.utils import Location
-this = Location(~/..)
-broke = ./break
+this = Location(~/)
+broke = ~/break
 
 function this.place:
 	if entity @n[type=item_display,tag=smithed.block,distance=..0.99] run return run function spindle:block/placement/cancel with block ~ ~ ~
@@ -24,7 +24,6 @@ function this.second_clock:
 function broke:
 	particle item{item:{id:"egg",components:{"minecraft:item_model":"spindle:copper_wheel"}}} ~ ~ ~ 0.25 0.25 0.25 0.1 15
 	playsound minecraft:block.copper.break block "@c"
-	#playsound minecraft:block.copper.break block @a[distance=..16]
 	loot spawn ~ ~ ~ loot spindle:items/copper_wheel
 	execute on vehicle run kill @s
 	kill @s
@@ -32,3 +31,19 @@ function broke:
 function this.left_click:
 	attack_adv("spindle.copper_wheel")
 	as @n[type=minecraft:interaction,tag=spindle.copper_wheel,nbt={attack:{}}] at @s positioned ~ ~0.5 ~ run function broke
+
+
+
+function this.head.tick:
+	execute if score @s spindle.wheel matches 200.. run return run function this.head.break_below:
+		scoreboard players reset @s spindle.wheel
+		execute positioned ~0.3 ~-0.1 ~0.3 unless block ~ ~ ~ #spindle:indestructible run fill ~ ~ ~ ~ ~ ~ air destroy
+		execute positioned ~-0.3 ~-0.1 ~0.3 unless block ~ ~ ~ #spindle:indestructible run fill ~ ~ ~ ~ ~ ~ air destroy
+		execute positioned ~0.3 ~-0.1 ~-0.3 unless block ~ ~ ~ #spindle:indestructible run fill ~ ~ ~ ~ ~ ~ air destroy
+		execute positioned ~-0.3 ~-0.1 ~-0.3 unless block ~ ~ ~ #spindle:indestructible run fill ~ ~ ~ ~ ~ ~ air destroy
+		#fill ~0.3 ~-1 ~0.3 ~-0.3 ~-1 ~-0.3 air destroy
+	execute if predicate spindle:entity/is_on_ground run return run scoreboard players add @s spindle.wheel 1
+	execute if score @s spindle.wheel matches 1.. run scoreboard players remove @s spindle.wheel 1
+
+function this.head.location_changed:
+	scoreboard players reset @s spindle.wheel
