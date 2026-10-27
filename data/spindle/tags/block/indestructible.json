@@ -1,5 +1,6 @@
 {
   "values": [
+    "minecraft:bedrock",
     "minecraft:barrier",
     "minecraft:command_block",
     "minecraft:chain_command_block",

@@ -33,9 +33,11 @@
 
 # 2.0 - "Ride the Lightning"
 ### Additions
-- Copper Hammer
+- COPPER HAMMER
+- Coppertendo Switch
 ### Changes
 - Ported to 26.3
 - Changed versioning system to MAJOR.PORT.MINOR/HOTFIX
+- It can no longer go in your head
 - Technical improvements!
 - Better performance!

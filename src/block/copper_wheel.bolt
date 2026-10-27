@@ -30,7 +30,7 @@ function broke:
 
 function this.left_click:
 	attack_adv("spindle.copper_wheel")
-	as @n[type=minecraft:interaction,tag=spindle.copper_wheel,nbt={attack:{}}] at @s positioned ~ ~0.5 ~ run function broke
+	as @n[type=interaction,tag=spindle.copper_wheel,nbt={attack:{}}] at @s positioned ~ ~0.5 ~ run function broke
 
 
 
