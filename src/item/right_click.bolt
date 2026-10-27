@@ -2,7 +2,7 @@ from camellia.utils import Location, technical
 
 this = Location(~/)
 
-#advancement technical(this.right_click) 
+#advancement technical(this.main) 
 {
   "parent": "spindle:technical/root",
   "criteria": {
@@ -22,18 +22,16 @@ this = Location(~/)
     }
   },
   "rewards": {
-    "function": this.right_click.main()
+    "function": this.main()
   }
 }
 
-function this.right_click.main:
-	#advancement revoke @s only technical(this.right_click)
-	#execute if items entity @s weapon.mainhand *[consumable, !use_remainder, custom_data~{spindle:{right_click:true}}] run return run function this.right_click.mainhand:
-	execute if items entity @s weapon.mainhand *[custom_data~{spindle:{right_click:true}}] run return run function this.right_click.mainhand:
+function this.main:
+	#advancement revoke @s only technical(this.main)
+	execute if items entity @s weapon.mainhand *[custom_data~{spindle:{right_click:true}}] run return run function this.from_mainhand:
 		item modify entity @s weapon.mainhand spindle:right_click/off
 		item modify entity @s weapon.mainhand spindle:right_click/on
 
-	#execute if items entity @s weapon.offhand *[consumable, !use_remainder, custom_data~{spindle:{right_click:true}}] run return run function this.right_click.offhand:
-	execute if items entity @s weapon.offhand *[custom_data~{spindle:{right_click:true}}] run return run function this.right_click.offhand:
+	execute if items entity @s weapon.offhand *[custom_data~{spindle:{right_click:true}}] run return run function this.from_offhand:
 		item modify entity @s weapon.offhand spindle:right_click/off
 		item modify entity @s weapon.offhand spindle:right_click/on

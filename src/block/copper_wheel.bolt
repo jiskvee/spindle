@@ -4,8 +4,8 @@ this = Location(~/)
 broke = ~/break
 
 function this.place:
-	if entity @n[type=item_display,tag=smithed.block,distance=..0.99] run return run function spindle:block/placement/cancel with block ~ ~ ~
-	if block ~ ~-1 ~ #spindle:pass_through run return run function spindle:block/placement/cancel with block ~ ~ ~
+	if entity @n[type=item_display,tag=smithed.block,distance=..0.99] run return run function ./placement/cancel with block ~ ~ ~
+	if block ~ ~-1 ~ #spindle:pass_through run return run function ./placement/cancel with block ~ ~ ~
 
 	playsound minecraft:block.copper.place block "@c"
 	summon item_display ~ ~-0.5 ~ {
