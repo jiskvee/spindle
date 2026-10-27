@@ -10,7 +10,7 @@ prepend function ten_second_clock:
 	as @a at @s run function this.ten_second_clock
 
 function this.tick:
-	if score @s spindle.egg matches 1.. run function spindle:item/egg
+	if score @s spindle.egg matches 1.. run function spindle:item/technical/egg
 	if predicate spindle:item/hammer/holding run function spindle:item/copper_hammer/tick
 	if predicate spindle:item/shotgun/holding run function spindle:item/copper_shotgun/tick
 
@@ -19,13 +19,13 @@ function this.ten_second_clock:
 
 	if entity @s[predicate=spindle:location/under_thunder] run function this.lightning_bolt_chance:
 		if items entity @s spindle:inventory *[custom_data~{spindle:{charge:4b}}]
-			if predicate random_chance(0.05) positioned over motion_blocking run summon minecraft:lightning_bolt
+			if predicate random_chance(0.02) positioned over motion_blocking run summon minecraft:lightning_bolt
 
 		store result score @s spindle.dummy if items entity @s armor.* #spindle:copper_armor
-		if score @s spindle.dummy matches 1 if predicate random_chance(0.01) run return run execute positioned over motion_blocking run summon minecraft:lightning_bolt
-		if score @s spindle.dummy matches 2 if predicate random_chance(0.02) run return run execute positioned over motion_blocking run summon minecraft:lightning_bolt
-		if score @s spindle.dummy matches 3 if predicate random_chance(0.03) run return run execute positioned over motion_blocking run summon minecraft:lightning_bolt
-		if score @s spindle.dummy matches 4 if predicate random_chance(0.04) run return run execute positioned over motion_blocking run summon minecraft:lightning_bolt
+		if score @s spindle.dummy matches 1 if predicate random_chance(0.005) run return run execute positioned over motion_blocking run summon minecraft:lightning_bolt
+		if score @s spindle.dummy matches 2 if predicate random_chance(0.01) run return run execute positioned over motion_blocking run summon minecraft:lightning_bolt
+		if score @s spindle.dummy matches 3 if predicate random_chance(0.015) run return run execute positioned over motion_blocking run summon minecraft:lightning_bolt
+		if score @s spindle.dummy matches 4 if predicate random_chance(0.02) run return run execute positioned over motion_blocking run summon minecraft:lightning_bolt
 
 function this.clear_saddle:
 	item replace entity @s saddle with air

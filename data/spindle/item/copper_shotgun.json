@@ -107,7 +107,7 @@
           "minecraft:intangible_projectile": { },
           "minecraft:custom_data": {
             "spindle": {
-              "shotgun_arrow": true
+              "technical_arrow": true
             }
           }
         }

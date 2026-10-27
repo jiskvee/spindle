@@ -9,9 +9,8 @@ function ./tick:
 	tag @s remove spindle.ammoless
 
 
-rc = ./rc
+rc = ./right_click
 rc_adv = technical(rc)
-
 function rc:
 	advancement revoke @s only rc_adv
 	scoreboard players set @s spindle.step 1
@@ -30,8 +29,12 @@ function ./reload_tick:
 	function ./reload/bar/display
 
 
-function ./shoot:
+shoot = ./shoot
+shoot_adv = technical(shoot)
+function shoot:
 	advancement revoke @s only shoot_adv
+	stopsound "@c" player minecraft:item.crossbow.shoot
+	kill @e[type=arrow,limit=1,predicate=spindle:entity/technical_arrow]
 	modify_weapon('copper_shotgun', 'spindle:shotgun/ammo/unload')
 	item replace entity @s saddle with egg[enchantments={"spindle:technical/impulse_back":1},equippable={slot:saddle,equip_sound:"minecraft:intentionally_empty"}]
 
@@ -69,5 +72,28 @@ advancement rc_adv {
   },
   "rewards": {
     "function": rc
+  }
+}
+
+advancement shoot_adv {
+  "parent": "spindle:technical/root",
+  "criteria": {
+    "requirement": {
+      "trigger": "minecraft:shot_crossbow",
+      "conditions": {
+        "item": {
+          "predicates": {
+            "minecraft:custom_data": {
+              "spindle": {
+                "id": "copper_shotgun"
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "rewards": {
+    "function": shoot
   }
 }
