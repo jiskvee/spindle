@@ -13,7 +13,8 @@
     "per_level_above_first": 0
   },
   "slots": [
-    "head"
+    "mainhand",
+    "offhand"
   ],
   "supported_items": [ ],
   "weight": 1,
@@ -22,7 +23,7 @@
       {
         "effect": {
           "type": "minecraft:run_function",
-          "function": "spindle:block/copper_wheel/head/tick"
+          "function": "spindle:block/copper_wheel/holding/tick"
         }
       }
     ],
@@ -30,7 +31,7 @@
       {
         "effect": {
           "type": "minecraft:run_function",
-          "function": "spindle:block/copper_wheel/head/location_changed"
+          "function": "spindle:block/copper_wheel/holding/location_changed"
         }
       }
     ]

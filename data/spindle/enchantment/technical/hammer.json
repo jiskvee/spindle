@@ -7,8 +7,7 @@
     "translate": "enchantment.spindle.technical"
   },
   "slots": [
-    "mainhand",
-    "offhand"
+    "mainhand"
   ],
   "max_cost": {
     "base": 0,

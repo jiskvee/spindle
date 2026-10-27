@@ -5,13 +5,19 @@ from spindle:utils import random_chance
 this = Location(~/)
 
 prepend function tick:
-	as @a at @s run function this.tick:
-		if score @s spindle.egg matches 1.. run function spindle:item/egg
-		if predicate spindle:item/hammer/holding run function spindle:item/copper_hammer/tick
-		if predicate spindle:item/shotgun/holding run function spindle:item/copper_shotgun/tick
-
+	as @a at @s run function this.tick
 prepend function ten_second_clock:
-	as @a[predicate=spindle:location/under_thunder] at @s run function this.lightning_bolt_chance:
+	as @a at @s run function this.ten_second_clock
+
+function this.tick:
+	if score @s spindle.egg matches 1.. run function spindle:item/egg
+	if predicate spindle:item/hammer/holding run function spindle:item/copper_hammer/tick
+	if predicate spindle:item/shotgun/holding run function spindle:item/copper_shotgun/tick
+
+function this.ten_second_clock:
+	unless items entity @s weapon.* *[custom_data~{spindle:{id:"copper_wheel"}}] run scoreboard players reset @s spindle.wheel
+
+	if entity @s[predicate=spindle:location/under_thunder] run function this.lightning_bolt_chance:
 		if items entity @s spindle:inventory *[custom_data~{spindle:{charge:4b}}]
 			if predicate random_chance(0.05) positioned over motion_blocking run summon minecraft:lightning_bolt
 

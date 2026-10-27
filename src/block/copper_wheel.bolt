@@ -34,8 +34,8 @@ function this.left_click:
 
 
 
-function this.head.tick:
-	execute if score @s spindle.wheel matches 200.. run return run function this.head.break_below:
+function this.holding.tick:
+	execute if score @s spindle.wheel matches 300.. run return run function this.holding.break_below:
 		scoreboard players reset @s spindle.wheel
 		execute positioned ~0.3 ~-0.1 ~0.3 unless block ~ ~ ~ #spindle:indestructible run fill ~ ~ ~ ~ ~ ~ air destroy
 		execute positioned ~-0.3 ~-0.1 ~0.3 unless block ~ ~ ~ #spindle:indestructible run fill ~ ~ ~ ~ ~ ~ air destroy
@@ -45,5 +45,5 @@ function this.head.tick:
 	execute if predicate spindle:entity/is_on_ground run return run scoreboard players add @s spindle.wheel 1
 	execute if score @s spindle.wheel matches 1.. run scoreboard players remove @s spindle.wheel 1
 
-function this.head.location_changed:
+function this.holding.location_changed:
 	scoreboard players reset @s spindle.wheel

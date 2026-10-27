@@ -23,6 +23,7 @@
     }
   ],
   "components": {
+    "!minecraft:equippable": { },
     "minecraft:tooltip_style": "spindle:spindle",
     "minecraft:profile": {
       "texture": "spindle:blank"
@@ -33,10 +34,6 @@
     },
     "minecraft:tooltip_display": {
       "hidden_components": [ "minecraft:enchantments" ]
-    },
-    "minecraft:equippable": {
-      "slot": "head",
-      "equip_sound": "minecraft:item.armor.equip_generic"
     },
     "minecraft:custom_data": {
       "spindle": {
