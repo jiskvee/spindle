@@ -1,6 +1,6 @@
 from camellia.utils import Location, technical
 this = Location(./technical)
-rc = Location(./right_click)
+rc = Location(./technical/right_click)
 
 function this.egg:
 	scoreboard players reset @s spindle.egg
