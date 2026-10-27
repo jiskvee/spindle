@@ -1,25 +1,45 @@
-function ./egg:
+from camellia.utils import Location, technical
+this = Location(./technical)
+rc = Location(./right_click)
+
+function this.egg:
 	scoreboard players reset @s spindle.egg
 	tag @s add spindle.egg
 	execute as @n[type=#spindle:pets,tag=!spindle.has_owner] run function spindle:entity/copper_pet/set_owner
 	execute as @n[type=#spindle:copper_entities,tag=spindle.placed] at @s run function spindle:entity/copper_pet/placed
 	tag @s remove spindle.egg
 
-function ./crossbow/shoot:
-	advancement revoke @s only spindle:technical/shoot_crossbow
-	as @n[type=minecraft:arrow,distance=..2,predicate=spindle:entity/shotgun_arrow] run function ./crossbow/as_arrow:
-		stopsound "@c" player minecraft:item.crossbow.shoot
-		on origin run function ./copper_shotgun/shoot
-		kill @s
+function rc.main:
+	#advancement revoke @s only technical(this.right_click.main)
+	execute if items entity @s weapon.mainhand *[custom_data~{spindle:{right_click:true}}] run return run function rc.from_mainhand:
+		item modify entity @s weapon.mainhand spindle:right_click/off
+		item modify entity @s weapon.mainhand spindle:right_click/on
 
-advancement spindle:technical/shoot_crossbow {
+	execute if items entity @s weapon.offhand *[custom_data~{spindle:{right_click:true}}] run return run function rc.from_offhand:
+		item modify entity @s weapon.offhand spindle:right_click/off
+		item modify entity @s weapon.offhand spindle:right_click/on
+
+
+#advancement spindle:technical/right_click
+{
   "parent": "spindle:technical/root",
   "criteria": {
     "requirement": {
-      "trigger": "minecraft:shot_crossbow"
+      "trigger": "minecraft:consume_item",
+      "conditions": {
+        "item": {
+          "predicates": {
+            "minecraft:custom_data": {
+              "spindle": {
+                "right_click": true
+              }
+            }
+          }
+        }
+      }
     }
   },
   "rewards": {
-    "function": "spindle:item/crossbow/shoot"
+    "function": rc.main()
   }
 }
