@@ -1,6 +1,7 @@
 from spindle:advancements import attack_adv, interact_adv
 from camellia.utils import Location
 this = Location(~/..)
+broke = ./break
 
 function this.place:
 	if entity @n[type=item_display,tag=smithed.block,distance=..0.99] run return run function spindle:block/placement/cancel with block ~ ~ ~
@@ -17,28 +18,17 @@ function this.place:
 		}]
 	}
 
-function this.gobblerift:
-	summon minecraft:item_display ~ ~ ~ {
-		Passengers:[{
-			Tags:["myriad.gobblerift.tall","myriad.gobblerift.hungry","myriad.gobblerift.can_reproduce","myriad.gobblerift","smithed.entity","smithed.block"],
-			response:true,id:"minecraft:interaction",Invulnerable:true,width:1.0f,height:2.0f,Rotation:[0.0f,0.0f]
-		}],
-		Rotation:[0.0f,0.0f],Tags:["myriad.block","myriad.item_display","smithed.entity","smithed.block","myriad.gobblerift","myriad.gobblerift.start"],
-		transformation:{translation:[0.0f,0.5f,0.0f],left_rotation:[0.0f,0.0f,0.0f,1.0f],scale:[1.0f,1.0f,1.0f],right_rotation:[0.0f,0.0f,0.0f,1.0f]},
-		item:{id:"minecraft:stone",count:1,components:{"minecraft:custom_data":{break_state:0},"minecraft:item_model":"myriad:block/gobblerift","minecraft:custom_model_data":{"strings":["hungry"],flags:[false]}}},
-		view_range:4.0f
-	}
-
 function this.second_clock:
-	execute positioned ~ ~0.5 ~ unless block ~ ~ ~ #spindle:pass_through run function this.break
+	execute positioned ~ ~0.5 ~ unless block ~ ~ ~ #spindle:pass_through run function broke
 
-function this.break:
-	playsound minecraft:block.copper.break block "@c"
+function broke:
 	particle item{item:{id:"egg",components:{"minecraft:item_model":"spindle:copper_wheel"}}} ~ ~ ~ 0.25 0.25 0.25 0.1 15
+	playsound minecraft:block.copper.break block "@c"
+	#playsound minecraft:block.copper.break block @a[distance=..16]
 	loot spawn ~ ~ ~ loot spindle:items/copper_wheel
 	execute on vehicle run kill @s
 	kill @s
 
 function this.left_click:
 	attack_adv("spindle.copper_wheel")
-	as @n[type=minecraft:interaction,tag=spindle.copper_wheel,nbt={attack:{}}] at @s positioned ~ ~0.5 ~ run function this.break
+	as @n[type=minecraft:interaction,tag=spindle.copper_wheel,nbt={attack:{}}] at @s positioned ~ ~0.5 ~ run function broke
