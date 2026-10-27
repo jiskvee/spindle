@@ -33,7 +33,7 @@ function this.get_rotation:
 function this.end:
 	scoreboard players set @s spindle.dummy 0
 	function this.get_rotation
-	data modify block ~ ~ ~ components."minecraft:profile" set value {texture:"spindle:item/empty"}
+	data modify block ~ ~ ~ components."minecraft:profile" set value {texture:"spindle:blank"}
 	$function $(place_function)
 	if block ~ ~ ~ #spindle:player_heads run setblock ~ ~ ~ air
 

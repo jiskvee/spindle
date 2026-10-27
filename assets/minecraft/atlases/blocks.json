@@ -2,6 +2,10 @@
   "sources": [
     {
       "type": "single",
+      "resource": "spindle:blank"
+    },
+    {
+      "type": "single",
       "resource": "spindle:entity/copper_cat/default"
     },
     {

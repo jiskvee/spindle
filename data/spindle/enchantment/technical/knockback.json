@@ -43,7 +43,7 @@
                 "item": {
                   "id": "minecraft:egg",
                   "components": {
-                    "minecraft:item_model": "spindle:empty"
+                    "minecraft:item_model": "spindle:blank"
                   }
                 }
               },
@@ -52,7 +52,7 @@
                 "item": {
                   "id": "minecraft:egg",
                   "components": {
-                    "minecraft:item_model": "spindle:empty"
+                    "minecraft:item_model": "spindle:blank"
                   }
                 }
               }

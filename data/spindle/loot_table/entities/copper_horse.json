@@ -29,7 +29,7 @@
             {
               "type": "minecraft:set_components",
               "components": {
-                "minecraft:item_model": "spindle:empty"
+                "minecraft:item_model": "spindle:blank"
               }
             },
             {
@@ -90,7 +90,7 @@
             {
               "type": "minecraft:set_components",
               "components": {
-                "minecraft:item_model": "spindle:empty"
+                "minecraft:item_model": "spindle:blank"
               }
             },
             {
