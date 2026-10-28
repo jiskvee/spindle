@@ -88,6 +88,7 @@
   "components": {
     "!minecraft:food": { },
     "!minecraft:enchantable": { },
+    "!minecraft:enchantments": { },
     "minecraft:tooltip_style": "spindle:spindle",
     "minecraft:damage": 0,
     "minecraft:max_damage": 200,

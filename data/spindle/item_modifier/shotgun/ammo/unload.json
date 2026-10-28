@@ -1,18 +1,12 @@
 {
   "type": "minecraft:sequence",
   "functions": [
-    "spindle:shotgun/arrow_reset",
+    "spindle:shotgun/oxidize",
     {
       "type": "minecraft:set_item",
       "item": "minecraft:poisonous_potato"
     },
-    {
-      "type": "minecraft:set_components",
-      "components": {
-        "minecraft:enchantments": {},
-        "minecraft:max_stack_size": 1
-      }
-    },
+    "spindle:shotgun/reset",
     {
       "type": "minecraft:set_custom_data",
       "tag": {

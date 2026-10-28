@@ -1,4 +1,3 @@
-from spindle:utils import modify_weapon
 from camellia.utils import technical, cit
 
 
@@ -19,12 +18,12 @@ function rc:
 
 function ./reload_tick:
 	scoreboard players add @s spindle.shotgun.time 1
-	execute if score @s spindle.shotgun.time >= @s spindle.shotgun.step run function ./reload/bar/move:
+	if score @s spindle.shotgun.time >= @s spindle.shotgun.step run function ./reload/bar/move:
 		scoreboard players set @s spindle.shotgun.time 0
 		scoreboard players operation @s spindle.shotgun.pos += @s spindle.shotgun.dir
-		execute if score @s spindle.shotgun.pos matches 8.. run
+		if score @s spindle.shotgun.pos matches 8.. run
 			scoreboard players operation @s spindle.shotgun.dir *= -1 spindle.shotgun.dir
-		execute if score @s spindle.shotgun.pos matches ..0 run
+		if score @s spindle.shotgun.pos matches ..0 run
 			scoreboard players operation @s spindle.shotgun.dir *= -1 spindle.shotgun.dir
 	function ./reload/bar/display
 
@@ -35,21 +34,27 @@ function shoot:
 	advancement revoke @s only shoot_adv
 	stopsound "@c" player minecraft:item.crossbow.shoot
 	kill @e[type=arrow,limit=1,predicate=spindle:entity/technical_arrow]
-	modify_weapon('copper_shotgun', 'spindle:shotgun/ammo/unload')
 	item replace entity @s saddle with egg[enchantments={"spindle:technical/impulse_back":1},equippable={slot:saddle,equip_sound:"minecraft:intentionally_empty"}]
 
 	rotate @s ~ ~-5
-	playsound spindle:item.copper_shotgun.shoot player "@c" ~ ~ ~ 0.6 1
-	execute anchored eyes positioned ^ ^ ^0.8 run particle large_smoke ~ ~ ~ 0 0 0 0.03 3
-	execute anchored eyes positioned ^ ^ ^0.7 run particle electric_spark ~ ~ ~ 0.1 0.1 0.1 0.03 5
+	playsound spindle:item.copper_shotgun.shoot player "@c" ~ ~ ~ 0.6
+	anchored eyes positioned ^ ^ ^0.8 run particle large_smoke ~ ~ ~ 0 0 0 0.03 3
+	anchored eyes positioned ^ ^ ^0.7 run particle electric_spark ~ ~ ~ 0.1 0.1 0.1 0.03 5
 
-	execute run function ./oxidize:
-		execute if items entity @s weapon.mainhand cit("spindle","copper_shotgun") run return run
-			item modify entity @s weapon.mainhand spindle:shotgun/oxidize
-		execute if items entity @s weapon.offhand cit("spindle","copper_shotgun") run return run
-			item modify entity @s weapon.mainhand spindle:shotgun/oxidize
+	function ./get_hand
+	execute run function ./ammo/unload:
+		if score $bool spindle.dummy matches 0 run return run
+			item modify entity @s weapon.mainhand spindle:shotgun/ammo/unload
+		if score $bool spindle.dummy matches 1 run return run
+			item modify entity @s weapon.offhand spindle:shotgun/ammo/unload
 
 	function ./raycast/start
+
+
+function ./get_hand:
+	scoreboard players reset $bool spindle.dummy
+	if items entity @s weapon.offhand cit("spindle","copper_shotgun") scoreboard players set $bool spindle.dummy 1
+	if items entity @s weapon.mainhand cit("spindle","copper_shotgun") scoreboard players set $bool spindle.dummy 0
 
 
 advancement rc_adv {

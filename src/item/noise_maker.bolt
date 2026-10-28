@@ -6,7 +6,7 @@ this = Location(~/)
 function this.right_click:
 	advancement revoke @s only technical(this.right_click)
 	tag @s add spindle.used
-	scoreboard players set $bool spindle.dummy 0
+	scoreboard players reset $bool spindle.dummy
 	if items entity @s weapon.offhand *[custom_data~{spindle:{noise_maker:{}}}] scoreboard players set $bool spindle.dummy 1
 	if items entity @s weapon.mainhand *[custom_data~{spindle:{noise_maker:{}}}] scoreboard players set $bool spindle.dummy 0
 

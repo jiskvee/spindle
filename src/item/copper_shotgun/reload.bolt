@@ -1,4 +1,3 @@
-from spindle:utils import modify_weapon
 from camellia.utils import cit
 
 function ./reload/check_ammo:
@@ -31,7 +30,12 @@ function ./reload/start:
 	# awesome
 	tag @s add spindle.reloading
 	playsound spindle:item.copper_shotgun.open player "@c" ~ ~ ~ 1 1
-	modify_weapon('copper_shotgun', 'spindle:shotgun/action/reload')
+	function ./get_hand
+	execute run function ./set_action/reload:
+		if score $bool spindle.dummy matches 0 run return run
+			item modify entity @s weapon.mainhand spindle:shotgun/action/reload
+		if score $bool spindle.dummy matches 1 run return run
+			item modify entity @s weapon.offhand spindle:shotgun/action/reload
 
 
 function ./reload/bar/display:
@@ -91,7 +95,12 @@ function ./reload/bar/display:
 
 function ./reload/end:
 	tag @s remove spindle.reloading
-	modify_weapon('copper_shotgun', 'spindle:shotgun/action/ready')
+	function ./get_hand
+	execute run function ./set_action/ready:
+		if score $bool spindle.dummy matches 0 run return run
+			item modify entity @s weapon.mainhand spindle:shotgun/action/ready
+		if score $bool spindle.dummy matches 1 run return run
+			item modify entity @s weapon.offhand spindle:shotgun/action/ready
 	function ./reload/determine
 	data remove storage spindle:shotgun root
 
@@ -99,13 +108,18 @@ function ./reload/end:
 function ./reload/determine:
 	if score @s spindle.shotgun.pos = @s spindle.shotgun.spot run return run function ./reload/success:
 		clear @s[gamemode=!creative] cit("spindle","copper_shell") 1
-		modify_weapon('copper_shotgun', 'spindle:shotgun/ammo/load')
 		playsound spindle:item.copper_shotgun.rack player "@c" ~ ~ ~ 1 1
 		playsound spindle:item.copper_shotgun.reload_success player @s ~ ~ ~ 0.5 1
 
 		function ./reload/bar/display
 		execute run function ./reload/bar/show_green with storage spindle:shotgun root:
 			$title @s actionbar {text:"( $(parsed))",font:"spindle:reload_bar/$(state)",color:"green"}
+
+		execute run function ./ammo/load:
+			if score $bool spindle.dummy matches 0 run return run
+				item modify entity @s weapon.mainhand spindle:shotgun/ammo/load
+			if score $bool spindle.dummy matches 1 run return run
+				item modify entity @s weapon.offhand spindle:shotgun/ammo/load
 	
 	execute run function ./reload/fail:
 		playsound spindle:item.copper_shotgun.close player "@c" ~ ~ ~ 0.8 1

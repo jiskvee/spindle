@@ -1,6 +1,10 @@
 {
   "type": "minecraft:set_components",
   "components": {
+    "!minecraft:enchantable": { },
+    "!minecraft:enchantments": { },
+    "!minecraft:cooking_fuel": { },
+    "minecraft:max_stack_size": 1,
     "minecraft:charged_projectiles": [
       {
         "id": "minecraft:poisonous_potato",
