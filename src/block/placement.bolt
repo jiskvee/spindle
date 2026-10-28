@@ -24,7 +24,7 @@ function this.layer:
 
 function this.get_rotation:
 	for i in range(0, 16):
-		if block ~ ~ ~ player_head[rotation=i] run return run scoreboard players set #rotation spindle.dummy i
+		if block ~ ~ ~ player_head[rotation=i] run return run scoreboard players set $rotation spindle.dummy i
 	if block ~ ~ ~ player_wall_head[facing=west] run return run scoreboard players set $rotation spindle.dummy 0
 	if block ~ ~ ~ player_wall_head[facing=north] run return run scoreboard players set $rotation spindle.dummy 4
 	if block ~ ~ ~ player_wall_head[facing=east] run return run scoreboard players set $rotation spindle.dummy 8
@@ -32,7 +32,7 @@ function this.get_rotation:
 
 function this.end:
 	scoreboard players set @s spindle.dummy 0
-	function this.get_rotation
+	#function this.get_rotation
 	data modify block ~ ~ ~ components."minecraft:profile" set value {texture:"spindle:blank"}
 	$function $(place_function)
 	if block ~ ~ ~ #spindle:player_heads run setblock ~ ~ ~ air
