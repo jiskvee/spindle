@@ -2,7 +2,7 @@
   "id": "copper_wheel",
   "base_item": "minecraft:player_head",
   "definition": "spindle:copper_wheel",
-  "minecraft:tooltip_style": "spindle:spindle",
+  "tooltip_style": "spindle:spindle",
   "name": {
     "translate": "item.spindle.copper_wheel",
     "color": "white",
