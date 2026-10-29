@@ -2,15 +2,15 @@ from camellia.utils import cit
 
 function ./reload/check_ammo:
 	if entity @s[gamemode=creative] run return 1
-	if items entity @s inventory.* *[custom_data~{spindle:{id:"copper_shell"}}] run return 1
-	if items entity @s hotbar.* *[custom_data~{spindle:{id:"copper_shell"}}] run return 1
-	if items entity @s weapon.offhand *[custom_data~{spindle:{id:"copper_shell"}}] run return 1
+	if items entity @s inventory.* cit("spindle","copper_shell") run return 1
+	if items entity @s hotbar.* cit("spindle","copper_shell") run return 1
+	if items entity @s weapon.offhand cit("spindle","copper_shell") run return 1
 
 function ./reload/start:
 	# no ammo in inventory
 	unless function ./reload/check_ammo run return run function ./reload/no_ammo:
 		if entity @s[tag=spindle.ammoless] run return fail
-		title @s actionbar [{text:"\u2718\u23f5 ",color:"red"},{translate:"item.spindle.copper_shotgun.message.no_ammo",with:[{translate:"item.spindle.copper_shell",color:"red"}],color:"#ffbbbb"}]
+		title @s actionbar [{text:"\u2718\u23f5 ",color:"red"},{translate:"item.spindle.copper_shotgun.no_ammo",with:[{translate:"item.spindle.copper_shell",color:"red"}],color:"#ffbbbb"}]
 		playsound spindle:item.copper_shotgun.empty player "@c" ~ ~ ~ 0.4 1
 		tag @s add spindle.ammoless
 
@@ -42,25 +42,8 @@ function ./reload/bar/display:
 	# base bar: 9 long, 0..8
 	data remove storage spindle:shotgun root
 	data merge storage spindle:shotgun {root:{bar:["E","E","E","E","E","E","E","E","E"]}}
-
 	store result storage spindle:shotgun root.spot int 1 run scoreboard players get @s spindle.shotgun.spot
-	#store result storage spindle:shotgun root.pos int 1 run scoreboard players get @s spindle.shotgun.pos
-
-	# ----- FUTURE VISION WITCHCRAFT -----
-    # copy current pos and time to temp scores
-    scoreboard players operation @s spindle.shotgun.display_pos = @s spindle.shotgun.pos
-    scoreboard players operation @s spindle.shotgun.next_time = @s spindle.shotgun.time
-    
-    # simulate what the time will be next tick
-    scoreboard players add @s spindle.shotgun.next_time 1
-    
-    # if the bullet will move next tick, apply the movement to the display position NOW
-    if score @s spindle.shotgun.next_time >= @s spindle.shotgun.step:
-		scoreboard players operation @s spindle.shotgun.display_pos += @s spindle.shotgun.dir
-    
-    # pass the future display_pos to the storage instead of the actual pos
-    store result storage spindle:shotgun root.pos int 1 run scoreboard players get @s spindle.shotgun.display_pos
-    # ------------------------------------
+	store result storage spindle:shotgun root.pos int 1 run scoreboard players get @s spindle.shotgun.pos
 
 	# get oxidization state for the font
 	execute run function ./reload/bar/state:
@@ -73,7 +56,7 @@ function ./reload/bar/display:
 	execute run function ./reload/bar/place_spot with storage spindle:shotgun root:
 		$data modify storage spindle:shotgun root.bar[$(spot)] set value "O"
 
-	execute run function ./reload/bar/place_cartridge with storage spindle:shotgun root:
+	execute run function ./reload/bar/place_bullet with storage spindle:shotgun root:
 		$data modify storage spindle:shotgun root.bar[$(pos)] set value "B"
 
 	# parse array into a string

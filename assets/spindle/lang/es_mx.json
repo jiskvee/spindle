@@ -17,7 +17,7 @@
   "item.spindle.copper_shotgun.desc1": "Presiona %s para disparar",
   "item.spindle.copper_shotgun.desc2": "Manten %s para recargar",
   "item.spindle.copper_shotgun.ammo_display": "Municion: %s/1",
-  "item.spindle.copper_shotgun.message.no_ammo": "¡Sin %s en el inventario!",
+  "item.spindle.copper_shotgun.no_ammo": "¡Sin %s en el inventario!",
   "item.spindle.copper_shell": "Cartucho de cobre",
   "item.spindle.copper_shell.desc1": "Usado para recargar la %s",
   "item.spindle.copper_hammer": "Martillo de cobre",

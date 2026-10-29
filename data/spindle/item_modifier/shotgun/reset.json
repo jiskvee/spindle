@@ -1,6 +1,7 @@
 {
   "type": "minecraft:set_components",
   "components": {
+    "!minecraft:food": { },
     "!minecraft:enchantable": { },
     "!minecraft:enchantments": { },
     "!minecraft:cooking_fuel": { },

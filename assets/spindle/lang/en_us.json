@@ -17,7 +17,7 @@
   "item.spindle.copper_shotgun.desc1": "Press %s to shoot",
   "item.spindle.copper_shotgun.desc2": "Hold %s to reload",
   "item.spindle.copper_shotgun.ammo_display": "Chamber: %s/1",
-  "item.spindle.copper_shotgun.message.no_ammo": "No %s in inventory!",
+  "item.spindle.copper_shotgun.no_ammo": "No %s in inventory!",
   "item.spindle.copper_shell": "Copper Shell",
   "item.spindle.copper_shell.desc1": "Used to reload the %s",
   "item.spindle.copper_hammer": "Copper Hammer",

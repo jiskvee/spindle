@@ -10,14 +10,12 @@ function ./technical/load:
 
 	# shotgun
 	scoreboard objectives add spindle.shotgun.state dummy # oxidization state
-	scoreboard objectives add spindle.shotgun.spot dummy # reload hole
-	scoreboard objectives add spindle.shotgun.time dummy # time between each movement
-	scoreboard objectives add spindle.shotgun.step dummy # how much to advance each movement
-	scoreboard objectives add spindle.shotgun.pos dummy # bullet pos in bar
-	scoreboard objectives add spindle.shotgun.dir dummy # movement direction
+	scoreboard objectives add spindle.shotgun.spot dummy # position of the reload hole
+	scoreboard objectives add spindle.shotgun.time dummy # timer for bullet movement
+	scoreboard objectives add spindle.shotgun.step dummy # how much to wait between each movement
+	scoreboard objectives add spindle.shotgun.pos dummy # bullet position in bar
+	scoreboard objectives add spindle.shotgun.dir dummy # movement direction of bullet
 	scoreboard players set -1 spindle.shotgun.dir -1
-	scoreboard objectives add spindle.shotgun.fw_time dummy # time + 1
-	scoreboard objectives add spindle.shotgun.display_pos dummy # pos + 1
 
 	# hammer
 	scoreboard objectives add spindle.hammer.cd dummy # silence between two strikes

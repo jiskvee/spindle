@@ -2,7 +2,6 @@
   "values": [
     "spindle:technical/lightning_protection",
     "spindle:technical/impulse_back",
-    "spindle:technical/knockback",
     "spindle:technical/explosion",
     "spindle:technical/hammer",
     "spindle:technical/wheel"

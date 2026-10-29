@@ -1,34 +1,32 @@
 function ./raycast/start:
-	attribute @s minecraft:explosion_knockback_resistance modifier add spindle:copper_shotgun_knockback 2 add_value
 	tag @s add spindle.shooting
 	scoreboard players set @s spindle.dummy 9
-	#scoreboard players set @s spindle.dummy 20
 	data modify storage spindle:temp root.raycast.UUID set from entity @s UUID
-	execute anchored eyes positioned ^ ^ ^0.5 run function ./raycast/step
+	anchored eyes positioned ^ ^ ^0.5 run function ./raycast/step
 
 
 function ./raycast/step:
 	particle minecraft:smoke ~ ~ ~ 0.25 0.25 0.25 0.02 2
 	scoreboard players remove @s spindle.dummy 1
 
-	ofs = 1.5
+	ofs = 1.25
 	a = (1.0 - ofs) * -1
 	b = (ofs / 2) * -1
-	execute positioned ~b ~b ~b as @e[dx=0,type=!#spindle:ignore,tag=!spindle.shooting,tag=!smithed.strict] positioned ~a ~a ~a if entity @s[dx=0] run function ./raycast/as_entity with storage spindle:temp root.raycast
+	positioned ~b ~b ~b as @e[dx=0,type=!#spindle:ignore,tag=!spindle.shooting,tag=!smithed.strict] positioned ~a ~a ~a if entity @s[dx=0] run function ./raycast/as_entity with storage spindle:temp root.raycast
 	
-	execute unless block ~ ~ ~ #spindle:pass_through run return run function ./raycast/end
-	execute unless score @s spindle.dummy matches 1.. run return run function ./raycast/end
-	execute positioned ^ ^ ^0.5 run function ./raycast/step
+	unless block ~ ~ ~ #spindle:pass_through run return run function ./raycast/end
+	unless score @s spindle.dummy matches 1.. run return run function ./raycast/end
+	positioned ^ ^ ^0.5 run function ./raycast/step
 
 
 function ./raycast/as_entity:
-	summon minecraft:armor_stand ^ ^ ^-1 {Invisible:1b,equipment:{feet:{id:"minecraft:poisonous_potato",components:{"minecraft:enchantments":{"spindle:technical/knockback":1}}}}}
+	attribute @s minecraft:knockback_resistance modifier add spindle:shotgun_knockback -0.25 add_value
 	$damage @s 12 minecraft:arrow by @a[limit=1,nbt={UUID:$(UUID)}]
-	$execute as @a[limit=1,nbt={UUID:$(UUID)}] run function spindle:item/copper_shotgun/raycast/end
+	attribute @s minecraft:knockback_resistance modifier remove spindle:shotgun_knockback
+	#$execute as @a[limit=1,nbt={UUID:$(UUID)}] run function spindle:item/copper_shotgun/raycast/end
 
 
 function ./raycast/end:
-	attribute @s minecraft:explosion_knockback_resistance modifier remove spindle:copper_shotgun_knockback
 	scoreboard players reset @s spindle.dummy
 	tag @s remove spindle.shooting
 	data remove storage spindle:temp root
