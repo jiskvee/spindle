@@ -14,12 +14,12 @@ function this.tick:
 
 	if items entity @s weapon.* *[minecraft:custom_data~{spindle:{charge:4b}}] positioned over motion_blocking run return run function this.overcharge.conductive:
 		if predicate spindle:tick/20 if predicate random_chance(0.4) run playsound spindle:item.copper_hammer.spark player "@c" ~ ~ ~ 0.5 2
-		if predicate random_chance(0.0015) run summon minecraft:lightning_bolt
+		if predicate random_chance(0.0001) run summon minecraft:lightning_bolt
 		if predicate random_chance(0.2) run particle minecraft:electric_spark ~ ~0.1 ~ 0.2 0 0.2 0.1 2
 		if predicate random_chance(0.2) run particle minecraft:electric_spark ~ ~0.1 ~ 0 1 0 1 0
 
 	positioned over motion_blocking run function this.conductive:
-		if predicate random_chance(0.001) run summon minecraft:lightning_bolt
+		if predicate random_chance(0.0001) run summon minecraft:lightning_bolt
 		if predicate random_chance(0.1) run particle minecraft:electric_spark ~ ~0.1 ~ 0.2 0 0.2 0.1 2
 		if predicate random_chance(0.1) run particle minecraft:electric_spark ~ ~0.1 ~ 0 1 0 1 0
 
@@ -105,9 +105,9 @@ function this.hit.as_attacker:
 	execute run function this.hit.effects:
 		if items entity @s weapon.mainhand *[minecraft:custom_data~{spindle:{charge:4b}}] run return run function this.hit.as_attacker_overcharge:
 			playsound spindle:item.copper_hammer.erupt player "@c"
-			damage @s 10 spindle:lightning
+			damage @s 12 spindle:lightning
 		playsound spindle:item.copper_hammer.discharge player "@c"
-		damage @s 6 spindle:lightning
+		damage @s 8 spindle:lightning
 	item modify entity @s weapon.mainhand spindle:hammer/remove_charge
 
 
@@ -125,9 +125,9 @@ function this.struck: # by lightning!
 
 	if items entity @s weapon.* *[minecraft:custom_data~{spindle:{charge:4b}}] run return run function this.overcharge.struck:
 		playsound spindle:item.copper_hammer.overcharge player "@c"
-		damage @s 10 spindle:lightning
+		damage @s 12 spindle:lightning
 	playsound spindle:item.copper_hammer.charge player "@c"
-	damage @s 6 spindle:lightning
+	damage @s 8 spindle:lightning
 
 
 advancement technical(this.struck) {
