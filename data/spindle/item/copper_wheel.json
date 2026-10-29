@@ -117,7 +117,7 @@
 
   "recipe": {
     "type": "minecraft:crafting_shaped",
-    "category": "equipment",
+    "category": "building",
     "key": {
       "B": "minecraft:copper_block",
       "O": "minecraft:oxidized_chiseled_copper"
