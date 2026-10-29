@@ -133,5 +133,56 @@
       "CCC",
       " G "
     ]
+  },
+
+
+  "recipe_advancement": {
+    "parent": "minecraft:recipes/root",
+    "criteria": {
+      "has_copper": {
+        "trigger": "minecraft:inventory_changed",
+        "conditions": {
+          "items": [
+            {
+              "items": "minecraft:copper_ingot"
+            }
+          ]
+        }
+      },
+      "has_blaze_rod": {
+        "trigger": "minecraft:inventory_changed",
+        "conditions": {
+          "items": [
+            {
+              "items": "minecraft:blaze_rod"
+            }
+          ]
+        }
+      },
+      "has_gold": {
+        "trigger": "minecraft:inventory_changed",
+        "conditions": {
+          "items": [
+            {
+              "items": "minecraft:gold_ingot"
+            }
+          ]
+        }
+      },
+      "has_the_recipe": {
+        "trigger": "minecraft:recipe_unlocked",
+        "conditions": {
+          "recipes": "spindle:copper_hammer"
+        }
+      }
+    },
+    "requirements": [
+      [
+        "has_copper",
+        "has_blaze_rod",
+        "has_gold",
+        "has_the_recipe"
+      ]
+    ]
   }
 }
