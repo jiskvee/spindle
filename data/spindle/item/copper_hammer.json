@@ -5,6 +5,7 @@
   "tooltip_style": "spindle:spindle",
   "name": {
     "translate": "item.spindle.copper_hammer",
+    "color": "white",
     "fallback": "%s",
     "with": [
       {

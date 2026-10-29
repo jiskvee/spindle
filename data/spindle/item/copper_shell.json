@@ -4,7 +4,7 @@
   "definition": "spindle:copper_shell",
   "tooltip_style": "spindle:spindle",
   "name": {
-    "translate": "item.spindle.coppertendo_switch",
+    "translate": "item.spindle.copper_shell",
     "fallback": "%s",
     "with": [
       {
