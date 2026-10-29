@@ -1,0 +1,106 @@
+{
+  "id": "copper_shell",
+  "base_item": "minecraft:poisonous_potato",
+  "definition": "spindle:copper_shell",
+  "name": {
+    "translate": "item.spindle.coppertendo_switch",
+    "fallback": "%s",
+    "with": [
+      {
+        "translate": "resourcePack.runtime_failure",
+        "color": "red",
+        "bold": true
+      }
+    ]
+  },
+  "description": [
+    {
+      "translate": "spindle.tooltip",
+      "font": "spindle:tooltip",
+      "color": "white",
+      "italic": false
+    },
+    {
+      "translate": "item.spindle.copper_shell.desc1",
+      "color": "gray",
+      "italic": false,
+      "with": [
+        {
+          "translate": "item.spindle.copper_shotgun"
+        }
+      ]
+    }
+  ],
+  "components": {
+    "!minecraft:consumable": { },
+    "minecraft:tooltip_style": "spindle:spindle",
+    "minecraft:custom_data": {
+      "spindle": {
+        "id": "copper_shell"
+      },
+      "smithed": {
+        "ignore": {
+          "functionality": true,
+          "crafting": true
+        }
+      }
+    }
+  },
+
+
+  "recipe": {
+    "type": "minecraft:crafting_shapeless",
+    "category": "equipment",
+    "ingredients": [
+      "minecraft:copper_ingot",
+      "minecraft:copper_ingot",
+      "minecraft:copper_ingot",
+      "minecraft:copper_ingot",
+      "minecraft:gunpowder"
+    ],
+    "result": {
+      "id": "minecraft:poisonous_potato",
+      "count": 4
+    }
+  },
+
+
+  "recipe_advancement": {
+    "parent": "minecraft:recipes/root",
+    "criteria": {
+      "has_copper": {
+        "trigger": "minecraft:inventory_changed",
+        "conditions": {
+          "items": [
+            {
+              "items": "minecraft:copper_ingot"
+            }
+          ]
+        }
+      },
+      "has_gunpowder": {
+        "trigger": "minecraft:inventory_changed",
+        "conditions": {
+          "items": [
+            {
+              "items": "minecraft:gunpowder"
+            }
+          ]
+        }
+      },
+      "has_the_recipe": {
+        "trigger": "minecraft:recipe_unlocked",
+        "conditions": {
+          "recipes": "spindle:copper_shell"
+        }
+      }
+    },
+    "requirements": [
+      [
+        "has_copper",
+        "has_gunpowder",
+        "has_the_recipe"
+      ]
+    ]
+  }
+}
