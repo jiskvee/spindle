@@ -42,9 +42,9 @@ function ./second_clock:
 	# overcharged damage
 	if entity @s[tag=spindle.overcharged] on passengers run function ./overcharged_clock:
 		if predicate random_chance(0.25) run playsound spindle:item.copper_hammer.spark player "@c" ~ ~ ~ 0.5 2
-		if predicate random_chance(0.15) run function ./damage_passenger:
+		if predicate random_chance(0.1) run function ./damage_passenger:
 			playsound spindle:item.copper_hammer.spark player "@c" ~ ~ ~ 1 2
-			damage @s 3 spindle:lightning
+			damage @s 3 spindle:electricity by @n[type=skeleton_horse,tag=spindle.copper_horse]
 
 	# explosion
 	unless predicate spindle:location/wet run return run scoreboard players remove @s[scores={spindle.explode=1..}] spindle.explode 1

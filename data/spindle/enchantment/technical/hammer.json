@@ -20,6 +20,14 @@
   "effects": {
     "minecraft:post_attack": [
       {
+        "effect": {
+          "type": "minecraft:run_function",
+          "function": "spindle:item/copper_hammer/hit/as_attacker_prev"
+        },
+        "enchanted": "attacker",
+        "affected": "attacker"
+      },
+      {
         "requirements": {
           "type": "minecraft:all_of",
           "terms": [

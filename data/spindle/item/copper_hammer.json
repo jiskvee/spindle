@@ -76,6 +76,7 @@
     "minecraft:max_damage": 400,
     "minecraft:max_stack_size": 1,
     "minecraft:minimum_attack_charge": 1,
+    "minecraft:damage_type": "spindle:hammer",
     "minecraft:enchantment_glint_override": false,
     "minecraft:enchantments": {
       "spindle:technical/hammer": 1

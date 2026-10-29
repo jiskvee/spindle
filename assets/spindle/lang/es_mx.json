@@ -71,5 +71,11 @@
   "subtitles.spindle.entity.copper_pet.retrieve": "Mascota de cobre recuperada",
 
 
+  "death.attack.spindle.hammer": "%1$s fue aplanado/a por %2$s",
+  "death.attack.spindle.hammer.item": "%1$s fue aplanado/a por %2$s con su %3$s",
+  "death.attack.spindle.electricity": "%1$s fue electrocutado/a hasta la muerte por %2$s",
+  "death.attack.spindle.electricity.item": "%1$s fue electrocutado/a hasta la muerte por %2$s con su %3$s",
+
+
   "enchantment.spindle.technical": "Encantamiento técnico | ¡Ignora esto!"
 }
