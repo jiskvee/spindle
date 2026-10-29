@@ -2,6 +2,7 @@
   "id": "copper_wheel",
   "base_item": "minecraft:player_head",
   "definition": "spindle:copper_wheel",
+  "minecraft:tooltip_style": "spindle:spindle",
   "name": {
     "translate": "item.spindle.copper_wheel",
     "color": "white",
@@ -14,6 +15,14 @@
       }
     ]
   },
+  "custom_data": {
+    "spindle": {
+      "block": {
+        "place_function": "spindle:block/copper_wheel/place",
+        "loot_table": "spindle:items/copper_wheel"
+      }
+    }
+  },
   "description": [
     {
       "translate": "spindle.tooltip",
@@ -24,7 +33,6 @@
   ],
   "components": {
     "!minecraft:equippable": { },
-    "minecraft:tooltip_style": "spindle:spindle",
     "minecraft:profile": {
       "texture": "spindle:blank"
     },
@@ -34,21 +42,6 @@
     },
     "minecraft:tooltip_display": {
       "hidden_components": [ "minecraft:enchantments" ]
-    },
-    "minecraft:custom_data": {
-      "spindle": {
-        "id": "copper_wheel",
-        "block": {
-          "place_function": "spindle:block/copper_wheel/place",
-          "loot_table": "spindle:items/copper_wheel"
-        }
-      },
-      "smithed": {
-        "ignore": {
-          "functionality": true,
-          "crafting": true
-        }
-      }
     },
     "minecraft:attribute_modifiers": [
       {

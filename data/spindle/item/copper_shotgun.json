@@ -2,6 +2,7 @@
   "id": "copper_shotgun",
   "base_item": "minecraft:poisonous_potato",
   "definition": "spindle:copper_shotgun",
+  "tooltip_style": "spindle:spindle",
   "name": {
     "translate": "item.spindle.copper_shotgun",
     "fallback": "%s",
@@ -13,7 +14,6 @@
       }
     ]
   },
-
   "description": [
     {
       "translate": "spindle.tooltip",
@@ -84,12 +84,19 @@
       ]
     }
   ],
-
+  "custom_data": {
+    "spindle": {
+      "gun": {
+        "loaded": false,
+        "reload_step": 2,
+        "state": 0
+      }
+    }
+  },
   "components": {
     "!minecraft:food": { },
     "!minecraft:enchantable": { },
     "!minecraft:enchantments": { },
-    "minecraft:tooltip_style": "spindle:spindle",
     "minecraft:damage": 0,
     "minecraft:max_damage": 200,
     "minecraft:max_stack_size": 1,
@@ -124,22 +131,6 @@
         "ready",
         "normal"
       ]
-    },
-    "minecraft:custom_data": {
-      "spindle": {
-        "id": "copper_shotgun",
-        "gun": {
-          "loaded": false,
-          "reload_step": 2,
-          "state": 0
-        }
-      },
-      "smithed": {
-        "ignore": {
-          "functionality": true,
-          "crafting": true
-        }
-      }
     },
     "minecraft:consumable": {
       "consume_seconds": 2147483647,

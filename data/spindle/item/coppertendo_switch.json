@@ -2,6 +2,7 @@
   "id": "coppertendo_switch",
   "base_item": "minecraft:poisonous_potato",
   "definition": "spindle:coppertendo_switch",
+  "tooltip_style": "spindle:spindle",
   "name": {
     "translate": "item.spindle.coppertendo_switch",
     "fallback": "%s",
@@ -31,9 +32,21 @@
       "italic": true
     }
   ],
+  "custom_data": {
+    "spindle": {
+      "noise_maker": {
+        "curindex": 0,
+        "sounds": [
+          "spindle:item.coppertendo_switch.ring",
+          "spindle:item.coppertendo_switch.howayu",
+          "spindle:item.coppertendo_switch.bark",
+          "spindle:item.coppertendo_switch.ayayay"
+        ]
+      }
+    }
+  },
   "components": {
     "!minecraft:food": { },
-    "minecraft:tooltip_style": "spindle:spindle",
     "minecraft:max_stack_size": 1,
     "minecraft:consumable": {
       "consume_seconds": 0.05,
@@ -46,28 +59,7 @@
       "speed_multiplier": 1
     },
     "minecraft:use_cooldown": {
-      "seconds": 3,
-      "cooldown_group": "spindle:coppertendo_switch"
-    },
-    "minecraft:custom_data": {
-      "spindle": {
-        "id": "coppertendo_switch",
-        "noise_maker": {
-          "curindex": 0,
-          "sounds": [
-            "spindle:item.coppertendo_switch.ring",
-            "spindle:item.coppertendo_switch.howayu",
-            "spindle:item.coppertendo_switch.bark",
-            "spindle:item.coppertendo_switch.ayayay"
-          ]
-        }
-      },
-      "smithed": {
-        "ignore": {
-          "functionality": true,
-          "crafting": true
-        }
-      }
+      "seconds": 2.5
     }
   },
 

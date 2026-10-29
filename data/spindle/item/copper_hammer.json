@@ -2,6 +2,7 @@
   "id": "copper_hammer",
   "base_item": "minecraft:poisonous_potato",
   "definition": "spindle:copper_hammer",
+  "tooltip_style": "spindle:spindle",
   "name": {
     "translate": "item.spindle.copper_hammer",
     "fallback": "%s",
@@ -61,11 +62,15 @@
       "with": [ "0" ]
     }
   ],
+  "custom_data": {
+    "spindle": {
+      "charge": 0
+    }
+  },
   "components": {
     "!minecraft:food": { },
     "!minecraft:consumable": { },
     "minecraft:weapon": { },
-    "minecraft:tooltip_style": "spindle:spindle",
     "minecraft:damage": 0,
     "minecraft:max_damage": 400,
     "minecraft:max_stack_size": 1,
@@ -82,18 +87,6 @@
     },
     "minecraft:custom_model_data": {
       "floats": [ 0 ]
-    },
-    "minecraft:custom_data": {
-      "spindle": {
-        "id": "copper_hammer",
-        "charge": 0
-      },
-      "smithed": {
-        "ignore": {
-          "functionality": true,
-          "crafting": true
-        }
-      }
     },
     "minecraft:tool": {
       "rules": [ ],
@@ -143,9 +136,7 @@
         "trigger": "minecraft:inventory_changed",
         "conditions": {
           "items": [
-            {
-              "items": "minecraft:copper_ingot"
-            }
+            {"items": "minecraft:copper_ingot"}
           ]
         }
       },
@@ -153,9 +144,7 @@
         "trigger": "minecraft:inventory_changed",
         "conditions": {
           "items": [
-            {
-              "items": "minecraft:blaze_rod"
-            }
+            {"items": "minecraft:blaze_rod"}
           ]
         }
       },
@@ -163,9 +152,7 @@
         "trigger": "minecraft:inventory_changed",
         "conditions": {
           "items": [
-            {
-              "items": "minecraft:gold_ingot"
-            }
+            {"items": "minecraft:gold_ingot"}
           ]
         }
       },
