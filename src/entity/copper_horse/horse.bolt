@@ -7,7 +7,7 @@ prepend function second_clock:
 	as @e[type=minecraft:skeleton_horse,tag=spindle.copper_horse] at @s run function ./second_clock
 
 function spindle:commands/summon/copper_horse:
-	summon minecraft:skeleton_horse ~ ~ ~ {Silent:1b,Tame:1b,CustomName:{translate:"entity.spindle.copper_horse"},DeathLootTable:"spindle:entities/copper_horse",Team:"spindle.no_nametag",Tags:["smithed.entity","spindle.entity","spindle.copper_horse"],equipment:{saddle:{id:"minecraft:saddle",count:1,components:{"minecraft:equippable":{slot:"saddle",asset_id:"spindle:copper_horse/default"},"minecraft:item_model":"spindle:gui/blocked_slot","minecraft:enchantment_glint_override":false,"minecraft:enchantments":{"minecraft:binding_curse":1},"minecraft:tooltip_display":{hide_tooltip:true},"minecraft:custom_data":{spindle:{id:"copper_horse"}}}}},drop_chances:{saddle:0.000},attributes:[{id:"minecraft:jump_strength",base:1.0},{id:"minecraft:max_health",base:30},{id:"minecraft:movement_speed",base:0.32}]}
+	summon minecraft:skeleton_horse ~ ~ ~ {Silent:1b,Tame:1b,CustomName:{translate:"entity.spindle.copper_horse"},DeathLootTable:"spindle:entities/copper_horse",Team:"spindle.no_nametag",Tags:["smithed.entity","spindle.entity","spindle.copper_horse"],equipment:{saddle:{id:"minecraft:saddle",count:1,components:{"minecraft:equippable":{slot:"saddle",asset_id:"spindle:copper_horse/default"},"minecraft:item_model":"spindle:gui/blocked_slot","minecraft:enchantment_glint_override":false,"minecraft:enchantments":{"minecraft:binding_curse":1},"minecraft:tooltip_display":{hide_tooltip:true},"minecraft:custom_data":{spindle:{id:"copper_horse"}}}}},drop_chances:{saddle:0.000},attributes:[{id:"minecraft:jump_strength",base:0.9},{id:"minecraft:max_health",base:30},{id:"minecraft:movement_speed",base:0.32}]}
 
 function ./tick:
 	# laser
@@ -70,6 +70,7 @@ function ./lightning_strike:
 	playsound spindle:item.copper_hammer.overcharge neutral "@c"
 	item modify entity @s saddle spindle:entity/set_state/copper_horse/overcharged
 	attribute @s minecraft:movement_speed base set 0.42
+	attribute @s minecraft:max_health base set 16
 	tag @s add spindle.overcharged
 	damage @s 0
 
