@@ -57,34 +57,23 @@
   "recipe_advancement": {
     "parent": "minecraft:recipes/root",
     "criteria": {
-      "has_copper": {
-        "trigger": "minecraft:inventory_changed",
-        "conditions": {
-          "items": [
-            {"items": "minecraft:copper_ingot"}
-          ]
-        }
-      },
-      "has_gunpowder": {
-        "trigger": "minecraft:inventory_changed",
-        "conditions": {
-          "items": [
-            {"items": "minecraft:gunpowder"}
-          ]
-        }
-      },
       "has_the_recipe": {
         "trigger": "minecraft:recipe_unlocked",
         "conditions": {
           "recipes": "spindle:copper_shell"
         }
+      },
+      "has_shotgun_recipe": {
+        "trigger": "minecraft:recipe_unlocked",
+        "conditions": {
+          "recipes": "spindle:copper_shotgun"
+        }
       }
     },
     "requirements": [
       [
-        "has_copper",
-        "has_gunpowder",
-        "has_the_recipe"
+        "has_the_recipe",
+        "has_shotgun_recipe"
       ]
     ]
   }
