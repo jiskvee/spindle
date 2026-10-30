@@ -8,18 +8,21 @@ function ./raycast/start:
 function ./raycast/step:
 	particle minecraft:smoke ~ ~ ~ 0.25 0.25 0.25 0.02 2
 	scoreboard players remove @s spindle.dummy 1
+	scoreboard players reset $bool spindle.dummy
 
 	ofs = 1.25
 	a = (1.0 - ofs) * -1
 	b = (ofs / 2) * -1
 	positioned ~b ~b ~b as @e[dx=0,type=!#spindle:ignore,tag=!spindle.shooting,tag=!smithed.strict] positioned ~a ~a ~a if entity @s[dx=0] run function ./raycast/as_entity with storage spindle:temp root.raycast
 	
+	if score $bool spindle.dummy matches 1 run scoreboard players remove @s spindle.dummy 1
 	unless block ~ ~ ~ #spindle:pass_through run return run function ./raycast/end
 	unless score @s spindle.dummy matches 1.. run return run function ./raycast/end
 	positioned ^ ^ ^0.5 run function ./raycast/step
 
 
 function ./raycast/as_entity:
+	scoreboard players set $bool spindle.dummy 1
 	attribute @s minecraft:knockback_resistance modifier add spindle:shotgun_knockback -0.25 add_value
 	$damage @s 12 minecraft:arrow by @a[limit=1,nbt={UUID:$(UUID)}]
 	attribute @s minecraft:knockback_resistance modifier remove spindle:shotgun_knockback
