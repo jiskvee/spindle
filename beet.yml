@@ -1,8 +1,10 @@
 name: spindle
 version: "2.0"
 description:
-  - text: "🔧 SPiNDLE 🔧"
-    color: "#e77c56"
+  - - text: "🔧 SPiNDLE 🔧"
+      color: "#e77c56"
+    - text: " v2.0"
+      color: "dark_gray"
   - text: "\n"
   - text: "⚡ ʀɪᴅᴇ ᴛʜᴇ ʟɪɢʜᴛɴɪɴɢ ⚡"
     color: "#39b894"
@@ -26,7 +28,6 @@ pipeline:
   - beet.contrib.find_replace
   - camellia.item
   - camellia.gen.sounds_json
-  - camellia.gen.recipe_outputs
   - camellia.gen.copy_spanish
   - camellia.gen.mcmeta
 
@@ -52,9 +53,6 @@ meta:
 
   lsp:
     excluded_plugins:
-      - beet.contrib.find_replace
-      - camellia.gen.updater
       - camellia.gen.sounds_json
-      - camellia.gen.recipe_outputs
       - camellia.gen.copy_spanish
       - camellia.gen.mcmeta
