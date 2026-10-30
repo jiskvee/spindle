@@ -33,10 +33,12 @@
 
 # 2.0 - "Ride the Lightning"
 ### Additions
+- Copper mobs can now get overcharged when struck by lightning
+- Coppertendo Switch (2026), the most requested item
 - COPPER HAMMER
-- Coppertendo Switch
 ### Changes
 - Ported to 26.3
+- Small balance changes
 - Changed versioning system to MAJOR.PORT.MINOR/HOTFIX
 - It can no longer go in your head
 - Technical improvements!

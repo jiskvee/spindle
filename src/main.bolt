@@ -8,6 +8,11 @@ function ./technical/load:
 	scoreboard objectives add spindle.dummy dummy
 	scoreboard players set #20 spindle.dummy 20
 
+	# dummy player scores
+	# $bool : 0 and 1 single tick operations
+	# $temp : single tick number operations
+	# $rotation : block placement
+
 	# shotgun
 	scoreboard objectives add spindle.shotgun.state dummy # oxidization state
 	scoreboard objectives add spindle.shotgun.spot dummy # position of the reload hole
