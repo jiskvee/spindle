@@ -4,7 +4,6 @@
 - Copper Wolf
 - Copper Cat
 
-
 # 1.0.1 Hotfix
 ### Changes
 - Copper Horse now uses Sprint key to shoot instead of an interaction entity to prevent issues with the hitbox
@@ -43,3 +42,8 @@
 - It can no longer go in your head
 - Technical improvements!
 - Better performance!
+
+# 2.0.1 - Hotfix
+### Changes
+- Coppertendo Switch has the correct cooldown group now
+- Copper Shotgun no longer reads player NBT, leading to better performance

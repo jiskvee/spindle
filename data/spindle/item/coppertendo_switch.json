@@ -59,6 +59,7 @@
       "speed_multiplier": 1
     },
     "minecraft:use_cooldown": {
+      "cooldown_group": "spindle:coppertendo_switch",
       "seconds": 2.5
     }
   },

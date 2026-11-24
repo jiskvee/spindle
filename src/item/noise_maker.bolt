@@ -27,6 +27,8 @@ function this.right_click:
 
 function this.set_data:
 	data modify storage spindle:noise_maker root.data set from entity @s item.components."minecraft:custom_data".spindle.noise_maker
+
+	data modify storage spindle:noise_maker root.index set value 0
 	data modify storage spindle:noise_maker root.index set from storage spindle:noise_maker root.data.curindex
 	execute run function this.pick_sound_macro with storage spindle:noise_maker root:
 		$data modify storage spindle:noise_maker root.sound set from storage spindle:noise_maker root.data.sounds[$(index)]
