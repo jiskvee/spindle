@@ -7,6 +7,8 @@ function ./reload/check_ammo:
 	if items entity @s weapon.offhand cit("spindle","copper_shell") run return 1
 
 function ./reload/start:
+	tag @s add spindle.reloading
+
 	# no ammo in inventory
 	unless function ./reload/check_ammo run return run function ./reload/no_ammo:
 		if entity @s[tag=spindle.ammoless] run return fail
@@ -16,8 +18,20 @@ function ./reload/start:
 
 	# get stats from item
 	execute run function ./reload/get_stats:
-		if items entity @s weapon.offhand cit("spindle","copper_shotgun") run return run data modify storage spindle:temp root.stats set from entity @s equipment.offhand.components."minecraft:custom_data".spindle.gun
-		data modify storage spindle:temp root.stats set from entity @s SelectedItem.components."minecraft:custom_data".spindle.gun
+		scoreboard players reset $bool spindle.dummy
+		if items entity @s weapon.offhand cit("spindle","copper_shotgun") run scoreboard players set $bool spindle.dummy 1
+		if items entity @s weapon.mainhand cit("spindle","copper_shotgun") run scoreboard players set $bool spindle.dummy 0
+
+		if score $bool spindle.dummy matches 0 summon item_display run function ./reload/stats/mainhand:
+			item replace entity @s contents from entity @a[distance=0,limit=1,tag=spindle.reloading] weapon.mainhand
+			function ./reload/stats/set_data
+		if score $bool spindle.dummy matches 1 summon item_display run function ./reload/stats/offhand:
+			item replace entity @s contents from entity @a[distance=0,limit=1,tag=spindle.reloading] weapon.offhand
+			function ./reload/stats/set_data
+
+		function ./reload/stats/set_data:
+			data modify storage spindle:temp root.stats set from entity @s item.components."minecraft:custom_data".spindle.gun
+			kill @s
 	
 	scoreboard players set @s spindle.shotgun.pos 1
 	scoreboard players set @s spindle.shotgun.dir 1
@@ -27,8 +41,6 @@ function ./reload/start:
 	store result score @s spindle.shotgun.state run data get storage spindle:temp root.stats.state
 	data remove storage spindle:temp root
 
-	# awesome
-	tag @s add spindle.reloading
 	playsound spindle:item.copper_shotgun.open player "@c" ~ ~ ~ 1 1
 	function ./get_hand
 	execute run function ./set_action/reload:
