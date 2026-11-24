@@ -1,3 +1,5 @@
+![SPiNDLE Logo](https://github.com/jiskvee/spindle/blob/master/assets/logo.png?raw=true)
+
 _Add more uses to copper you say? I know what you are. I have what you want._
 
 Have you ever felt like Minecraft was lacking some good old rusty copper content? Is the content of the Copper Age drop just not RUSTY enough for you?? Well... uhh you could be in luck. Am not sure, though.
