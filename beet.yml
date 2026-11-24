@@ -1,9 +1,9 @@
 name: spindle
-version: "2.0"
+version: "2.0.1"
 description:
   - - text: "🔧 SPiNDLE 🔧"
       color: "#e77c56"
-    - text: " v2.0"
+    - text: " v2.0.1"
       color: "dark_gray"
   - text: "\n"
   - text: "⚡ ʀɪᴅᴇ ᴛʜᴇ ʟɪɢʜᴛɴɪɴɢ ⚡"
