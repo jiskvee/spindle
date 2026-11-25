@@ -1,4 +1,4 @@
-# 1.0 - "Beasts of Bronze"
+# 1.0 - Beasts of Bronze
 ### Additions
 - Copper Horse
 - Copper Wolf
@@ -17,7 +17,7 @@
 - Ported to 1.21.11
 - Improved hitboxes of the copper mob lasers
 
-# 1.1 - "Rust in Peace"
+# 1.1 - Rust in Peace
 ### Additions
 - The copper frog
 - THE COPPER SHOTGUN
@@ -30,20 +30,22 @@
 - Copper shotgun reload mechanic no longer has a 1 tick delay
 - Copper shotgun should also be more performance friendly
 
-# 2.0 - "Ride the Lightning"
+# 2.0.0 - Ride the Lightning
 ### Additions
 - Copper mobs can now get overcharged when struck by lightning
 - Coppertendo Switch (2026), the most requested item
 - COPPER HAMMER
-### Changes
+### Gameplay changes
+- Small balance adjustments to copper mobs
+- Copper Wheel can no longer be equipped on head
+### Technical changes
 - Ported to 26.3
-- Small balance changes
 - Changed versioning system to MAJOR.PORT.MINOR/HOTFIX
-- It can no longer go in your head
 - Technical improvements!
 - Better performance!
 
 # 2.0.1 - Hotfix
-### Changes
+Everyone loves a good hotfix!
+### Technical changes
 - Coppertendo Switch has the correct cooldown group now
 - Copper Shotgun no longer reads player NBT, leading to better performance
