@@ -18,7 +18,7 @@ function this.ten_second_clock:
 	unless items entity @s weapon.* *[custom_data~{spindle:{id:"copper_wheel"}}] run scoreboard players reset @s spindle.wheel
 
 	if entity @s[predicate=spindle:location/under_thunder] run function this.lightning_bolt_chance:
-		if items entity @s spindle:inventory *[custom_data~{spindle:{charge:4b}}]
+		if items entity @s spindle:item_inventory *[custom_data~{spindle:{charge:4b}}]
 			if predicate random_chance(0.0001) positioned over motion_blocking run summon minecraft:lightning_bolt
 
 		store result score @s spindle.dummy if items entity @s armor.* #spindle:copper_armor
@@ -47,18 +47,4 @@ advancement technical(this.lightning_strike) {
   "rewards": {
     "function": this.lightning_strike()
   }
-}
-
-slot_source spindle:inventory {
-  "type": "minecraft:group",
-  "terms": [
-    {
-      "type": "minecraft:slot_range",
-      "slots": "inventory.*"
-    },
-    {
-      "type": "minecraft:slot_range",
-      "slots": "hotbar.*"
-    }
-  ]
 }
