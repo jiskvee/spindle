@@ -8,6 +8,7 @@ function ./reload/check_ammo:
 
 function ./reload/start:
 	tag @s add spindle.reloading
+	function ./get_hand
 
 	# no ammo in inventory
 	unless function ./reload/check_ammo run return run function ./reload/no_ammo:
@@ -18,10 +19,6 @@ function ./reload/start:
 
 	# get stats from item
 	execute run function ./reload/get_stats:
-		scoreboard players reset $bool spindle.dummy
-		if items entity @s weapon.offhand cit("spindle","copper_shotgun") run scoreboard players set $bool spindle.dummy 1
-		if items entity @s weapon.mainhand cit("spindle","copper_shotgun") run scoreboard players set $bool spindle.dummy 0
-
 		if score $bool spindle.dummy matches 0 summon item_display run function ./reload/stats/mainhand:
 			item replace entity @s contents from entity @a[distance=0,limit=1,tag=spindle.reloading] weapon.mainhand
 			function ./reload/stats/set_data
@@ -42,7 +39,6 @@ function ./reload/start:
 	data remove storage spindle:temp root
 
 	playsound spindle:item.copper_shotgun.open player "@c" ~ ~ ~ 1 1
-	function ./get_hand
 	execute run function ./set_action/reload:
 		if score $bool spindle.dummy matches 0 run return run
 			item modify entity @s weapon.mainhand spindle:shotgun/action/reload
